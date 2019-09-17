@@ -4,11 +4,16 @@
 package com.manyfaces.ui.controllers;
 
 import com.jfoenix.controls.JFXTabPane;
+import java.io.IOException;
+import java.net.URL;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.beans.property.ReadOnlyIntegerProperty;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.SingleSelectionModel;
 import javafx.scene.control.Tab;
+import javafx.scene.layout.Pane;
 
 /**
  FXML Controller class
@@ -31,9 +36,24 @@ public class ProfileListTabController {
 
     /**
      Initializes the controller class.
+
+     @throws java.io.IOException
      */
     @FXML
-    public void initialize() {
+    public void initialize() throws IOException {
+        URL location = getClass().getResource("/views/ProfileList.fxml");
+        FXMLLoader loader = new FXMLLoader(location);
+        Pane pane = null;
+
+        try {
+            pane = loader.load();
+        } catch (IOException ex) {
+            LOG.log(Level.SEVERE, null, ex);
+        }
+
+        if (pane != null) {
+            profileListTab.setContent(pane);
+        }
     }
 
     public void setPageHeaderController(PageHeaderController phc) {
@@ -44,13 +64,13 @@ public class ProfileListTabController {
         SingleSelectionModel<Tab> ssm = tabPane.getSelectionModel();
         ReadOnlyIntegerProperty roop = ssm.selectedIndexProperty();
         roop.addListener((o, oldVal, newVal) -> {
-            setHeaderTitle(newVal.intValue(), phc);
+            setHeaderText(newVal.intValue(), phc);
         });
-        
-        setHeaderTitle(ssm.getSelectedIndex(), phc);
+
+        setHeaderText(ssm.getSelectedIndex(), phc);
     }
 
-    private void setHeaderTitle(int idx, PageHeaderController phc){
+    private void setHeaderText(int idx, PageHeaderController phc) {
         switch (idx) {
             case 0:
                 phc.setHeaderText("Browser profile list");
