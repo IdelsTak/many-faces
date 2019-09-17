@@ -7,12 +7,24 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.controls.JFXToggleNode;
+import com.manyfaces.model.Profile;
+import com.manyfaces.ui.ExpanderColumnCell;
+import java.io.IOException;
+import java.net.URL;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.css.Styleable;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TitledPane;
 import javafx.scene.input.InputEvent;
+import javafx.scene.layout.Pane;
+import org.controlsfx.control.table.TableRowExpanderColumn;
 import org.kordamp.ikonli.javafx.FontIcon;
 
 /**
@@ -46,7 +58,7 @@ public class ProfileListController {
     @FXML
     private FontIcon refreshIcon;
     @FXML
-    private TableView<?> profilesTable;
+    private TableView<Profile> profilesTable;
 
     static {
         LOG = Logger.getLogger(ProfileListController.class.getName());
@@ -95,5 +107,61 @@ public class ProfileListController {
         selectButton.setOnAction(e -> {
             selectCheckBox.setSelected(!selectCheckBox.isSelected());
         });
+        
+        initTable();
+    }
+    
+    private Pane getProfileEditor(TableRowExpanderColumn.TableRowDataFeatures<Profile> rowData) {
+        URL location = getClass().getResource("/views/ProfileEditView.fxml");
+        Pane profileEditPane = null;
+
+        try {
+            profileEditPane = FXMLLoader.load(location);
+        } catch (IOException ex) {
+            LOG.log(Level.SEVERE, null, ex);
+        }
+
+        return profileEditPane;
+    }
+
+    @SuppressWarnings("unchecked")
+    private void initTable() {
+        TableRowExpanderColumn<Profile> expanderColumn = new TableRowExpanderColumn<>(this::getProfileEditor);
+
+        expanderColumn.setText("Name");
+        expanderColumn.setCellFactory(c -> {
+            ExpanderColumnCell columnCell = new ExpanderColumnCell(expanderColumn, selectCheckBox);
+
+            selectCheckBox.selectedProperty().addListener((o, oldVal, newVal) -> {
+                columnCell.getRowCheckBox().setSelected(newVal);
+            });
+
+            return columnCell;
+        });
+        
+        TableColumn<Profile, String> statusColumn = new TableColumn<>("Status");
+        statusColumn.setCellValueFactory(cellData -> cellData.getValue().getStatusProperty());
+        
+        TableColumn<Profile, String> membersColumn = new TableColumn<>("Members");
+        
+        TableColumn<Profile, LocalDateTime> lastEditedColumn = new TableColumn<>("Last edited");
+        lastEditedColumn.setCellValueFactory(cellData -> cellData.getValue().getLastEditedProperty());
+        
+        profilesTable.getColumns().addAll(
+                expanderColumn, 
+                statusColumn, 
+                membersColumn,
+                lastEditedColumn);
+
+        Collection<Profile> profiles = new ArrayList<>();
+
+        profiles.add(new Profile("Profile 1", "", "", LocalDateTime.now()));
+        profiles.add(new Profile("Profile 2", "", "", LocalDateTime.now()));
+        profiles.add(new Profile("Profile 3", "", "", LocalDateTime.now()));
+        profiles.add(new Profile("Profile 4", "", "", LocalDateTime.now()));
+        profiles.add(new Profile("Profile 5", "", "", LocalDateTime.now()));
+        profiles.add(new Profile("Profile 6", "", "", LocalDateTime.now()));
+
+        profilesTable.getItems().addAll(profiles);
     }
 }
