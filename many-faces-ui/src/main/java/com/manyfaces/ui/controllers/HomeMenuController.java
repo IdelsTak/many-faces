@@ -5,7 +5,6 @@ package com.manyfaces.ui.controllers;
 
 import com.manyfaces.ui.BrowserProfileList;
 import com.manyfaces.ui.Home;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Platform;
 import javafx.css.Styleable;
@@ -53,8 +52,6 @@ public class HomeMenuController {
         this.home = home;
 
         homeToggle.selectedProperty().addListener((o, oldVal, selected) -> {
-            LOG.log(Level.INFO, "Home radio selected? {0}", selected);
-
             if (selected) {
                 openBrowserProfileList();
             }
