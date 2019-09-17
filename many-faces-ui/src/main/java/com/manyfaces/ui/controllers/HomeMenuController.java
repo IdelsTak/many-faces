@@ -3,12 +3,17 @@
  */
 package com.manyfaces.ui.controllers;
 
+import com.manyfaces.ui.BrowserProfileList;
+import com.manyfaces.ui.Home;
+import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.application.Platform;
 import javafx.css.Styleable;
 import javafx.fxml.FXML;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.layout.Pane;
 
 /**
  FXML Controller class
@@ -30,6 +35,7 @@ public class HomeMenuController {
     private RadioButton pluginsToggle;
     @FXML
     private RadioButton helpToggle;
+    private Home home;
 
     static {
         LOG = Logger.getLogger(HomeMenuController.class.getName());
@@ -41,6 +47,29 @@ public class HomeMenuController {
     @FXML
     public void initialize() {
         menuGroup.getToggles().forEach(this::removeRadioButtonStyling);
+    }
+
+    public void setHome(Home home) {
+        this.home = home;
+
+        homeToggle.selectedProperty().addListener((o, oldVal, selected) -> {
+            LOG.log(Level.INFO, "Home radio selected? {0}", selected);
+
+            if (selected) {
+                openBrowserProfileList();
+            }
+        });
+
+        openBrowserProfileList();
+        homeToggle.setSelected(true);
+    }
+
+    private void openBrowserProfileList() {
+        Platform.runLater(() -> {
+            Pane contentPane = home.getContentPane();
+
+            contentPane.getChildren().setAll(new BrowserProfileList().loadPane());
+        });
     }
 
     private void removeRadioButtonStyling(Toggle toggle) {
