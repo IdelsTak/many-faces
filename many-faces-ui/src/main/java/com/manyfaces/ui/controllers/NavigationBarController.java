@@ -3,6 +3,7 @@
  */
 package com.manyfaces.ui.controllers;
 
+import java.util.logging.Logger;
 import javafx.fxml.FXML;
 
 /**
@@ -12,12 +13,17 @@ import javafx.fxml.FXML;
  */
 public class NavigationBarController {
 
+    private static final Logger LOG;
+
+    static {
+        LOG = Logger.getLogger(NavigationBarController.class.getName());
+    }
+
     /**
      Initializes the controller class.
      */
     @FXML
     public void initialize() {
-        // TODO
-    }    
-    
+    }
+
 }
