@@ -3,23 +3,21 @@
  */
 package com.manyfaces.ui.controllers;
 
-import java.net.URL;
-import java.util.ResourceBundle;
-import javafx.fxml.Initializable;
+import javafx.fxml.FXML;
 
 /**
  FXML Controller class
 
  @author Hiram K <hiram.kamau@outlook.com>
  */
-public class PageHeaderController implements Initializable {
+public class PageHeaderController {
 
     /**
      Initializes the controller class.
      */
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
+    @FXML
+    public void initialize() {
         // TODO
-    }    
-    
+    }
+
 }
