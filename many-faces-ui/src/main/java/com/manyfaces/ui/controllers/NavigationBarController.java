@@ -3,6 +3,7 @@
  */
 package com.manyfaces.ui.controllers;
 
+import com.manyfaces.ui.Home;
 import java.io.IOException;
 import java.net.URL;
 import java.util.logging.Logger;
@@ -33,11 +34,13 @@ public class NavigationBarController {
     public void initialize() {
     }
     
-    public void loadHomeMenu() throws IOException{
+    public void loadHomeMenu(Home home) throws IOException{
         URL location = getClass().getResource("/views/HomeMenu.fxml");
         FXMLLoader loader = new FXMLLoader(location);
         Pane homeMenuPane = loader.load();
+        HomeMenuController homeMenuController = loader.getController();
         
+        homeMenuController.setHome(home);
         pane.getChildren().setAll(homeMenuPane);
         
         AnchorPane.setTopAnchor(homeMenuPane, 0.0);
