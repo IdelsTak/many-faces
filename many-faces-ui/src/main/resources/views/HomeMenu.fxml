@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.JFXRadioButton?>
 <?import java.net.URL?>
+<?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.VBox?>
@@ -11,15 +11,15 @@
       <ImageView fitHeight="139.0" fitWidth="242.0" pickOnBounds="true" styleClass="home-logo" />
       <VBox spacing="15.0" styleClass="menu-pane">
          <children>
-            <JFXRadioButton fx:id="homeToggle" styleClass="menu-toggle-node" text="Home">
+            <RadioButton fx:id="homeToggle" mnemonicParsing="false" selected="true" styleClass="menu-toggle-node" text="Home">
                <toggleGroup>
                   <ToggleGroup fx:id="menuGroup" />
                </toggleGroup>
-            </JFXRadioButton>
-            <JFXRadioButton fx:id="newProfileToggle" disable="true" styleClass="menu-toggle-node" text="New browser profile" toggleGroup="$menuGroup" />
-            <JFXRadioButton fx:id="accountToggle" styleClass="menu-toggle-node" text="My account" toggleGroup="$menuGroup" />
-            <JFXRadioButton fx:id="pluginsToggle" styleClass="menu-toggle-node" text="Plugins" toggleGroup="$menuGroup" />
-            <JFXRadioButton fx:id="helpToggle" styleClass="menu-toggle-node" text="Help &amp; Support" toggleGroup="$menuGroup" />
+            </RadioButton>
+            <RadioButton fx:id="newProfileToggle" layoutX="35.0" layoutY="195.0" mnemonicParsing="false" styleClass="menu-toggle-node" text="New browser profile" toggleGroup="$menuGroup" />
+            <RadioButton fx:id="accountToggle" layoutX="35.0" layoutY="232.0" mnemonicParsing="false" styleClass="menu-toggle-node" text="My account" toggleGroup="$menuGroup" />
+            <RadioButton fx:id="pluginsToggle" layoutX="35.0" layoutY="232.0" mnemonicParsing="false" styleClass="menu-toggle-node" text="Plugins" toggleGroup="$menuGroup" />
+            <RadioButton fx:id="helpToggle" layoutX="35.0" layoutY="269.0" mnemonicParsing="false" styleClass="menu-toggle-node" text="Help &amp; Support" toggleGroup="$menuGroup" />
          </children>
       </VBox>
    </children>
