@@ -21,5 +21,16 @@
 }
 
 .page-header-text {
-    
+    -fx-font-family: "Roboto Regular";
+    -fx-font-size: 19px;
+    -fx-fill: #b4bbc2;
+}
+
+.toggle-node {
+    -fx-pref-width: 24px;
+    -fx-pref-height: 24px;
+    -fx-min-width: -fx-pref-width;
+    -fx-min-height: -fx-pref-height;
+    -fx-max-width: -fx-pref-width;
+    -fx-max-height: -fx-pref-height;
 }
