@@ -9,4 +9,5 @@
     -fx-max-width: -fx-pref-width;
     -fx-min-width: -fx-pref-width;
     -fx-min-height: -fx-pref-height;
+    -fx-background-color: transparent;
 }
