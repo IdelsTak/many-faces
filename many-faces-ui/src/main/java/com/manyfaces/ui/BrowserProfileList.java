@@ -12,6 +12,7 @@ import java.util.logging.Logger;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.TabPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 
 /**
@@ -46,6 +47,9 @@ public class BrowserProfileList extends VBox {
         }
 
         if (headerPane != null && tabPane != null) {
+            tabPane.getStyleClass().add("-fx-background-color: white");
+            tabPane.setPrefHeight(800.0);
+            VBox.setVgrow(tabPane, Priority.ALWAYS);
             getChildren().setAll(headerPane, tabPane);
         }
 
