@@ -12,3 +12,12 @@
     /*Draw the border on the bottom side only*/
     -fx-border-color: transparent transparent #e0e2e7 transparent;
 }
+
+.icon {
+    -fx-icon-color: #e0e2e7;
+    -fx-icon-size: 24px;
+}
+
+.page-header-text {
+    
+}
