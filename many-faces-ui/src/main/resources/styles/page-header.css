@@ -11,13 +11,18 @@
     -fx-max-height: -fx-pref-height;
     /*Draw the border on the bottom side only*/
     -fx-border-color: transparent transparent #e0e2e7 transparent;
+    -fx-padding: 0 32 0 35;
 }
 
 .icon {
-    -fx-icon-color: #e0e2e7;
+    -fx-icon-color: #1547bf;
     -fx-icon-size: 24px;
     /*This is how one can set the icon literal*/
     -fx-icon-code: "mdi-bell";
+}
+
+.icon:disabled {
+    -fx-icon-color: #e0e2e7;
 }
 
 .page-header-text {
@@ -27,10 +32,15 @@
 }
 
 .toggle-node {
-    -fx-pref-width: 24px;
-    -fx-pref-height: 24px;
+    -fx-pref-width: 42px;
+    -fx-pref-height: 42px;
     -fx-min-width: -fx-pref-width;
     -fx-min-height: -fx-pref-height;
     -fx-max-width: -fx-pref-width;
     -fx-max-height: -fx-pref-height;
+    -fx-background-radius: 24px;
+}
+
+.toggle-node .jfx-rippler {
+    -jfx-rippler-fill: #dadada;
 }
