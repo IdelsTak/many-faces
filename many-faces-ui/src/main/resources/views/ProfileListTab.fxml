@@ -6,8 +6,8 @@
 
 <JFXTabPane fx:id="tabPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.manyfaces.ui.controllers.ProfileListTabController">
     <tabs>
-        <Tab fx:id="profileListTab" closable="false" text="Profile listg" />
-        <Tab fx:id="groupsTab" closable="false" text="Groupsg" />
+        <Tab fx:id="profileListTab" closable="false" text="Profile list" />
+        <Tab fx:id="groupsTab" closable="false" text="Groups" />
     </tabs>
    <stylesheets>
       <URL value="@../styles/roboto-regular.css" />
