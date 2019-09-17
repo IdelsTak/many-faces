@@ -1,2 +1,2 @@
-# many-faces
+# ManyFaces
 Virtual browser identity profiles 
