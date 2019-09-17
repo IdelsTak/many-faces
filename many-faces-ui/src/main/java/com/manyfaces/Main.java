@@ -39,8 +39,8 @@ public class Main extends Application {
     }
 
     /**
-     {@link Stage#setMaximized(boolean)} doesn't seem to work. So this is a fallback hack
-     for maximizing the stage.
+     {@link Stage#setMaximized(boolean)} doesn't seem to work. So this is a
+     fallback hack for maximizing the stage.
 
      @param stage the primary stage
      */
