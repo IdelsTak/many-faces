@@ -7,10 +7,11 @@
     -fx-pref-height: 65px;
     -fx-min-width: -fx-pref-width;
     -fx-min-height: -fx-pref-height;
-    -fx-max-width: -fx-pref-width;
     -fx-max-height: -fx-pref-height;
     /*Draw the border on the bottom side only*/
     /*-fx-border-color: transparent transparent #e0e2e7 transparent;*/
+    /*A red border for testing purposes*/
+    /*-fx-border-color: red;*/
     -fx-padding: 0 32 0 35;
 }
 
@@ -26,7 +27,7 @@
 }
 
 .page-header-text {
-    -fx-font-family: "Roboto Regular";
+    -fx-font-family: "Roboto";
     -fx-font-size: 19px;
     -fx-fill: #b4bbc2;
 }
