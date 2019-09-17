@@ -3,6 +3,7 @@
  */
 package com.manyfaces;
 
+import com.manyfaces.ui.Home;
 import java.util.logging.Logger;
 import javafx.application.Application;
 import javafx.geometry.Rectangle2D;
