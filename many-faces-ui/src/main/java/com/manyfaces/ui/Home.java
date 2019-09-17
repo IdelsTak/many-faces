@@ -68,7 +68,7 @@ public class Home extends HBox {
         VBox vBox = new VBox();
         
         //A red border for testing purposes
-        vBox.setStyle("-fx-border-color: red");
+//        vBox.getStyleClass().add("-fx-border-color: red");
 
         vBox.setPrefHeight(632);
         vBox.setMinHeight(632);
