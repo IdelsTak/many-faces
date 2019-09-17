@@ -5,7 +5,9 @@ package com.manyfaces.ui.controllers;
 
 import com.jfoenix.controls.JFXTabPane;
 import java.util.logging.Logger;
+import javafx.beans.property.ReadOnlyIntegerProperty;
 import javafx.fxml.FXML;
+import javafx.scene.control.SingleSelectionModel;
 import javafx.scene.control.Tab;
 
 /**
@@ -32,6 +34,33 @@ public class ProfileListTabController {
      */
     @FXML
     public void initialize() {
-//        LOG.log(Level.INFO, "Style: {0}", tabPane);
     }
+
+    public void setPageHeaderController(PageHeaderController phc) {
+        if (phc == null) {
+            throw new IllegalArgumentException("Controller should not be null");
+        }
+
+        SingleSelectionModel<Tab> ssm = tabPane.getSelectionModel();
+        ReadOnlyIntegerProperty roop = ssm.selectedIndexProperty();
+        roop.addListener((o, oldVal, newVal) -> {
+            setHeaderTitle(newVal.intValue(), phc);
+        });
+        
+        setHeaderTitle(ssm.getSelectedIndex(), phc);
+    }
+
+    private void setHeaderTitle(int idx, PageHeaderController phc){
+        switch (idx) {
+            case 0:
+                phc.setHeaderText("Browser profile list");
+                return;
+            case 1:
+                phc.setHeaderText("Groups");
+                return;
+            default:
+                throw new IllegalArgumentException("Tab index not known");
+        }
+    }
+
 }
