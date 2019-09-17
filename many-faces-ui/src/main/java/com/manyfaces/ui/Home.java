@@ -9,26 +9,30 @@ import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.VBox;
 
 /**
 
  @author Hiram K <hiram.kamau@outlook.com>
  */
-public class Home extends AnchorPane {
+public class Home extends HBox {
 
     private static final Logger LOG = Logger.getLogger(Home.class.getName());
+    private Pane contentPane;
 
     /**
      Default constructor.
      */
     public Home() {
+        super();
     }
 
     public Pane loadPane() {
         Pane navigationBar = null;
-        
+
         try {
             navigationBar = loadNavigationBarWithHomeMenu();
         } catch (IOException ex) {
@@ -36,19 +40,17 @@ public class Home extends AnchorPane {
         }
 
         if (navigationBar != null) {
-            Pane contentPane = loadContentPane();
-            
-            getChildren().setAll(navigationBar, contentPane);
+            contentPane = loadContentPane();
 
-            AnchorPane.setTopAnchor(navigationBar, 0.0);
-            AnchorPane.setBottomAnchor(navigationBar, 0.0);
-            AnchorPane.setLeftAnchor(navigationBar, 0.0);
-            AnchorPane.setTopAnchor(contentPane, 0.0);
-            AnchorPane.setBottomAnchor(contentPane, 0.0);
-            AnchorPane.setRightAnchor(contentPane, 0.0);
+            getChildren().setAll(navigationBar, contentPane);
+            HBox.setHgrow(contentPane, Priority.ALWAYS);
         }
-        
+
         return this;
+    }
+
+    public Pane getContentPane() {
+        return contentPane;
     }
 
     private Pane loadNavigationBarWithHomeMenu() throws IOException {
@@ -56,21 +58,24 @@ public class Home extends AnchorPane {
         FXMLLoader loader = new FXMLLoader(location);
         Pane navigationPane = loader.load();
         NavigationBarController controller = loader.getController();
-        
-        controller.loadHomeMenu();
+
+        controller.loadHomeMenu(this);
 
         return navigationPane;
     }
 
     private Pane loadContentPane() {
-        AnchorPane contentPane = new AnchorPane();
+        VBox vBox = new VBox();
+        
+        //A red border for testing purposes
+        vBox.setStyle("-fx-border-color: red");
 
-        contentPane.setPrefWidth(706);
-        contentPane.setPrefHeight(632);
-        contentPane.setMinWidth(706);
-        contentPane.setMinHeight(632);
+        vBox.setPrefHeight(632);
+        vBox.setMinHeight(632);
+        vBox.setMinWidth(706);
+        vBox.setMaxWidth(Double.MAX_VALUE);
 
-        return contentPane;
+        return vBox;
     }
 
 }
