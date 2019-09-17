@@ -12,6 +12,7 @@
     /*-fx-border-color: transparent transparent #e0e2e7 transparent;*/
     /*A red border for testing purposes*/
     /*-fx-border-color: red;*/
+    -fx-background-color: white; 
     -fx-padding: 0 32 0 35;
 }
 
