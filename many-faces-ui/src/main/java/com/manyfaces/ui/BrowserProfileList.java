@@ -9,6 +9,7 @@ import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.TabPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
@@ -33,17 +34,19 @@ public class BrowserProfileList extends VBox {
 
     public Pane loadPane() {
         Pane headerPane = null;
+        TabPane tabPane = null;
 
         try {
             headerPane = loadHeaderPane();
+            tabPane = loadProfileListTab();
         } catch (IOException ex) {
             LOG.log(Level.SEVERE, null, ex);
         }
 
-        if (headerPane != null) {
-            getChildren().setAll(headerPane);
+        if (headerPane != null && tabPane != null) {
+            getChildren().setAll(headerPane, tabPane);
         }
-        
+
         return this;
     }
 
@@ -56,6 +59,14 @@ public class BrowserProfileList extends VBox {
         controller.setHeaderText("Browser profile list");
 
         return pane;
+    }
+
+    private TabPane loadProfileListTab() throws IOException {
+        URL location = getClass().getResource("/views/ProfileListTab.fxml");
+        FXMLLoader loader = new FXMLLoader(location);
+        TabPane tabPane = loader.load();
+
+        return tabPane;
     }
 
 }
