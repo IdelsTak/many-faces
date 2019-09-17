@@ -10,7 +10,7 @@
     -fx-max-width: -fx-pref-width;
     -fx-max-height: -fx-pref-height;
     /*Draw the border on the bottom side only*/
-    -fx-border-color: transparent transparent #e0e2e7 transparent;
+    /*-fx-border-color: transparent transparent #e0e2e7 transparent;*/
     -fx-padding: 0 32 0 35;
 }
 
