@@ -1,6 +1,3 @@
-/*
- * Empty Stylesheet file.
- */
 .root {
     -fx-background-color: white;
 }
@@ -88,4 +85,70 @@ only the collapsible pane remains*/
     -jfx-rippler-fill: #8ca6e4;
 }
 
+.table-view {
+    -fx-font-family: "Roboto";
+    /*For testing purposes*/
+    /*-fx-border-color: blueviolet;*/
+}
+
+.table-view, .table-view:focused {
+    -fx-background-color: white;
+    -fx-background-insets: 0;
+    -fx-background-radius: 0;
+}
+
+.table-view .column-header,
+.table-view .filler,
+.table-view > .column-header-background > .show-hide-columns-button,
+.table-view:constrained-resize .filler {
+    -fx-background-color: white;
+    -fx-background-insets: 0 0 0 0;
+    -fx-font-weight: normal;
+    -fx-size: 24px;
+    /*-fx-text-fill: red;*/
+    -fx-border-width: 0 0 1 0;
+    -fx-border-color: white white gainsboro white;
+}
+
+.table-view .column-header .label {
+    -fx-alignment: center-left;
+    -fx-padding: 0 0 8 0;
+}
+
+.table-view .arrow {
+    -fx-background-color: white;
+    /*-fx-padding: 0.25em 0.3125em 0.25em 0.3125em;  3 3.75 3 3.75 */
+    -fx-padding: 3 3 3 3; /* 3 3.75 3 3.75 */
+    -fx-shape: "M 0 0 h 7 l -3.5 4 z";
+}
+
+.table-row-cell:odd {
+    -fx-background: -fx-control-inner-background;
+}
+
+.table-row-cell:filled {
+    -fx-padding: 0.166667em;  /*2px, plus border adds 1px */
+    -fx-border-color: white white gainsboro white;
+}
+
+.table-cell,
+.table-row-cell,
+.table-row-cell:filled:selected,
+.table-row-cell:filled > .table-cell:selected {
+    -fx-background: white;
+    -fx-table-cell-border-color: white;
+    -fx-cell-size: 3.3em;
+}
+
+.profile-name-label {
+
+}
+
+.profile-name-label:hover {
+    -fx-font-weight: bold;
+}
+
+.profile-row-toggle {
+    -fx-padding: 0 6 0 0;
+}
 
