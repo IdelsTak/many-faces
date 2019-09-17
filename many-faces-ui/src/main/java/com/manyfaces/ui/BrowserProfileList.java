@@ -4,6 +4,7 @@
 package com.manyfaces.ui;
 
 import com.manyfaces.ui.controllers.PageHeaderController;
+import com.manyfaces.ui.controllers.ProfileListTabController;
 import java.io.IOException;
 import java.net.URL;
 import java.util.logging.Level;
@@ -20,6 +21,7 @@ import javafx.scene.layout.VBox;
 public class BrowserProfileList extends VBox {
 
     private static final Logger LOG;
+    private PageHeaderController pageHeaderController;
 
     static {
         LOG = Logger.getLogger(BrowserProfileList.class.getName());
@@ -54,9 +56,7 @@ public class BrowserProfileList extends VBox {
         URL location = getClass().getResource("/views/PageHeader.fxml");
         FXMLLoader loader = new FXMLLoader(location);
         Pane pane = loader.load();
-        PageHeaderController controller = loader.getController();
-
-        controller.setHeaderText("Browser profile list");
+        pageHeaderController = loader.getController();
 
         return pane;
     }
@@ -65,6 +65,9 @@ public class BrowserProfileList extends VBox {
         URL location = getClass().getResource("/views/ProfileListTab.fxml");
         FXMLLoader loader = new FXMLLoader(location);
         TabPane tabPane = loader.load();
+        ProfileListTabController tabController = loader.getController();
+        
+        tabController.setPageHeaderController(pageHeaderController);
 
         return tabPane;
     }
