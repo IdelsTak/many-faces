@@ -24,7 +24,8 @@
       </VBox>
    </children>
    <stylesheets>
-      <URL value="@../styles/roboto-fonts.css" />
+      <URL value="@../styles/roboto-regular.css" />
+      <URL value="@../styles/roboto-bold.css" />
       <URL value="@../styles/home-menu.css" />
       <URL value="@../styles/navigation-bar.css" />
    </stylesheets>
