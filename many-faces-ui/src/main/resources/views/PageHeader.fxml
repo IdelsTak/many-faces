@@ -1,14 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.net.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import com.jfoenix.controls.JFXToggleNode?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Text?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.manyfaces.ui.controllers.PageHeaderController">
-    <stylesheets>
-        <URL value="@/styles/pageheader.css"/>
-    </stylesheets>
-</AnchorPane>
+<BorderPane styleClass="page-header" stylesheets="@../styles/pageheader.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.manyfaces.ui.controllers.PageHeaderController">
+    <left>
+        <Text fx:id="headerText" strokeType="OUTSIDE" strokeWidth="0.0" text="Plugins" BorderPane.alignment="CENTER" />
+    </left>
+    <right>
+        <JFXToggleNode fx:id="notificationToggle" BorderPane.alignment="CENTER">
+            <graphic>
+                <FontIcon fx:id="icon" iconLiteral="mdi-bell" styleClass="icon" />
+            </graphic>
+        </JFXToggleNode>
+    </right>
+</BorderPane>
