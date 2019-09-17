@@ -16,6 +16,8 @@
 .icon {
     -fx-icon-color: #e0e2e7;
     -fx-icon-size: 24px;
+    /*This is how one can set the icon literal*/
+    -fx-icon-code: "mdi-bell";
 }
 
 .page-header-text {
