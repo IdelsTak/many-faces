@@ -16,10 +16,10 @@
                   <ToggleGroup fx:id="menuGroup" />
                </toggleGroup>
             </RadioButton>
-            <RadioButton fx:id="newProfileToggle" layoutX="35.0" layoutY="195.0" mnemonicParsing="false" styleClass="menu-toggle-node" text="New browser profile" toggleGroup="$menuGroup" />
-            <RadioButton fx:id="accountToggle" layoutX="35.0" layoutY="232.0" mnemonicParsing="false" styleClass="menu-toggle-node" text="My account" toggleGroup="$menuGroup" />
-            <RadioButton fx:id="pluginsToggle" layoutX="35.0" layoutY="232.0" mnemonicParsing="false" styleClass="menu-toggle-node" text="Plugins" toggleGroup="$menuGroup" />
-            <RadioButton fx:id="helpToggle" layoutX="35.0" layoutY="269.0" mnemonicParsing="false" styleClass="menu-toggle-node" text="Help &amp; Support" toggleGroup="$menuGroup" />
+            <RadioButton fx:id="newProfileToggle" disable="true" layoutX="35.0" layoutY="195.0" mnemonicParsing="false" styleClass="menu-toggle-node" text="New browser profile" toggleGroup="$menuGroup" />
+            <RadioButton fx:id="accountToggle" disable="true" layoutX="35.0" layoutY="232.0" mnemonicParsing="false" styleClass="menu-toggle-node" text="My account" toggleGroup="$menuGroup" />
+            <RadioButton fx:id="pluginsToggle" disable="true" layoutX="35.0" layoutY="232.0" mnemonicParsing="false" styleClass="menu-toggle-node" text="Plugins" toggleGroup="$menuGroup" />
+            <RadioButton fx:id="helpToggle" disable="true" layoutX="35.0" layoutY="269.0" mnemonicParsing="false" styleClass="menu-toggle-node" text="Help &amp; Support" toggleGroup="$menuGroup" />
          </children>
       </VBox>
    </children>
