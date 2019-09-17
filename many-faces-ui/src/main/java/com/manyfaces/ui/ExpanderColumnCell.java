@@ -25,7 +25,7 @@ public class ExpanderColumnCell extends TableCell<Profile, Boolean> {
     private static final Logger LOG;
     private JFXToggleNode toggleButton;
     private Pane pane;
-    private JFXCheckBox checkBox;
+    private JFXCheckBox rowCheckBox;
     private Label nameLabel;
     private JFXCheckBox selectAllCheckBox;
     private final TableRowExpanderColumn<Profile> column;
@@ -37,7 +37,7 @@ public class ExpanderColumnCell extends TableCell<Profile, Boolean> {
     public ExpanderColumnCell(TableRowExpanderColumn<Profile> column, JFXCheckBox selectAllCheckBox) {
         this.column = column;
         this.selectAllCheckBox = selectAllCheckBox;
-        
+
         URL location = getClass().getResource("/views/ExpanderColumnButton.fxml");
 
         try {
@@ -48,7 +48,7 @@ public class ExpanderColumnCell extends TableCell<Profile, Boolean> {
 
         if (pane != null) {
             toggleButton = (JFXToggleNode) pane.lookup("#toggleButton");
-            checkBox = (JFXCheckBox) pane.lookup("#checkBox");
+            rowCheckBox = (JFXCheckBox) pane.lookup("#checkBox");
             nameLabel = (Label) pane.lookup("#nameLabel");
 
             nameLabel.getStyleClass().add("profile-name-label");
@@ -56,6 +56,10 @@ public class ExpanderColumnCell extends TableCell<Profile, Boolean> {
 
             toggleButton.setOnAction(e -> column.toggleExpanded(getIndex()));
         }
+    }
+
+    public JFXCheckBox getRowCheckBox() {
+        return rowCheckBox;
     }
 
     @Override
@@ -66,7 +70,7 @@ public class ExpanderColumnCell extends TableCell<Profile, Boolean> {
             setGraphic(null);
         } else {
             toggleButton.setSelected(expanded);
-            checkBox.setSelected(selectAllCheckBox.isSelected());
+            rowCheckBox.setSelected(selectAllCheckBox.isSelected());
 
             int index = getIndex();
             if (index > -1 && index < getTableView().getItems().size()) {
