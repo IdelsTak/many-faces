@@ -28,7 +28,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        Scene scene = new Scene(new Home().loadPane());
+        Scene scene = new Scene(new Home().getPane());
 
         primaryStage.setOnShown(e -> maximizeFallBack(primaryStage));
         primaryStage.setTitle("Many Faces");
