@@ -30,7 +30,7 @@ public class Home extends HBox {
         super();
     }
 
-    public Pane loadPane() {
+    public Pane getPane() {
         Pane navigationBar = null;
 
         try {
@@ -40,16 +40,17 @@ public class Home extends HBox {
         }
 
         if (navigationBar != null) {
-            contentPane = loadContentPane();
-
-            getChildren().setAll(navigationBar, contentPane);
-            HBox.setHgrow(contentPane, Priority.ALWAYS);
+            getChildren().setAll(navigationBar, getContentPane());
+            HBox.setHgrow(getContentPane(), Priority.ALWAYS);
         }
 
         return this;
     }
 
     public Pane getContentPane() {
+        if (contentPane == null) {
+            contentPane = loadContentPane();
+        }
         return contentPane;
     }
 
@@ -59,7 +60,7 @@ public class Home extends HBox {
         Pane navigationPane = loader.load();
         NavigationBarController controller = loader.getController();
 
-        controller.loadHomeMenu(this);
+        controller.setHomeContentPane(getContentPane());
 
         return navigationPane;
     }
