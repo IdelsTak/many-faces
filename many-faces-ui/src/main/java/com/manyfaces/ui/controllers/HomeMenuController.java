@@ -4,9 +4,7 @@
 package com.manyfaces.ui.controllers;
 
 import com.manyfaces.ui.BrowserProfileList;
-import com.manyfaces.ui.Home;
 import java.util.logging.Logger;
-import javafx.application.Platform;
 import javafx.css.Styleable;
 import javafx.fxml.FXML;
 import javafx.scene.control.RadioButton;
@@ -34,7 +32,7 @@ public class HomeMenuController {
     private RadioButton pluginsToggle;
     @FXML
     private RadioButton helpToggle;
-    private Home home;
+    private Pane contentPane;
 
     static {
         LOG = Logger.getLogger(HomeMenuController.class.getName());
@@ -48,8 +46,8 @@ public class HomeMenuController {
         menuGroup.getToggles().forEach(this::removeRadioButtonStyling);
     }
 
-    public void setHome(Home home) {
-        this.home = home;
+    public void setContentPane(Pane contentPane) {
+        this.contentPane = contentPane;
 
         homeToggle.selectedProperty().addListener((o, oldVal, selected) -> {
             if (selected) {
@@ -62,11 +60,7 @@ public class HomeMenuController {
     }
 
     private void openBrowserProfileList() {
-        Platform.runLater(() -> {
-            Pane contentPane = home.getContentPane();
-
-            contentPane.getChildren().setAll(new BrowserProfileList().loadPane());
-        });
+        contentPane.getChildren().setAll(new BrowserProfileList().loadPane());
     }
 
     private void removeRadioButtonStyling(Toggle toggle) {
