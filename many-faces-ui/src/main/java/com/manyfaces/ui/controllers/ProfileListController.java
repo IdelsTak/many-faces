@@ -81,8 +81,8 @@ public class ProfileListController {
         });
 
         titledPane.expandedProperty().addListener((o, oldVal, expanded) -> {
-            selectCheckBox.setSelected(selectCheckBox.isSelected() 
-                    && expanded != null 
+            selectCheckBox.setSelected(selectCheckBox.isSelected()
+                    && expanded != null
                     && !expanded);
         });
 
@@ -107,10 +107,10 @@ public class ProfileListController {
         selectButton.setOnAction(e -> {
             selectCheckBox.setSelected(!selectCheckBox.isSelected());
         });
-        
+
         initTable();
     }
-    
+
     private Pane getProfileEditor(TableRowExpanderColumn.TableRowDataFeatures<Profile> rowData) {
         URL location = getClass().getResource("/views/ProfileEditView.fxml");
         Pane profileEditPane = null;
@@ -136,20 +136,24 @@ public class ProfileListController {
                 columnCell.getRowCheckBox().setSelected(newVal);
             });
 
+            titledPane.expandedProperty().addListener((o, oldVal, expanded) -> {
+                columnCell.getRowCheckBox().setVisible(expanded);
+            });
+
             return columnCell;
         });
-        
+
         TableColumn<Profile, String> statusColumn = new TableColumn<>("Status");
         statusColumn.setCellValueFactory(cellData -> cellData.getValue().getStatusProperty());
-        
+
         TableColumn<Profile, String> membersColumn = new TableColumn<>("Members");
-        
+
         TableColumn<Profile, LocalDateTime> lastEditedColumn = new TableColumn<>("Last edited");
         lastEditedColumn.setCellValueFactory(cellData -> cellData.getValue().getLastEditedProperty());
-        
+
         profilesTable.getColumns().addAll(
-                expanderColumn, 
-                statusColumn, 
+                expanderColumn,
+                statusColumn,
                 membersColumn,
                 lastEditedColumn);
 
