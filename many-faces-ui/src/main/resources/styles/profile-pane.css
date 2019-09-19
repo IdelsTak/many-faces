@@ -1,0 +1,46 @@
+
+.profile-pane, 
+.title-box,
+.grid-pane {
+    -fx-font-family: "Roboto";
+    -fx-background-color: white;
+}
+
+.title-box {
+    /*-fx-border-color: transparent transparent grey transparent;*/
+    -fx-border-width: 0.5px;
+}
+
+.profile-pane {
+    -fx-border-color: grey transparent grey transparent;
+}
+
+.profile-pane > .title {
+    -fx-pref-height: 48;
+    -fx-cursor: null;
+    -fx-background-insets: 0;
+    -fx-background-radius: 0;
+    -fx-padding: 0;
+    -fx-background-color: white;
+    /*-fx-border-color: transparent transparent grey transparent;*/
+    -fx-cursor: hand;
+}
+
+.profile-pane > .title > .arrow-button {
+    -fx-padding: 0;
+}
+
+.profile-pane > .title > .arrow-button > .arrow {
+    -fx-background-color: null;
+    -fx-padding: 0;
+}
+
+.profile-pane > *.content {
+    -fx-border-color: null;
+    -fx-border-insets: 0;
+    -fx-background-color: white;
+}
+
+.jfx-toggle-node:selected {
+    -fx-rotate: 90;
+}

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXCheckBox?>
+<?import com.jfoenix.controls.JFXToggleNode?>
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Text?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+
+<TitledPane fx:id="titledPane" animated="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="288.0" styleClass="profile-pane" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.manyfaces.ui.controllers.ProfilePaneController">
+   <content>
+      <GridPane hgap="6.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="240.0" prefWidth="600.0" styleClass="grid-pane" vgap="12.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="NEVER" minWidth="10.0" />
+          <ColumnConstraints hgrow="NEVER" minWidth="10.0" />
+            <ColumnConstraints hgrow="NEVER" minWidth="10.0" />
+            <ColumnConstraints hgrow="NEVER" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="NEVER" />
+          <RowConstraints minHeight="10.0" vgrow="NEVER" />
+          <RowConstraints minHeight="10.0" vgrow="NEVER" />
+        </rowConstraints>
+         <children>
+            <Label text="Profile ID">
+               <padding>
+                  <Insets right="12.0" />
+               </padding>
+            </Label>
+            <Text fx:id="profileIdText" strokeType="OUTSIDE" strokeWidth="0.0" text="bcb1f5f6-3b20-4136-8a14-c7bf9418bef8" GridPane.columnIndex="1" GridPane.columnSpan="2147483647" />
+            <Label text="Notes" GridPane.rowIndex="1" GridPane.valignment="TOP" />
+            <TextArea maxHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" GridPane.columnIndex="1" GridPane.columnSpan="2147483647" GridPane.rowIndex="1" />
+            <Button mnemonicParsing="false" text="Save note" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Button mnemonicParsing="false" text="Cancel editing" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+         </children>
+         <padding>
+            <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
+         </padding>
+      </GridPane>
+   </content>
+   <graphic>
+      <HBox fx:id="titleHbox" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="49.0" prefWidth="627.0" spacing="2.0" styleClass="title-box">
+         <children>
+            <JFXCheckBox fx:id="titlePaneCheckBox" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="49.0" />
+            <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true" HBox.hgrow="NEVER">
+               <image>
+                  <Image url="@../images/fox.png" />
+               </image>
+               <HBox.margin>
+                  <Insets bottom="12.5" top="12.5" />
+               </HBox.margin>
+            </ImageView>
+            <JFXToggleNode fx:id="expandPaneToggle" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="49.0">
+               <graphic>
+                  <FontIcon iconLiteral="mdi-play" />
+               </graphic>
+               <padding>
+                  <Insets bottom="-1.0" left="-1.0" right="-1.0" top="-1.0" />
+               </padding>
+            </JFXToggleNode>
+            <Label fx:id="profileNameLabel" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="49.0" />
+         </children>
+      </HBox>
+   </graphic>
+   <stylesheets>
+      <URL value="@../styles/roboto-regular.css" />
+      <URL value="@../styles/profile-pane.css" />
+   </stylesheets>
+</TitledPane>
