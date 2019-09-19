@@ -16,7 +16,7 @@
 
 <VBox style="-fx-background-color: white;" VBox.vgrow="ALWAYS" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.manyfaces.ui.controllers.ProfileListController">
    <children>
-      <TitledPane fx:id="titledPane" animated="false" styleClass="action-pane" VBox.vgrow="NEVER">
+      <TitledPane fx:id="titledPane" animated="false" expanded="false" styleClass="action-pane" VBox.vgrow="NEVER">
          <content>
             <HBox maxHeight="-Infinity" minHeight="-Infinity" prefHeight="36.0" spacing="6.0" style="-fx-background-color: transparent;">
                <children>
@@ -59,7 +59,7 @@
       </HBox>
       <VBox VBox.vgrow="ALWAYS">
          <children>
-            <HBox VBox.vgrow="NEVER">
+            <HBox styleClass="columns-box" VBox.vgrow="NEVER">
                <children>
                   <JFXButton contentDisplay="RIGHT" styleClass="sort-button" text="Name">
                      <graphic>
@@ -69,7 +69,35 @@
                         <Insets bottom="-1.0" left="-1.0" right="-1.0" top="-1.0" />
                      </padding>
                   </JFXButton>
+                  <HBox maxHeight="-Infinity" minWidth="-Infinity" prefHeight="13.0" prefWidth="225.0" />
+                  <JFXButton contentDisplay="RIGHT" layoutX="11.0" layoutY="11.0" styleClass="sort-button" text="Status">
+                     <padding>
+                        <Insets bottom="-1.0" left="-1.0" right="-1.0" top="-1.0" />
+                     </padding>
+                  </JFXButton>
+                  <HBox layoutX="58.0" layoutY="11.0" maxHeight="-Infinity" minWidth="-Infinity" prefHeight="13.0" prefWidth="30.0" />
+                  <JFXButton contentDisplay="RIGHT" layoutX="11.0" layoutY="11.0" styleClass="sort-button" text="Members">
+                     <graphic>
+                        <FontIcon fx:id="nameSortIcon1" iconLiteral="mdi-play" styleClass="sort-icon" />
+                     </graphic>
+                     <padding>
+                        <Insets bottom="-1.0" left="-1.0" right="-1.0" top="-1.0" />
+                     </padding>
+                  </JFXButton>
+                  <HBox layoutX="315.0" layoutY="11.0" maxHeight="-Infinity" minWidth="-Infinity" prefHeight="13.0" prefWidth="32.0" />
+                  <JFXButton contentDisplay="RIGHT" layoutX="345.0" layoutY="11.0" styleClass="sort-button" text="Last edited">
+                     <graphic>
+                        <FontIcon fx:id="nameSortIcon11" iconLiteral="mdi-play" styleClass="sort-icon" />
+                     </graphic>
+                     <padding>
+                        <Insets bottom="-1.0" left="-1.0" right="-1.0" top="-1.0" />
+                     </padding>
+                  </JFXButton>
+                  <HBox layoutX="411.0" layoutY="11.0" maxHeight="-Infinity" minWidth="-Infinity" prefHeight="13.0" prefWidth="170.0" />
                </children>
+               <padding>
+                  <Insets bottom="6.0" />
+               </padding>
             </HBox>
             <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" prefHeight="500.0" style="-fx-background-color: white;" VBox.vgrow="NEVER">
                <content>
