@@ -8,7 +8,6 @@ import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.controls.JFXToggleNode;
 import com.manyfaces.model.Profile;
-import com.manyfaces.ui.ExpanderColumnCell;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDateTime;
@@ -19,12 +18,9 @@ import java.util.logging.Logger;
 import javafx.css.Styleable;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.Accordion;
 import javafx.scene.control.TitledPane;
 import javafx.scene.input.InputEvent;
-import javafx.scene.layout.Pane;
-import org.controlsfx.control.table.TableRowExpanderColumn;
 import org.kordamp.ikonli.javafx.FontIcon;
 
 /**
@@ -58,7 +54,8 @@ public class ProfileListController {
     @FXML
     private FontIcon refreshIcon;
     @FXML
-    private TableView<Profile> profilesTable;
+    private Accordion accordion;
+    private final Collection<Profile> profiles = new ArrayList<>();
 
     static {
         LOG = Logger.getLogger(ProfileListController.class.getName());
@@ -80,10 +77,17 @@ public class ProfileListController {
             }
         });
 
-        titledPane.expandedProperty().addListener((o, oldVal, expanded) -> {
-            selectCheckBox.setSelected(selectCheckBox.isSelected()
-                    && expanded != null
-                    && !expanded);
+        titledPane.expandedProperty().addListener((o, ov, expanded) -> {
+            selectCheckBox.setSelected(!expanded);
+
+            accordion.getPanes().clear();
+
+            profiles.forEach(profile -> {
+                ProfileTitledPane ptp = getProfileTitledPane(
+                        profile.getProfileNameProperty().get());
+                ptp.showSelectCheckboxes(expanded);
+                accordion.getPanes().add(ptp.getTitledPane());
+            });
         });
 
         settingsToggle.setOnAction(e -> {
@@ -108,57 +112,20 @@ public class ProfileListController {
             selectCheckBox.setSelected(!selectCheckBox.isSelected());
         });
 
+        selectCheckBox.selectedProperty().addListener((ob, ov, nv) -> {
+            accordion.getPanes().clear();
+
+            profiles.forEach(profile -> {
+                ProfileTitledPane ptp = getProfileTitledPane(
+                        profile.getProfileNameProperty().get());
+                ptp.setTitledPaneSelected(nv);
+                accordion.getPanes().add(ptp.getTitledPane());
+            });
+        });
         initTable();
     }
 
-    private Pane getProfileEditor(TableRowExpanderColumn.TableRowDataFeatures<Profile> rowData) {
-        URL location = getClass().getResource("/views/ProfileEditView.fxml");
-        Pane profileEditPane = null;
-
-        try {
-            profileEditPane = FXMLLoader.load(location);
-        } catch (IOException ex) {
-            LOG.log(Level.SEVERE, null, ex);
-        }
-
-        return profileEditPane;
-    }
-
-    @SuppressWarnings("unchecked")
     private void initTable() {
-        TableRowExpanderColumn<Profile> expanderColumn = new TableRowExpanderColumn<>(this::getProfileEditor);
-
-        expanderColumn.setText("Name");
-        expanderColumn.setCellFactory(c -> {
-            ExpanderColumnCell columnCell = new ExpanderColumnCell(expanderColumn, selectCheckBox);
-
-            selectCheckBox.selectedProperty().addListener((o, oldVal, newVal) -> {
-                columnCell.getRowCheckBox().setSelected(newVal);
-            });
-
-            titledPane.expandedProperty().addListener((o, oldVal, expanded) -> {
-                columnCell.getRowCheckBox().setVisible(expanded);
-            });
-
-            return columnCell;
-        });
-
-        TableColumn<Profile, String> statusColumn = new TableColumn<>("Status");
-        statusColumn.setCellValueFactory(cellData -> cellData.getValue().getStatusProperty());
-
-        TableColumn<Profile, String> membersColumn = new TableColumn<>("Members");
-
-        TableColumn<Profile, LocalDateTime> lastEditedColumn = new TableColumn<>("Last edited");
-        lastEditedColumn.setCellValueFactory(cellData -> cellData.getValue().getLastEditedProperty());
-
-        profilesTable.getColumns().addAll(
-                expanderColumn,
-                statusColumn,
-                membersColumn,
-                lastEditedColumn);
-
-        Collection<Profile> profiles = new ArrayList<>();
-
         profiles.add(new Profile("Profile 1", "", "", LocalDateTime.now()));
         profiles.add(new Profile("Profile 2", "", "", LocalDateTime.now()));
         profiles.add(new Profile("Profile 3", "", "", LocalDateTime.now()));
@@ -166,6 +133,58 @@ public class ProfileListController {
         profiles.add(new Profile("Profile 5", "", "", LocalDateTime.now()));
         profiles.add(new Profile("Profile 6", "", "", LocalDateTime.now()));
 
-        profilesTable.getItems().addAll(profiles);
+        profiles.forEach(profile -> {
+            accordion.getPanes()
+                    .add(getProfileTitledPane(profile.getProfileNameProperty().get())
+                            .getTitledPane());
+        });
+
+    }
+
+    private ProfileTitledPane getProfileTitledPane(String profileName) {
+        URL location = getClass().getResource("/views/ProfilePane.fxml");
+        FXMLLoader loader = new FXMLLoader(location);
+
+        TitledPane tp = null;
+        ProfilePaneController controller = null;
+        try {
+            tp = loader.load();
+            controller = loader.getController();
+
+            controller.setTitledPaneTitle(profileName);
+            controller.setTitledPaneSelected(true);
+        } catch (IOException ex) {
+            LOG.log(Level.SEVERE, null, ex);
+        }
+        ProfileTitledPane ptp = new ProfileTitledPane(tp, controller);
+        ptp.setTitledPaneSelected(selectCheckBox.isSelected());
+
+        return ptp;
+    }
+
+    private static class ProfileTitledPane {
+
+        private final TitledPane titledPane;
+        private final ProfilePaneController controller;
+
+        private ProfileTitledPane(
+                TitledPane titledPane, 
+                ProfilePaneController controller) {
+            this.titledPane = titledPane;
+            this.controller = controller;
+        }
+
+        private TitledPane getTitledPane() {
+            return titledPane;
+        }
+
+        private void setTitledPaneSelected(boolean selected) {
+            controller.setTitledPaneSelected(selected);
+        }
+
+        private void showSelectCheckboxes(boolean show) {
+            controller.showSelectBoxes(show);
+        }
+
     }
 }
