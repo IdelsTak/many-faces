@@ -67,15 +67,18 @@
                   <Insets bottom="12.5" top="12.5" />
                </HBox.margin>
             </ImageView>
-            <JFXToggleNode fx:id="expandPaneToggle" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="49.0">
+            <JFXToggleNode fx:id="expandPaneToggle" maxHeight="-Infinity" minHeight="-Infinity" prefWidth="12.0">
                <graphic>
                   <FontIcon iconLiteral="mdi-play" />
                </graphic>
                <padding>
                   <Insets bottom="-1.0" left="-1.0" right="-1.0" top="-1.0" />
                </padding>
+               <HBox.margin>
+                  <Insets bottom="16.5" top="16.5" />
+               </HBox.margin>
             </JFXToggleNode>
-            <Label fx:id="profileNameLabel" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="49.0" />
+            <Label fx:id="profileNameLabel" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="49.0" styleClass="title-label" />
          </children>
       </HBox>
    </graphic>
