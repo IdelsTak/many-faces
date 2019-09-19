@@ -131,7 +131,7 @@ public class ProfileListController {
                     .filtered(TitledPane::isExpanded)
                     .forEach(pane -> pane.setExpanded(false));
         });
-        
+
         initTable();
     }
 
