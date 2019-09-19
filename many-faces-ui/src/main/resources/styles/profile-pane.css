@@ -15,7 +15,7 @@
 }
 
 .profile-pane {
-    -fx-border-color: #e1e3e7 transparent transparent transparent;
+    -fx-border-color: transparent transparent #e1e3e7 transparent;
 }
 
 .profile-pane > .title {
@@ -79,6 +79,10 @@
 }
 
 .edit-label {
+    -fx-font-weight: bold;
+}
+
+.title-label:hover {
     -fx-font-weight: bold;
 }
 
