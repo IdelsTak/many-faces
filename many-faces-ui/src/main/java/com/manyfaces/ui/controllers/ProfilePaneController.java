@@ -3,8 +3,13 @@
  */
 package com.manyfaces.ui.controllers;
 
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
+import com.jfoenix.controls.JFXListView;
+import com.jfoenix.controls.JFXPopup;
 import com.jfoenix.controls.JFXToggleNode;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TitledPane;
@@ -18,6 +23,7 @@ import javafx.scene.text.Text;
  */
 public class ProfilePaneController {
 
+    private static final Logger LOG;
     @FXML
     private JFXCheckBox titlePaneCheckBox;
     @FXML
@@ -30,6 +36,12 @@ public class ProfilePaneController {
     private Label profileNameLabel;
     @FXML
     private JFXToggleNode expandPaneToggle;
+    @FXML
+    private JFXButton menuButton;
+
+    static {
+        LOG = Logger.getLogger(ProfilePaneController.class.getName());
+    }
 
     /**
      Initializes the controller class.
@@ -46,6 +58,41 @@ public class ProfilePaneController {
 
         expandPaneToggle.selectedProperty().addListener((ob, ov, nv) -> {
             titledPane.setExpanded(nv);
+        });
+
+        menuButton.setOnAction(e -> {
+            JFXListView<Label> list = new JFXListView<>();
+            list.getStylesheets().add(getClass().getResource("/styles/profile-pane.css").toExternalForm());
+
+            list.getItems().add(new Label("Edit"));
+            list.getItems().add(new Label("Move to a group"));
+            list.getItems().add(new Label("Delete"));
+
+            list.selectionModelProperty()
+                    .getValue()
+                    .selectedItemProperty()
+                    .addListener((ob, ov, nv) -> {
+                        switch (nv.getText()) {
+                            case "Edit":
+                                LOG.log(Level.INFO, "Edit");
+                                return;
+                            case "Move to a group":
+                                LOG.log(Level.INFO, "Move to a group");
+                                return;
+                            case "Delete":
+                                LOG.log(Level.INFO, "Delete");
+                                return;
+                            default:
+                                throw new IllegalArgumentException("Action not known");
+
+                        }
+                    });
+
+            JFXPopup popup = new JFXPopup(list);
+
+            popup.show(menuButton,
+                    JFXPopup.PopupVPosition.TOP,
+                    JFXPopup.PopupHPosition.RIGHT);
         });
 
     }
