@@ -71,7 +71,7 @@
                   </JFXButton>
                </children>
             </HBox>
-            <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" maxHeight="-Infinity" style="-fx-background-color: white;" VBox.vgrow="NEVER">
+            <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" prefHeight="500.0" style="-fx-background-color: white;" VBox.vgrow="NEVER">
                <content>
                   <Accordion fx:id="accordion" style="-fx-background-color: white;" />
                </content>
