@@ -7,12 +7,14 @@
 <?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Accordion?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 
-<VBox maxHeight="1.7976931348623157E308" style="-fx-background-color: white;" VBox.vgrow="ALWAYS" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.manyfaces.ui.controllers.ProfileListController">
+<VBox style="-fx-background-color: white;" VBox.vgrow="ALWAYS" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.manyfaces.ui.controllers.ProfileListController">
    <children>
       <TitledPane fx:id="titledPane" animated="false" styleClass="action-pane" VBox.vgrow="NEVER">
          <content>
@@ -55,9 +57,9 @@
             <Insets />
          </VBox.margin>
       </HBox>
-      <VBox>
+      <VBox VBox.vgrow="ALWAYS">
          <children>
-            <HBox>
+            <HBox VBox.vgrow="NEVER">
                <children>
                   <JFXButton contentDisplay="RIGHT" styleClass="sort-button" text="Name">
                      <graphic>
@@ -69,7 +71,12 @@
                   </JFXButton>
                </children>
             </HBox>
-            <Accordion fx:id="accordion" />
+            <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" maxHeight="-Infinity" style="-fx-background-color: white;" VBox.vgrow="NEVER">
+               <content>
+                  <Accordion fx:id="accordion" style="-fx-background-color: white;" />
+               </content>
+            </ScrollPane>
+            <Separator orientation="VERTICAL" prefHeight="6.0" visible="false" VBox.vgrow="NEVER" />
          </children>
          <padding>
             <Insets left="26.0" right="32.0" />
