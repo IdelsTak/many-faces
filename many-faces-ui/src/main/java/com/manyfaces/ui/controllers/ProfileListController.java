@@ -168,6 +168,7 @@ public class ProfileListController {
         }
         ProfileTitledPane ptp = new ProfileTitledPane(tp, controller);
         ptp.setTitledPaneSelected(selectCheckBox.isSelected());
+        ptp.showSelectCheckboxes(titledPane.isExpanded());
 
         return ptp;
     }
