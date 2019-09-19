@@ -10,7 +10,6 @@ import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.TabPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
@@ -37,7 +36,7 @@ public class BrowserProfileList extends VBox {
 
     public Pane loadPane() {
         Pane headerPane = null;
-        TabPane tabPane = null;
+        Pane tabPane = null;
 
         try {
             headerPane = loadHeaderPane();
@@ -47,9 +46,8 @@ public class BrowserProfileList extends VBox {
         }
 
         if (headerPane != null && tabPane != null) {
-            tabPane.getStyleClass().add("-fx-background-color: white");
-            tabPane.setPrefHeight(800.0);
             VBox.setVgrow(tabPane, Priority.ALWAYS);
+
             getChildren().setAll(headerPane, tabPane);
         }
 
@@ -65,15 +63,15 @@ public class BrowserProfileList extends VBox {
         return pane;
     }
 
-    private TabPane loadProfileListTab() throws IOException {
+    private Pane loadProfileListTab() throws IOException {
         URL location = getClass().getResource("/views/ProfileListTab.fxml");
         FXMLLoader loader = new FXMLLoader(location);
-        TabPane tabPane = loader.load();
+        Pane pane = loader.load();
         ProfileListTabController tabController = loader.getController();
-        
+
         tabController.setPageHeaderController(pageHeaderController);
 
-        return tabPane;
+        return pane;
     }
 
 }
