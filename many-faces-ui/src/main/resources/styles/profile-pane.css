@@ -86,7 +86,19 @@
     -fx-font-weight: bold;
 }
 
-.jfx-button {
+.edit-button {
     -fx-font-size: 12px;
+}
+
+.menu-icon {
+    -fx-icon-color: #c0c0c0;
+}
+
+.menu-icon:hover {
+    -fx-icon-color: black;
+}
+
+.menu-button .jfx-rippler {
+    -jfx-rippler-fill: #dadada;
 }
 
