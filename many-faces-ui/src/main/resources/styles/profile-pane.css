@@ -1,18 +1,21 @@
 
 .profile-pane, 
-.title-box,
-.grid-pane {
+.title-box {
     -fx-font-family: "Roboto";
     -fx-background-color: white;
 }
 
+.grid-pane {
+    -fx-font-family: "Roboto";
+    -fx-background-color: #fafafa;
+}
+
 .title-box {
-    /*-fx-border-color: transparent transparent grey transparent;*/
     -fx-border-width: 0.5px;
 }
 
 .profile-pane {
-    -fx-border-color: grey transparent grey transparent;
+    -fx-border-color: #e1e3e7 transparent transparent transparent;
 }
 
 .profile-pane > .title {
@@ -22,8 +25,8 @@
     -fx-background-radius: 0;
     -fx-padding: 0;
     -fx-background-color: white;
-    /*-fx-border-color: transparent transparent grey transparent;*/
     -fx-cursor: hand;
+    -fx-font-size: 14px;
 }
 
 .profile-pane > .title > .arrow-button {
@@ -36,11 +39,50 @@
 }
 
 .profile-pane > *.content {
+    -fx-font-size: 14px;
     -fx-border-color: null;
     -fx-border-insets: 0;
     -fx-background-color: white;
 }
 
+.jfx-toggle-node {
+    -jfx-toggle-color: white;
+    -jfx-untoggle-color: white;
+}
+
 .jfx-toggle-node:selected {
     -fx-rotate: 90;
 }
+
+.jfx-toggle-node .jfx-rippler {
+    -jfx-rippler-fill: white;
+}
+
+.jfx-text-area {
+    /*-fx-font-weight: normal;*/
+    -fx-prompt-text-fill: #7b7b7b;
+    -fx-border-color: #949494;
+    -fx-border-width: 1 1 1 1;
+    -fx-pref-width: 475px;
+    -fx-pref-height: 80px;
+    -fx-padding: 0 0 0 1;
+}
+
+.jfx-text-area > .input-line {
+    -fx-pref-height: 0px;
+    -fx-max-height: 0px;
+}
+
+.jfx-text-area > .input-focused-line {
+    -fx-pref-height: 0px;
+    -fx-max-height: 0px;
+}
+
+.edit-label {
+    -fx-font-weight: bold;
+}
+
+.jfx-button {
+    -fx-font-size: 12px;
+}
+
