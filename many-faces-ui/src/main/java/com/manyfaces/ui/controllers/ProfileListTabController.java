@@ -6,7 +6,6 @@ package com.manyfaces.ui.controllers;
 import com.jfoenix.controls.JFXTabPane;
 import java.io.IOException;
 import java.net.URL;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.beans.property.ReadOnlyIntegerProperty;
 import javafx.fxml.FXML;
@@ -43,17 +42,15 @@ public class ProfileListTabController {
     public void initialize() throws IOException {
         URL location = getClass().getResource("/views/ProfileList.fxml");
         FXMLLoader loader = new FXMLLoader(location);
-        Pane pane = null;
+        Pane profileListpane = loader.load();
 
-        try {
-            pane = loader.load();
-        } catch (IOException ex) {
-            LOG.log(Level.SEVERE, null, ex);
-        }
+        profileListTab.setContent(profileListpane);
 
-        if (pane != null) {
-            profileListTab.setContent(pane);
-        }
+        location = getClass().getResource("/views/GroupList.fxml");
+        loader = new FXMLLoader(location);
+        Pane groupListPane = loader.load();
+        
+        groupsTab.setContent(groupListPane);
     }
 
     public void setPageHeaderController(PageHeaderController phc) {
