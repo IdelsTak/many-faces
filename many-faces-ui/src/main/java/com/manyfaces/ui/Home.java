@@ -74,7 +74,7 @@ public class Home extends HBox {
         vBox.setPrefHeight(632);
         vBox.setMinHeight(632);
         vBox.setMinWidth(706);
-        vBox.setMaxWidth(Double.MAX_VALUE);
+//        vBox.setMaxWidth(Double.MAX_VALUE);
 
         return vBox;
     }
