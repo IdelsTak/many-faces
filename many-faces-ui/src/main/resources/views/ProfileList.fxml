@@ -34,7 +34,7 @@
       </TitledPane>
       <HBox maxHeight="-Infinity" minHeight="-Infinity" prefHeight="60.0" prefWidth="200.0" style="-fx-background-color: transparent;" VBox.vgrow="NEVER">
          <children>
-            <JFXTextField fx:id="searchField" labelFloat="true" promptText="Search...">
+            <JFXTextField fx:id="searchField" labelFloat="true" promptText="Search profiles...">
                <HBox.margin>
                   <Insets top="7.5" />
                </HBox.margin></JFXTextField>
