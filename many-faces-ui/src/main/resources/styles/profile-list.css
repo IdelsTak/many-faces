@@ -83,30 +83,34 @@ only the collapsible pane remains*/
     -fx-rotate: 180;
 }
 
-.sort-button {
-    -fx-font-size: 12px;
-    -fx-text-fill: grey;
-}
-
-.jfx-check-box, .action-button{
+.jfx-check-box, .action-button {
     -fx-font-family: "Roboto";
-    -fx-font-size: 14.0;
+    -fx-font-size: 14px;
     -fx-text-fill: #174bc9;
     -jfx-checked-color: #174bc9;
 }
 
-.action-button:disabled{
+.action-button:disabled {
     -fx-text-fill: #8ba5e4;
 }
 
-.jfx-check-box .jfx-rippler{
+.jfx-check-box .jfx-rippler {
     -jfx-rippler-fill: #8ca6e4;
 }
 
-.table-view {
+.columns-box {
+    -fx-font-size: 12px;
+    -fx-border-color: transparent transparent #e1e3e7 transparent;
+}
+
+.columns-box > .jfx-button .jfx-rippler {
+    -jfx-rippler-fill: white;
+}
+
+/*.table-view {
     -fx-font-family: "Roboto";
-    /*For testing purposes*/
-    /*-fx-border-color: blueviolet;*/
+    For testing purposes
+    -fx-border-color: blueviolet;
 }
 
 .table-view, .table-view:focused {
@@ -123,7 +127,7 @@ only the collapsible pane remains*/
     -fx-background-insets: 0 0 0 0;
     -fx-font-weight: normal;
     -fx-size: 24px;
-    /*-fx-text-fill: red;*/
+    -fx-text-fill: red;
     -fx-border-width: 0 0 1 0;
     -fx-border-color: white white gainsboro white;
 }
@@ -135,8 +139,8 @@ only the collapsible pane remains*/
 
 .table-view .arrow {
     -fx-background-color: white;
-    /*-fx-padding: 0.25em 0.3125em 0.25em 0.3125em;  3 3.75 3 3.75 */
-    -fx-padding: 3 3 3 3; /* 3 3.75 3 3.75 */
+    -fx-padding: 0.25em 0.3125em 0.25em 0.3125em;  3 3.75 3 3.75 
+    -fx-padding: 3 3 3 3;  3 3.75 3 3.75 
     -fx-shape: "M 0 0 h 7 l -3.5 4 z";
 }
 
@@ -145,7 +149,7 @@ only the collapsible pane remains*/
 }
 
 .table-row-cell:filled {
-    -fx-padding: 0.166667em;  /*2px, plus border adds 1px */
+    -fx-padding: 0.166667em;  2px, plus border adds 1px 
     -fx-border-color: white white gainsboro white;
 }
 
@@ -156,15 +160,15 @@ only the collapsible pane remains*/
     -fx-background: white;
     -fx-table-cell-border-color: white;
     -fx-cell-size: 3.3em;
-}
+}*/
 
-.profile-name-label {
+/*.profile-name-label {
 
 }
 
 .profile-name-label:hover {
     -fx-font-weight: bold;
-}
+}*/
 
 /*.profile-row-toggle {
     -fx-padding: 0 6 0 0;
