@@ -47,8 +47,8 @@
                   <Insets bottom="20.0" top="30.0" />
                </GridPane.margin>
             </JFXTextArea>
-            <JFXButton minHeight="-Infinity" minWidth="-Infinity" style="-fx-background-color: #1c54d3;" text="Save note" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <JFXButton text="Cancel editing" textFill="#2858cd" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+            <JFXButton minHeight="-Infinity" minWidth="-Infinity" style="-fx-background-color: #1c54d3;" styleClass="edit-button" text="Save note" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <JFXButton styleClass="edit-button" text="Cancel editing" textFill="#2858cd" GridPane.columnIndex="2" GridPane.rowIndex="2" />
          </children>
          <padding>
             <Insets bottom="15.0" left="40.0" top="25.0" />
@@ -56,7 +56,7 @@
       </GridPane>
    </content>
    <graphic>
-      <HBox fx:id="titleHbox" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="48.0" prefWidth="627.0" spacing="2.0" styleClass="title-box">
+      <HBox fx:id="titleHbox" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="48.0" prefWidth="645.0" spacing="2.0" styleClass="title-box">
          <children>
             <JFXCheckBox fx:id="titlePaneCheckBox" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="49.0" />
             <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true" HBox.hgrow="NEVER">
@@ -79,6 +79,26 @@
                </HBox.margin>
             </JFXToggleNode>
             <Label fx:id="profileNameLabel" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="49.0" styleClass="title-label" />
+            <HBox prefWidth="200.0" HBox.hgrow="ALWAYS" />
+            <Label fx:id="lastEditedLabel" prefHeight="24.0" prefWidth="65.0" style="-fx-font-size: 12px;" text="01/08/2018">
+               <HBox.margin>
+                  <Insets top="12.0" />
+               </HBox.margin>
+            </Label>
+            <HBox fx:id="notificationsBox" layoutX="143.0" layoutY="10.0" prefWidth="65.0" />
+            <JFXButton maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="55.0" style="-fx-background-color: #60c652; -fx-text-fill: white;" text="Update">
+               <HBox.margin>
+                  <Insets bottom="11.5" top="11.5" />
+               </HBox.margin>
+               <padding>
+                  <Insets bottom="-1.0" left="-1.0" right="-1.0" top="-1.0" />
+               </padding>
+            </JFXButton>
+            <JFXButton fx:id="menuButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="48.0" prefWidth="48.0" style="-fx-background-radius: 24;" styleClass="menu-button">
+               <graphic>
+                  <FontIcon fx:id="menuIcon" iconLiteral="mdi-dots-vertical" iconSize="24" styleClass="menu-icon" />
+               </graphic>
+            </JFXButton>
          </children>
       </HBox>
    </graphic>
