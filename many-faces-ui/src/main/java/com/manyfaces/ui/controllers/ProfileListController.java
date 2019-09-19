@@ -122,6 +122,16 @@ public class ProfileListController {
                 accordion.getPanes().add(ptp.getTitledPane());
             });
         });
+
+        //Ensures that only ONE pane is expanded in the
+        //accordion at any one time
+        accordion.expandedPaneProperty().addListener((ob, ov, nv) -> {
+            accordion.getPanes()
+                    .filtered(pane -> !pane.equals(nv))
+                    .filtered(TitledPane::isExpanded)
+                    .forEach(pane -> pane.setExpanded(false));
+        });
+        
         initTable();
     }
 
@@ -168,7 +178,7 @@ public class ProfileListController {
         private final ProfilePaneController controller;
 
         private ProfileTitledPane(
-                TitledPane titledPane, 
+                TitledPane titledPane,
                 ProfilePaneController controller) {
             this.titledPane = titledPane;
             this.controller = controller;
