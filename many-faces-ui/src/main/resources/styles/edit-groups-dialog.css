@@ -87,6 +87,8 @@
     -fx-min-height: -fx-pref-height;
     -fx-max-width: -fx-pref-width;
     -fx-max-height: -fx-pref-height;
+    -fx-font-family: "Roboto";
+    -fx-font-size: 14px;
 }
 
 .buttons-area {
@@ -127,7 +129,7 @@
     -fx-font-family: "Roboto";
 }
 
-.list-area > .list-actions-area > .jfx-button {
+.list-area > .list-actions-area > .add-group-button {
     -fx-pref-width: 155px;
     -fx-pref-height: 36px;
     -fx-min-width: -fx-pref-width;
@@ -138,10 +140,35 @@
     -fx-text-fill: #0e46cc;
 }
 
-.list-area > .list-actions-area > .jfx-button > .ikonli-font-icon {
+.list-area > .list-actions-area > .add-group-button > .ikonli-font-icon {
     -fx-icon-code: mdi-folder-plus;
     -fx-icon-size: 22px;
     -fx-icon-color: #6b8dde;
+}
+
+.list-area > .list-actions-area > .apply-group-name-button {
+    -fx-pref-width: 18px;
+    -fx-pref-height: 18px;
+    -fx-min-width: -fx-pref-width;
+    -fx-min-height: -fx-pref-height;
+    -fx-max-width: -fx-pref-width;
+    -fx-max-height: -fx-pref-height;
+    -fx-background-radius: 8px;
+    -fx-padding: 2px 2px 2px 2px;
+}
+
+.list-area > .list-actions-area > .apply-group-name-button > .jfx-rippler{
+    -jfx-rippler-fill: #dadada;
+}
+
+.list-area > .list-actions-area > .apply-group-name-button > .ikonli-font-icon {
+    -fx-icon-code: mdi-plus-box;
+    -fx-icon-size: 16px;
+    -fx-icon-color: #828b93;
+}
+
+.list-area > .list-actions-area > .apply-group-name-button:hover > .ikonli-font-icon {
+    -fx-icon-color: black;
 }
 
 .list-area > .list-actions-area > .jfx-text-field {
@@ -150,9 +177,13 @@
     -fx-prompt-text-fill: #7b7b7b;
     -fx-border-color: #949494;
     -fx-border-width: 1 1 1 1;
-    /*    -fx-pref-width: 208px;*/
     -fx-pref-height: 27px;
     -fx-padding: 0 0 0 1;
+}
+
+.search-area > .jfx-text-field:focused,
+.list-area > .list-actions-area > .jfx-text-field:focused {
+    -fx-border-color: #174bc9;
 }
 
 .jfx-text-field > .input-line {
