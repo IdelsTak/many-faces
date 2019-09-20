@@ -5,7 +5,9 @@ package com.manyfaces.ui.controllers;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDialog;
+import com.jfoenix.controls.JFXTextField;
 import javafx.fxml.FXML;
+import javafx.scene.layout.StackPane;
 
 /**
  FXML Controller class
@@ -18,13 +20,20 @@ public class EditGroupsDialogController {
     private JFXButton closeButton;
     @FXML
     private JFXButton cancelButton;
+    @FXML
+    private StackPane listActionsPane;
+    @FXML
+    private JFXButton addNewgroupButton;
+    @FXML
+    private JFXTextField groupNameField;
 
     /**
      Initializes the controller class.
      */
     @FXML
     public void initialize() {
-        // TODO
+        addNewgroupButton.visibleProperty().bind(groupNameField.visibleProperty().not());
+        addNewgroupButton.setOnAction(e -> groupNameField.setVisible(true));
     }
 
     void setDialog(JFXDialog dialog) {
