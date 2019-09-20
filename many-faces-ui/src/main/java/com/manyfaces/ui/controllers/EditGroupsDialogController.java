@@ -6,6 +6,9 @@ package com.manyfaces.ui.controllers;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXTextField;
+import java.util.logging.Logger;
+import javafx.beans.binding.BooleanBinding;
+import javafx.beans.property.BooleanProperty;
 import javafx.fxml.FXML;
 import javafx.scene.layout.StackPane;
 
@@ -16,6 +19,7 @@ import javafx.scene.layout.StackPane;
  */
 public class EditGroupsDialogController {
 
+    private static final Logger LOG;
     @FXML
     private JFXButton closeButton;
     @FXML
@@ -26,22 +30,32 @@ public class EditGroupsDialogController {
     private JFXButton addNewgroupButton;
     @FXML
     private JFXTextField groupNameField;
+    @FXML
+    private JFXButton applyGroupNameButton;
+
+    static {
+        LOG = Logger.getLogger(EditGroupsDialogController.class.getName());
+    }
 
     /**
      Initializes the controller class.
      */
     @FXML
     public void initialize() {
-        addNewgroupButton.visibleProperty().bind(groupNameField.visibleProperty().not());
+        BooleanProperty nameFieldprop = groupNameField.visibleProperty();
+        BooleanBinding nameFieldNotProp = nameFieldprop.not();
+
+        addNewgroupButton.visibleProperty().bind(nameFieldNotProp);
+        applyGroupNameButton.visibleProperty().bind(nameFieldprop);
+        
         addNewgroupButton.setOnAction(e -> groupNameField.setVisible(true));
     }
 
     void setDialog(JFXDialog dialog) {
         if (dialog == null) {
-            throw new IllegalArgumentException("Dialo should not be null");
+            throw new IllegalArgumentException("Dialog should not be null");
         }
         closeButton.setOnAction(e -> dialog.close());
         cancelButton.setOnAction(e -> dialog.close());
     }
-
 }
