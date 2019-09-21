@@ -5,16 +5,19 @@ package com.manyfaces.ui.controllers;
 
 import com.jfoenix.controls.JFXTextField;
 import com.manyfaces.model.Group;
+import com.manyfaces.spi.GroupsRepository;
 import java.io.IOException;
 import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.collections.FXCollections;
+import javafx.application.Platform;
+import javafx.collections.ListChangeListener.Change;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Accordion;
 import javafx.scene.control.TitledPane;
+import org.openide.util.Lookup;
 
 /**
  FXML Controller class
@@ -24,10 +27,12 @@ import javafx.scene.control.TitledPane;
 public class GroupListController {
 
     private static final Logger LOG;
+    private static final Lookup LOOKUP = Lookup.getDefault();
     @FXML
     private JFXTextField searchField;
     @FXML
     private Accordion accordion;
+    private ObservableList<Group> groups;
 
     static {
         LOG = Logger.getLogger(GroupListController.class.getName());
@@ -41,13 +46,12 @@ public class GroupListController {
     @FXML
     public void initialize() throws IOException {
 
-        ObservableList<Group> groups = FXCollections.observableArrayList();
+        groups = LOOKUP.lookup(GroupsRepository.class).findAll();
 
-        groups.add(new Group(1, "Unassigned"));
-        groups.add(new Group(2, "test group"));
+        refreshRows();
 
-        groups.forEach(group -> {
-            accordion.getPanes().add(getGroupRow(group.getGroupNameProperty().get()));
+        groups.addListener((Change<? extends Group> change) -> {
+            Platform.runLater(() -> refreshRows());
         });
 
         accordion.expandedPaneProperty().addListener((ob, ov, nv) -> {
@@ -79,6 +83,15 @@ public class GroupListController {
                         pane.setExpanded(false);
                     });
 
+        });
+    }
+
+    private void refreshRows() {
+        accordion.getPanes().clear();
+        groups.forEach(group -> {
+            accordion.getPanes()
+                    .add(getGroupRow(group.getGroupNameProperty()
+                            .get()));
         });
     }
 
