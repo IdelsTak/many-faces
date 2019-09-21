@@ -78,7 +78,7 @@ public class EditGroupsDialogController {
         groups = LOOKUP.lookup(GroupsRepository.class).findAll();
 
         groups.addListener((Change<? extends Group> change) -> {
-            LOG.log(Level.INFO, "Groups list change event occured: {0}", change);
+//            LOG.log(Level.INFO, "Groups list change event occured: {0}", change);
 
             noGroupsFoundText.setVisible(change.getList().isEmpty());
             groupsListView.setVisible(!change.getList().isEmpty());
