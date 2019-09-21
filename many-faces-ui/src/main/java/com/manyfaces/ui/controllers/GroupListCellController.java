@@ -25,6 +25,7 @@ import org.openide.util.Lookup;
 public class GroupListCellController {
 
     private static final Logger LOG;
+    private static final Lookup LOOKUP = Lookup.getDefault();
     @FXML
     private Label groupNameLabel;
     @FXML
@@ -74,6 +75,8 @@ public class GroupListCellController {
             group.getGroupNameProperty().set(newName);
             updateDisplayedNames(newName);
             editGroupNamePane.setVisible(false);
+
+            LOOKUP.lookup(GroupsRepository.class).update(groupProperty.get());
         });
 
         editGroupNamePane.visibleProperty().addListener((o, ov, nv) -> {
@@ -88,9 +91,7 @@ public class GroupListCellController {
 
         deleteGroupButton.setOnAction(e -> confirmDeleteBox.setVisible(true));
         doDeleteButton.setOnAction(e -> {
-            Lookup globalLookup = Lookup.getDefault();
-            GroupsRepository repository = globalLookup.lookup(GroupsRepository.class);
-            repository.delete(groupProperty.get());
+            LOOKUP.lookup(GroupsRepository.class).delete(groupProperty.get());
         });
         dontDeleteButton.setOnAction(e -> confirmDeleteBox.setVisible(false));
 
