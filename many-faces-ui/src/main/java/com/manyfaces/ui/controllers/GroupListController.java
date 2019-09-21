@@ -4,11 +4,11 @@
 package com.manyfaces.ui.controllers;
 
 import com.jfoenix.controls.JFXTextField;
+import com.manyfaces.model.Group;
 import java.io.IOException;
 import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -47,7 +47,7 @@ public class GroupListController {
         groups.add(new Group("test group"));
 
         groups.forEach(group -> {
-            accordion.getPanes().add(getGroupRow(group.groupNameProperty.get()));
+            accordion.getPanes().add(getGroupRow(group.getGroupNameProperty().get()));
         });
 
         accordion.expandedPaneProperty().addListener((ob, ov, nv) -> {
@@ -99,14 +99,4 @@ public class GroupListController {
 
         return titledPane;
     }
-
-    private static class Group {
-
-        private final SimpleStringProperty groupNameProperty;
-
-        private Group(String groupName) {
-            this.groupNameProperty = new SimpleStringProperty(groupName);
-        }
-    }
-
 }
