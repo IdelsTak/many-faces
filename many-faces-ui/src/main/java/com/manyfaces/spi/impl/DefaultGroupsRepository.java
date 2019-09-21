@@ -3,6 +3,8 @@
  */
 package com.manyfaces.spi.impl;
 
+import com.github.javafaker.Company;
+import com.github.javafaker.Faker;
 import com.manyfaces.model.Group;
 import com.manyfaces.spi.GroupsRepository;
 import java.util.Optional;
@@ -26,17 +28,12 @@ public class DefaultGroupsRepository implements GroupsRepository {
 
     public DefaultGroupsRepository() {
         this.groups = FXCollections.observableArrayList();
-        //Sample data
-        groups.add(new Group(1, "Unassigned"));
-        groups.add(new Group(2, "test group"));
-        groups.add(new Group(3, "lulfswasas"));
-        groups.add(new Group(4, "qwqwqwcdc"));
-        groups.add(new Group(5, "lopdaswddwd"));
-        groups.add(new Group(6, "nnyyhyhyhyh"));
-        groups.add(new Group(7, "dgghghgh"));
-        groups.add(new Group(8, "bjyjaadawf"));
-        groups.add(new Group(9, "gdfdfdf"));
-        groups.add(new Group(10, "asasas"));
+        //Bogus data
+        Company company = new Faker().company();
+        
+        for (int i = 1; i < 11; i++) {
+            groups.add(new Group(i, company.buzzword()));
+        }
 
         groups.addListener((ListChangeListener.Change<? extends Group> change) -> {
             LOG.log(Level.INFO, "CHANGE OCCURED: {0}", change);
