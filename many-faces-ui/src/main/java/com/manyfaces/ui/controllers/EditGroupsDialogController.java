@@ -34,6 +34,7 @@ import org.openide.util.Lookup;
 public class EditGroupsDialogController {
 
     private static final Logger LOG;
+    private static final Lookup LOOKUP = Lookup.getDefault();
     @FXML
     private JFXButton closeButton;
     @FXML
@@ -56,9 +57,6 @@ public class EditGroupsDialogController {
         LOG = Logger.getLogger(EditGroupsDialogController.class.getName());
     }
 
-//    {
-//        groups = FXCollections.emptyObservableList();
-//    }
     /**
      Initializes the controller class.
      */
@@ -71,11 +69,13 @@ public class EditGroupsDialogController {
         applyGroupNameButton.visibleProperty().bind(nameFieldprop);
 
         addNewgroupButton.setOnAction(e -> groupNameField.setVisible(true));
+        applyGroupNameButton.setOnAction(e -> {
+            LOOKUP.lookup(GroupsRepository.class).add(groupNameField.getText());
+            groupNameField.setText(null);
+            groupNameField.setVisible(false);
+        });
 
-        Lookup globalLookup = Lookup.getDefault();
-        GroupsRepository repository = globalLookup.lookup(GroupsRepository.class);
-
-        groups = repository.findAll();
+        groups = LOOKUP.lookup(GroupsRepository.class).findAll();
 
         groups.addListener((Change<? extends Group> change) -> {
             LOG.log(Level.INFO, "Groups list change event occured: {0}", change);
