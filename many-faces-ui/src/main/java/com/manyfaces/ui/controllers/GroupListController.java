@@ -43,8 +43,8 @@ public class GroupListController {
 
         ObservableList<Group> groups = FXCollections.observableArrayList();
 
-        groups.add(new Group("Unassigned"));
-        groups.add(new Group("test group"));
+        groups.add(new Group(1, "Unassigned"));
+        groups.add(new Group(2, "test group"));
 
         groups.forEach(group -> {
             accordion.getPanes().add(getGroupRow(group.getGroupNameProperty().get()));
