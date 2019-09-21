@@ -20,7 +20,6 @@ import javafx.collections.ListChangeListener.Change;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
@@ -51,11 +50,15 @@ public class EditGroupsDialogController {
     private JFXListView<Group> groupsListView;
     @FXML
     private Text noGroupsFoundText;
+    private ObservableList<Group> groups;
 
     static {
         LOG = Logger.getLogger(EditGroupsDialogController.class.getName());
     }
 
+//    {
+//        groups = FXCollections.emptyObservableList();
+//    }
     /**
      Initializes the controller class.
      */
@@ -72,24 +75,21 @@ public class EditGroupsDialogController {
         Lookup globalLookup = Lookup.getDefault();
         GroupsRepository repository = globalLookup.lookup(GroupsRepository.class);
 
-        ObservableList<Group> groups = repository.findAll();
+        groups = repository.findAll();
 
-        groups.addListener((Change<? extends Group> c) -> {
-            LOG.log(Level.INFO, "Groups list change event occured: {0}", c);
+        groups.addListener((Change<? extends Group> change) -> {
+            LOG.log(Level.INFO, "Groups list change event occured: {0}", change);
 
-            noGroupsFoundText.setVisible(c.getList().isEmpty());
-            groupsListView.setVisible(!c.getList().isEmpty());
+            noGroupsFoundText.setVisible(change.getList().isEmpty());
+            groupsListView.setVisible(!change.getList().isEmpty());
 
-//            groupsListView.setCellFactory(listView -> new GroupCell());
-//            groupsListView.getItems().setAll(groups);
-//            groupsListView.refresh();
-            Platform.runLater(() -> initListView(groups));
+            Platform.runLater(() -> updateListView());
         });
 
         noGroupsFoundText.setVisible(groups.isEmpty());
         groupsListView.setVisible(!groups.isEmpty());
 
-        initListView(groups);
+        updateListView();
     }
 
     void setDialog(JFXDialog dialog) {
@@ -100,7 +100,7 @@ public class EditGroupsDialogController {
         cancelButton.setOnAction(e -> dialog.close());
     }
 
-    private void initListView(ObservableList<Group> groups) {
+    private void updateListView() {
         groupsListView.setCellFactory(listView -> new GroupCell());
         groupsListView.getItems().setAll(groups);
     }
@@ -114,14 +114,10 @@ public class EditGroupsDialogController {
         protected void updateItem(Group group, boolean empty) {
             super.updateItem(group, empty);
 
-            LOG.log(Level.INFO,
-                    "Cell updating... group: {0}; is empty? {1}",
-                    new Object[]{group, empty});
-
             if (group != null && !empty) {
                 setGraphic(getHBox(group));
             } else {
-                setGraphic(new HBox(new Label("<empty>")));
+                setGraphic(new HBox());
             }
         }
 
