@@ -9,6 +9,7 @@ import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import org.openide.util.lookup.ServiceProvider;
 
@@ -28,6 +29,18 @@ public class DefaultGroupsRepository implements GroupsRepository {
         //Sample data
         groups.add(new Group(1, "Unassigned"));
         groups.add(new Group(2, "test group"));
+        groups.add(new Group(3, "lulfswasas"));
+        groups.add(new Group(4, "qwqwqwcdc"));
+        groups.add(new Group(5, "lopdaswddwd"));
+        groups.add(new Group(6, "nnyyhyhyhyh"));
+        groups.add(new Group(7, "dgghghgh"));
+        groups.add(new Group(8, "bjyjaadawf"));
+        groups.add(new Group(9, "gdfdfdf"));
+        groups.add(new Group(10, "asasas"));
+
+        groups.addListener((ListChangeListener.Change<? extends Group> change) -> {
+            LOG.log(Level.INFO, "CHANGE OCCURED: {0}", change);
+        });
     }
 
     @Override
@@ -46,8 +59,13 @@ public class DefaultGroupsRepository implements GroupsRepository {
                 })
                 .findFirst()
                 .ifPresent(g -> {
+                    int index = groups.indexOf(g);
+                    int ID = g.getIdProperty().get();
                     String newGroupName = group.getGroupNameProperty().get();
-                    g.getGroupNameProperty().set(newGroupName);
+
+                    if (groups.remove(g)) {
+                        groups.add(index, new Group(ID, newGroupName));
+                    }
                 });
     }
 
@@ -65,11 +83,7 @@ public class DefaultGroupsRepository implements GroupsRepository {
 
     @Override
     public void delete(Group group) {
-        LOG.log(Level.INFO, "Deleting group: {0}", group);
-        boolean removed = groups.remove(group);
-        LOG.log(Level.INFO,
-                "Group: {0} was removed? {1}",
-                new Object[]{group, removed});
+        groups.remove(group);
     }
 
 }
