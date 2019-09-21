@@ -69,7 +69,8 @@ public class Group {
     public String toString() {
         int id = getIdProperty().get();
         String name = getGroupNameProperty().get();
-        return "[" + id + ", " + name + "]";
+//        return "[" + id + ", " + name + "]";
+        return name;
     }
 
 }
