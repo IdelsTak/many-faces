@@ -17,6 +17,8 @@ public interface GroupsRepository {
 
     void update(Group group);
 
+    void updateWithPosition(int index, Group group);
+
     Optional<Group> findbyId(int id);
 
     ObservableList<Group> findAll();
