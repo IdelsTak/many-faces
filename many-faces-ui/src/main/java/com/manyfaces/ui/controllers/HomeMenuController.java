@@ -10,6 +10,7 @@ import com.manyfaces.model.Group;
 import com.manyfaces.spi.GroupsRepository;
 import com.manyfaces.spi.RootComponent;
 import com.manyfaces.ui.BrowserProfileList;
+import com.manyfaces.ui.Help;
 import java.io.IOException;
 import java.net.URL;
 import java.util.logging.Level;
@@ -64,6 +65,9 @@ public class HomeMenuController {
     @FXML
     public void initialize() {
         menuGroup.getToggles().forEach(this::removeRadioButtonStyling);
+        helpToggle.setOnAction(e -> {
+            contentPane.getChildren().setAll(new Help().getPane());
+        });
         groupSettingsButton.setOnAction(e -> {
 
             URL location = getClass().getResource("/views/EditGroupsDialog.fxml");
