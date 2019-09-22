@@ -50,18 +50,18 @@ public class DefaultGroupsRepository implements GroupsRepository {
     public void update(Group group) {
         groups.stream()
                 .filter(g -> {
-                    int anId = g.getIdProperty().get();
-                    int groupId = group.getIdProperty().get();
-                    return anId == groupId;
+                    int thisId = g.getIdProperty().get();
+                    int otherId = group.getIdProperty().get();
+                    return thisId == otherId;
                 })
                 .findFirst()
                 .ifPresent(g -> {
-                    int index = groups.indexOf(g);
-                    int ID = g.getIdProperty().get();
-                    String newGroupName = group.getGroupNameProperty().get();
+                    int thisId = g.getIdProperty().get();
+                    int thisIdx = groups.indexOf(g);
+                    String otherName = group.getGroupNameProperty().get();
 
                     if (groups.remove(g)) {
-                        groups.add(index, new Group(ID, newGroupName));
+                        groups.add(thisIdx, new Group(thisId, otherName));
                     }
                 });
     }
