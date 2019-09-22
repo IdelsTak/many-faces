@@ -30,7 +30,7 @@ public class DefaultGroupsRepository implements GroupsRepository {
         this.groups = FXCollections.observableArrayList();
         //Bogus data
         Company company = new Faker().company();
-        
+
         for (int i = 1; i < 11; i++) {
             groups.add(new Group(i, company.buzzword()));
         }
@@ -62,6 +62,25 @@ public class DefaultGroupsRepository implements GroupsRepository {
 
                     if (groups.remove(g)) {
                         groups.add(thisIdx, new Group(thisId, otherName));
+                    }
+                });
+    }
+
+    @Override
+    public void updateWithPosition(int index, Group group) {
+        groups.stream()
+                .filter(g -> {
+                    int thisId = g.getIdProperty().get();
+                    int otherId = group.getIdProperty().get();
+                    return thisId == otherId;
+                })
+                .findFirst()
+                .ifPresent(g -> {
+                    int thisId = g.getIdProperty().get();
+                    String otherName = group.getGroupNameProperty().get();
+
+                    if (groups.remove(g)) {
+                        groups.add(index, new Group(thisId, otherName));
                     }
                 });
     }
