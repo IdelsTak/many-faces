@@ -20,4 +20,12 @@ public class HelpAndSupportController {
         // TODO
     }
 
+    public void setPageHeaderController(PageHeaderController phc) {
+        if (phc == null) {
+            String message = "PageHeaderController should not be null";
+            throw new IllegalArgumentException(message);
+        }
+        phc.setHeaderText("Help & Support");
+    }
+
 }
