@@ -147,3 +147,71 @@
     -fx-background-color: #0d3fb9;
     -fx-pref-height: 110px;
 }
+
+.bottom-area > .stats-box {
+    -fx-font-family: "Roboto";
+    -fx-pref-width: 190px;
+    -fx-pref-height: 75px;
+    -fx-min-height: -fx-pref-height;
+    -fx-max-height: -fx-pref-height;
+    -fx-background-color: #2258d7;
+}
+
+.bottom-area > .stats-box > .paid-status-box {
+    -fx-pref-height: 30px;
+    -fx-min-height: -fx-pref-height;
+    -fx-max-height: -fx-pref-height;
+}
+
+.bottom-area > .stats-box > .paid-status-box > * {
+    -fx-pref-height: 30px;
+    -fx-font-size: 15px;
+}
+
+.bottom-area > .stats-box > .paid-status-box > .label {
+    -fx-pref-width: 80px;
+    -fx-alignment: center-right;
+    -fx-text-fill: white;
+}
+
+.bottom-area > .stats-box > .paid-status-box > .hyperlink {
+    -fx-pref-width: 95px;
+    -fx-pref-height: 30px;
+    -fx-underline: true;
+    -fx-text-fill: #ffdc00;
+}
+
+
+.bottom-area > .stats-box > .profiles-number-box {
+    -fx-pref-height: 20px;
+    -fx-min-height: -fx-pref-height;
+    -fx-max-height: -fx-pref-height;
+}
+
+.bottom-area > .stats-box > .profiles-number-box > .label {
+    -fx-pref-width: 95px;
+    -fx-font-size: 15px;
+}
+
+.bottom-area > .stats-box > .profiles-number-box > .number-in-use-label {
+    -fx-alignment: center-right;
+    -fx-text-fill: white;
+}
+
+.bottom-area > .stats-box > .profiles-number-box > .total-allowed-label {
+    -fx-alignment: center-left;
+    -fx-text-fill: #96c3ff;
+}
+
+.bottom-area > .stats-box > .profiles-label-box {
+    -fx-pref-height: 25px;
+    -fx-min-height: -fx-pref-height;
+    -fx-max-height: -fx-pref-height;
+}
+
+.bottom-area > .stats-box > .profiles-label-box > .label {
+    -fx-pref-width: 190px;
+    -fx-alignment: center;
+    -fx-text-fill: #87b6fa;
+    -fx-font-size: 12px;
+}
