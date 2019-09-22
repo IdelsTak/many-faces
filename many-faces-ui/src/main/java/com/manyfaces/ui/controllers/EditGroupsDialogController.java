@@ -20,7 +20,14 @@ import javafx.collections.ListChangeListener.Change;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.SnapshotParameters;
 import javafx.scene.control.ListCell;
+import javafx.scene.image.Image;
+import javafx.scene.input.ClipboardContent;
+import javafx.scene.input.DragEvent;
+import javafx.scene.input.Dragboard;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.input.TransferMode;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
@@ -105,9 +112,15 @@ public class EditGroupsDialogController {
         groupsListView.getItems().setAll(groups);
     }
 
-    private static class GroupCell extends ListCell<Group> {
+    private class GroupCell extends ListCell<Group> {
 
         private GroupCell() {
+            //DnD implementations
+            setOnDragDetected(this::initDragContent);
+            setOnDragOver(this::acceptMoveTransferMode);
+            setOnDragEntered(this::setDragEnteredOpacity);
+            setOnDragExited(this::setDragExitedOpacity);
+            setOnDragDropped(this::consumeDragDrop);
         }
 
         @Override
@@ -119,6 +132,77 @@ public class EditGroupsDialogController {
             } else {
                 setGraphic(new HBox());
             }
+        }
+
+        private void setDragExitedOpacity(DragEvent event) {
+            if (event.getGestureSource() != this
+                    && event.getDragboard().hasString()) {
+                setOpacity(1);
+            }
+        }
+
+        private void setDragEnteredOpacity(DragEvent event) {
+            if (event.getGestureSource() != this
+                    && event.getDragboard().hasString()) {
+                setOpacity(0.3);
+            }
+        }
+
+        private void acceptMoveTransferMode(DragEvent event) {
+            if (event.getGestureSource() != this
+                    && event.getDragboard().hasString()) {
+                event.acceptTransferModes(TransferMode.MOVE);
+            }
+
+            event.consume();
+        }
+
+        private void initDragContent(MouseEvent event) {
+            if (getItem() == null) {
+                return;
+            }
+
+            Dragboard dragboard = startDragAndDrop(TransferMode.MOVE);
+            ClipboardContent content = new ClipboardContent();
+            int groupId = getItem().getIdProperty().get();
+            SnapshotParameters parameters = new SnapshotParameters();
+            Image snapshot = getGraphic().snapshot(parameters, null);
+
+            content.putString(String.valueOf(groupId));
+            dragboard.setDragView(snapshot);
+            dragboard.setContent(content);
+
+            event.consume();
+        }
+
+        private void consumeDragDrop(DragEvent event) {
+            if (getItem() == null) {
+                return;
+            }
+
+            Dragboard dragboard = event.getDragboard();
+            boolean success = false;
+
+            if (dragboard.hasString()) {
+                int newIdx = groups.indexOf(getItem());
+                Class<GroupsRepository> clazz = GroupsRepository.class;
+                GroupsRepository repository = LOOKUP.lookup(clazz);
+
+                groups.stream()
+                        .filter(group -> {
+                            int thisId = group.getIdProperty().get();
+                            String otherIdString = dragboard.getString();
+                            int otherId = Integer.parseInt(otherIdString);
+                            return thisId == otherId;
+                        })
+                        .findFirst()
+                        .ifPresent(group -> {
+                            repository.updateWithPosition(newIdx, group);
+                        });
+            }
+
+            event.setDropCompleted(success);
+            event.consume();
         }
 
         private HBox getHBox(Group group) {
