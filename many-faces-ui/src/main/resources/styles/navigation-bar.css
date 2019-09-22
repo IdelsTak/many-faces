@@ -5,8 +5,7 @@
 
 .navigation-bar-content {
     -fx-pref-width: 242px;
-    -fx-pref-height: 630px;
     -fx-max-width: -fx-pref-width;
     -fx-min-width: -fx-pref-width;
-    -fx-min-height: -fx-pref-height;
+    -fx-min-height: 630px;
 }
