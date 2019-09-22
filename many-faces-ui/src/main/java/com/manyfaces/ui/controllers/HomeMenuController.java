@@ -11,6 +11,7 @@ import com.manyfaces.spi.GroupsRepository;
 import com.manyfaces.spi.RootComponent;
 import com.manyfaces.ui.BrowserProfileList;
 import com.manyfaces.ui.Help;
+import com.manyfaces.ui.Plugins;
 import java.io.IOException;
 import java.net.URL;
 import java.util.logging.Level;
@@ -68,6 +69,9 @@ public class HomeMenuController {
         helpToggle.setOnAction(e -> {
             contentPane.getChildren().setAll(new Help().getPane());
         });
+        pluginsToggle.setOnAction(e -> {
+            contentPane.getChildren().setAll(new Plugins().getPane());
+        });
         groupSettingsButton.setOnAction(e -> {
 
             URL location = getClass().getResource("/views/EditGroupsDialog.fxml");
@@ -103,6 +107,11 @@ public class HomeMenuController {
 
     public void setContentPane(Pane contentPane) {
         this.contentPane = contentPane;
+        
+        URL styleUrl = getClass().getResource("/styles/content-area.css");
+        this.contentPane.getStylesheets().add(styleUrl.toExternalForm());
+        
+        this.contentPane.getStyleClass().add("content-area");
 
         homeToggle.selectedProperty().addListener((o, ov, nv) -> {
             if (nv) {
