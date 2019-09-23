@@ -3,7 +3,6 @@
  */
 package com.manyfaces.ui.controllers;
 
-import com.github.javafaker.Faker;
 import com.jfoenix.controls.JFXTextField;
 import java.io.IOException;
 import java.net.URL;
@@ -17,7 +16,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.control.Accordion;
 import javafx.scene.control.TitledPane;
-import javafx.scene.input.InputEvent;
 import javafx.scene.layout.AnchorPane;
 
 /**
@@ -42,50 +40,17 @@ public class PluginsController {
      */
     @FXML
     public void initialize() {
-        accordion.addEventFilter(InputEvent.ANY, e -> {
-//            LOG.log(Level.INFO, "accordion event occured: {0}", e);
-
-//            if (((Styleable) e.getTarget())
-//                    .getStyleClass()
-//                    .contains("title")) {
-//                e.consume();
-//            }
-//            if (!((Styleable) e.getTarget())
-//                    .getStyleClass()
-//                    .contains("toggle-button")) {
-//                e.consume();
-//            }
-//            if (e.getSource().equals(accordion)) {
-//                e.consume();
-//            }
-        });
-
-        accordion.expandedPaneProperty().addListener((ob, ov, nv) -> {
-//            accordion.getPanes()
-//                    .stream()
-//                    .filter(pane -> pane.isExpanded())
-//                    .findFirst()
-//                    .ifPresent(pane -> {
-//                        LOG.log(Level.INFO,
-//                                "selected pane: {0}",
-//                                new Object[]{pane.getId()});
-//                        pane.setExpanded(false);
-//                    });
-
-        });
-
         searchField.textProperty().addListener((o, ov, nv) -> {
             if (nv == null || nv.trim().isEmpty()) {
                 Platform.runLater(() -> refreshRows());
-                return;
+            } else {
+                List<TitledPane> list = accordion.getPanes()
+                        .stream()
+                        .filter(tp -> tp.getId().contains(nv))
+                        .collect(Collectors.toList());
+
+                Platform.runLater(() -> accordion.getPanes().setAll(list));
             }
-
-            List<TitledPane> filteredPanes = accordion.getPanes()
-                    .stream()
-                    .filter(tp -> tp.getId().contains(nv))
-                    .collect(Collectors.toList());
-
-            Platform.runLater(() -> accordion.getPanes().setAll(filteredPanes));
         });
     }
 
@@ -99,7 +64,7 @@ public class PluginsController {
         Platform.runLater(() -> refreshRows());
     }
 
-    private TitledPane getPluginRow(String pluginName, Node pluginContent) {
+    private TitledPane getPluginRow(String name, Node content) {
         URL location = getClass().getResource("/views/PluginsListRow.fxml");
         FXMLLoader loader = new FXMLLoader(location);
         TitledPane pane = null;
@@ -107,27 +72,8 @@ public class PluginsController {
         try {
             pane = loader.load();
             PluginsListRowController controller = loader.getController();
-            controller.setPluginName(pluginName);
-            controller.setPluginContent(pluginContent);
-            controller.setParentAccordion(accordion);
-        } catch (IOException ex) {
-            LOG.log(Level.SEVERE, null, ex);
-        }
-
-        return pane;
-    }
-    
-    private TitledPane getTestPluginRow(String pluginName) {
-        URL location = getClass().getResource("/views/PluginsListRow.fxml");
-        FXMLLoader loader = new FXMLLoader(location);
-        TitledPane pane = null;
-
-        try {
-            pane = loader.load();
-            PluginsListRowController controller = loader.getController();
-            String paragraph = new Faker().lorem().paragraph(15);
-            controller.setPluginName(pluginName);
-            controller.setTestContent(paragraph);
+            controller.setPluginName(name);
+            controller.setPluginContent(content);
             controller.setParentAccordion(accordion);
         } catch (IOException ex) {
             LOG.log(Level.SEVERE, null, ex);
@@ -137,26 +83,36 @@ public class PluginsController {
     }
 
     private void refreshRows() {
+        accordion.getPanes().clear();
         accordion.getPanes().add(getPluginRow("IP Teleport", getIPTeleportPane()));
-        
-//        Internet internet = new Faker().internet();
-//
-//        for (int i = 0; i < 10; i++) {
-//            accordion.getPanes().add(getTestPluginRow(internet.slug()));
-//        }
+        accordion.getPanes().add(getPluginRow("Luminati", getLuminatiPane()));
     }
-    
-    private Node getIPTeleportPane(){
+
+    private Node getIPTeleportPane() {
         URL location = getClass().getResource("/views/IPTelePortPane.fxml");
         FXMLLoader loader = new FXMLLoader(location);
         AnchorPane pane = null;
-        
+
         try {
             pane = loader.load();
         } catch (IOException ex) {
             LOG.log(Level.SEVERE, null, ex);
         }
-        
+
+        return pane;
+    }
+
+    private Node getLuminatiPane() {
+        URL location = getClass().getResource("/views/LuminatiPane.fxml");
+        FXMLLoader loader = new FXMLLoader(location);
+        AnchorPane pane = null;
+
+        try {
+            pane = loader.load();
+        } catch (IOException ex) {
+            LOG.log(Level.SEVERE, null, ex);
+        }
+
         return pane;
     }
 }
