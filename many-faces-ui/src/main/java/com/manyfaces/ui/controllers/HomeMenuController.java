@@ -11,6 +11,7 @@ import com.manyfaces.spi.GroupsRepository;
 import com.manyfaces.spi.RootComponent;
 import com.manyfaces.ui.BrowserProfileList;
 import com.manyfaces.ui.Help;
+import com.manyfaces.ui.MyAccountPreferences;
 import com.manyfaces.ui.Plugins;
 import java.io.IOException;
 import java.net.URL;
@@ -71,6 +72,9 @@ public class HomeMenuController {
         });
         pluginsToggle.setOnAction(e -> {
             contentPane.getChildren().setAll(new Plugins().getPane());
+        });
+        accountToggle.setOnAction(e -> {
+            contentPane.getChildren().setAll(new MyAccountPreferences().getPane());
         });
         groupSettingsButton.setOnAction(e -> {
 
