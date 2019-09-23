@@ -7,7 +7,7 @@
 
 .title-box {
     -fx-pref-width: 645px;
-    -fx-pref-height: 38px;
+    -fx-pref-height: 35px;
     -fx-min-height: -fx-pref-height;
     -fx-max-height: -fx-pref-height;
 }
@@ -17,7 +17,7 @@
 }
 
 .titled-pane > .title {
-    -fx-pref-height: 38px;
+    -fx-pref-height: 35px;
     -fx-cursor: null;
     -fx-background-insets: 0;
     -fx-background-radius: 0;
@@ -43,6 +43,14 @@
 .plugin-name-label {
     -fx-font-size: 15px;
     -fx-pref-height: 38px;
+}
+
+.recommended-label {
+    -fx-font-size: 8px;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+    -fx-background-color: #174bc9;
+    -fx-background-radius: 6px;
 }
 
 .expand-pane-toggle {
