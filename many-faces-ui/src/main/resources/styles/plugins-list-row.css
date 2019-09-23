@@ -54,6 +54,8 @@
     -fx-max-height: -fx-pref-width;
     -fx-background-radius: 9px;
     -fx-cursor: hand;
+    -jfx-toggle-color: transparent;
+    -jfx-untoggle-color: transparent;
 }
 .expand-pane-icon {
     -fx-icon-code: mdi-settings;
