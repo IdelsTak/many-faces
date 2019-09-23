@@ -4,7 +4,6 @@
 package com.manyfaces.ui.controllers;
 
 import com.github.javafaker.Faker;
-import com.github.javafaker.Internet;
 import com.jfoenix.controls.JFXTextField;
 import java.io.IOException;
 import java.net.URL;
@@ -15,9 +14,11 @@ import java.util.stream.Collectors;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.control.Accordion;
 import javafx.scene.control.TitledPane;
 import javafx.scene.input.InputEvent;
+import javafx.scene.layout.AnchorPane;
 
 /**
  FXML Controller class
@@ -98,7 +99,25 @@ public class PluginsController {
         Platform.runLater(() -> refreshRows());
     }
 
-    private TitledPane getPluginRow(String pluginName) {
+    private TitledPane getPluginRow(String pluginName, Node pluginContent) {
+        URL location = getClass().getResource("/views/PluginsListRow.fxml");
+        FXMLLoader loader = new FXMLLoader(location);
+        TitledPane pane = null;
+
+        try {
+            pane = loader.load();
+            PluginsListRowController controller = loader.getController();
+            controller.setPluginName(pluginName);
+            controller.setPluginContent(pluginContent);
+            controller.setParentAccordion(accordion);
+        } catch (IOException ex) {
+            LOG.log(Level.SEVERE, null, ex);
+        }
+
+        return pane;
+    }
+    
+    private TitledPane getTestPluginRow(String pluginName) {
         URL location = getClass().getResource("/views/PluginsListRow.fxml");
         FXMLLoader loader = new FXMLLoader(location);
         TitledPane pane = null;
@@ -118,10 +137,26 @@ public class PluginsController {
     }
 
     private void refreshRows() {
-        Internet internet = new Faker().internet();
-
-        for (int i = 0; i < 10; i++) {
-            accordion.getPanes().add(getPluginRow(internet.slug()));
+        accordion.getPanes().add(getPluginRow("IP Teleport", getIPTeleportPane()));
+        
+//        Internet internet = new Faker().internet();
+//
+//        for (int i = 0; i < 10; i++) {
+//            accordion.getPanes().add(getTestPluginRow(internet.slug()));
+//        }
+    }
+    
+    private Node getIPTeleportPane(){
+        URL location = getClass().getResource("/views/IPTelePortPane.fxml");
+        FXMLLoader loader = new FXMLLoader(location);
+        AnchorPane pane = null;
+        
+        try {
+            pane = loader.load();
+        } catch (IOException ex) {
+            LOG.log(Level.SEVERE, null, ex);
         }
+        
+        return pane;
     }
 }
