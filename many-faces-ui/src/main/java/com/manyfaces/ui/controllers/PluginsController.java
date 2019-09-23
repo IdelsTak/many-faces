@@ -74,6 +74,9 @@ public class PluginsController {
             PluginsListRowController controller = loader.getController();
             controller.setPluginName(name);
             controller.setPluginContent(content);
+            if (name.equals("Luminati") || name.equals("GeoSurf")) {
+                controller.setRecommended(true);
+            }
             controller.setParentAccordion(accordion);
         } catch (IOException ex) {
             LOG.log(Level.SEVERE, null, ex);
@@ -86,24 +89,28 @@ public class PluginsController {
         accordion.getPanes().clear();
         accordion.getPanes().add(getPluginRow("IP Teleport", getIPTeleportPane()));
         accordion.getPanes().add(getPluginRow("Luminati", getLuminatiPane()));
+        accordion.getPanes().add(getPluginRow("GeoSurf", getGeoSurfPane()));
+        accordion.getPanes().add(getPluginRow("POSSH (Proxy Over SSH)", getPosshPane()));
     }
 
     private Node getIPTeleportPane() {
-        URL location = getClass().getResource("/views/IPTelePortPane.fxml");
-        FXMLLoader loader = new FXMLLoader(location);
-        AnchorPane pane = null;
-
-        try {
-            pane = loader.load();
-        } catch (IOException ex) {
-            LOG.log(Level.SEVERE, null, ex);
-        }
-
-        return pane;
+        return from("/views/IPTelePortPane.fxml");
     }
 
     private Node getLuminatiPane() {
-        URL location = getClass().getResource("/views/LuminatiPane.fxml");
+        return from("/views/LuminatiPane.fxml");
+    }
+
+    private Node getGeoSurfPane() {
+        return from("/views/GeoSurfPane.fxml");
+    }
+
+    private Node getPosshPane() {
+        return from("/views/PosshPane.fxml");
+    }
+
+    private Node from(String path) {
+        URL location = getClass().getResource(path);
         FXMLLoader loader = new FXMLLoader(location);
         AnchorPane pane = null;
 
@@ -115,4 +122,5 @@ public class PluginsController {
 
         return pane;
     }
+
 }
