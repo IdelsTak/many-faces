@@ -5,6 +5,7 @@ package com.manyfaces.ui.controllers;
 
 import com.jfoenix.controls.JFXToggleNode;
 import java.util.Objects;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -73,20 +74,35 @@ public class PluginsListRowController {
         String message = "Plugins accordion should not be null";
         Accordion akkordion = Objects.requireNonNull(accordion, message);
 
+        openContentToggle.setOnAction(e -> {
+            Platform.runLater(() -> {
+                boolean selected = openContentToggle.isSelected();
+                akkordion.setExpandedPane(selected ? titledPane : null);
+            });
+        });
+
         akkordion.addEventFilter(MouseEvent.MOUSE_CLICKED, e -> {
-            if (!e.getTarget()
+            String className = e.getTarget()
                     .getClass()
-                    .getSimpleName()
-                    .equals("StackPane")) {
+                    .getSimpleName();
+
+            LOG.log(Level.FINE, "Accordion event target: {0}", className);
+
+            if (!className.equals("StackPane")
+                    && !className.equals("JFXButton")
+                    && !className.equals("VBox")
+                    && !className.equals("Pane")
+                    && !className.equals("LabeledText")
+                    && !className.equals("GridPane")) {
                 Platform.runLater(() -> akkordion.setExpandedPane(null));
             }
         });
 
-        openContentToggle.setOnAction(e -> {
-            if (openContentToggle.isSelected()) {
-                Platform.runLater(() -> akkordion.setExpandedPane(titledPane));
-            } else {
-                Platform.runLater(() -> akkordion.setExpandedPane(null));
+        akkordion.expandedPaneProperty().addListener((o, ov, nv) -> {
+            if (nv != null && nv.equals(titledPane)) {
+                openContentToggle.setSelected(true);
+            } else if (ov != null && ov.equals(titledPane)) {
+                openContentToggle.setSelected(false);
             }
         });
     }
