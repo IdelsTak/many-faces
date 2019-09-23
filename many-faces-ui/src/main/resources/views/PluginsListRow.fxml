@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 
-<TitledPane fx:id="titledPane" animated="false" maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="645.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.manyfaces.ui.controllers.PluginsListRowController">
+<TitledPane fx:id="titledPane" animated="false" minWidth="-Infinity" prefWidth="650.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.manyfaces.ui.controllers.PluginsListRowController">
     <content>
         <AnchorPane fx:id="pluginContentPane" styleClass="content-area">
          <children>

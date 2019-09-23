@@ -26,14 +26,14 @@
                   <Insets bottom="20.0" left="26.0" right="32.0" top="10.0" />
                </padding>
             </HBox>
-            <VBox maxHeight="1.7976931348623157E308" VBox.vgrow="ALWAYS">
+            <VBox maxHeight="1.7976931348623157E308" VBox.vgrow="NEVER">
                <children>
-                  <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" maxHeight="1.7976931348623157E308" prefHeight="500.0" style="-fx-background-color: white;" VBox.vgrow="ALWAYS">
+                  <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" maxHeight="1.7976931348623157E308" style="-fx-background-color: white;" VBox.vgrow="NEVER">
                      <content>
                         <Accordion fx:id="accordion" style="-fx-background-color: white;" />
                      </content>
                   </ScrollPane>
-                  <Separator orientation="VERTICAL" prefHeight="6.0" visible="false" VBox.vgrow="NEVER" />
+                  <Separator orientation="VERTICAL" prefHeight="6.0" visible="false" VBox.vgrow="ALWAYS" />
                </children>
                <padding>
                   <Insets left="26.0" right="32.0" top="10.0" />
