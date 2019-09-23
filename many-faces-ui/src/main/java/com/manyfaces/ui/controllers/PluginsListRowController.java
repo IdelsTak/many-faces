@@ -12,6 +12,7 @@ import javafx.scene.Node;
 import javafx.scene.control.Accordion;
 import javafx.scene.control.Label;
 import javafx.scene.control.TitledPane;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 
@@ -35,6 +36,7 @@ public class PluginsListRowController {
     private JFXToggleNode openContentToggle;
     @FXML
     private Label sampleContentLabel;
+    private double height;
 
     static {
         LOG = Logger.getLogger(PluginsListRowController.class.getName());
@@ -60,31 +62,32 @@ public class PluginsListRowController {
         String message = "Content pane should not be null";
         Node kontent = Objects.requireNonNull(content, message);
 
-        Platform.runLater(() -> {
-            pluginContentPane.getChildren().setAll(kontent);
+        pluginContentPane.getChildren().setAll(kontent);
 
-            AnchorPane.setTopAnchor(kontent, 0.0);
-            AnchorPane.setRightAnchor(kontent, 0.0);
-            AnchorPane.setLeftAnchor(kontent, 0.0);
-        });
-
-    }
-
-    void setTestContent(String testContent) {
-        sampleContentLabel.setText(testContent);
+        AnchorPane.setTopAnchor(kontent, 0.0);
+        AnchorPane.setRightAnchor(kontent, 0.0);
+        AnchorPane.setLeftAnchor(kontent, 0.0);
     }
 
     void setParentAccordion(Accordion accordion) {
         String message = "Plugins accordion should not be null";
         Accordion akkordion = Objects.requireNonNull(accordion, message);
 
+        akkordion.addEventFilter(MouseEvent.MOUSE_CLICKED, e -> {
+            if (!e.getTarget()
+                    .getClass()
+                    .getSimpleName()
+                    .equals("StackPane")) {
+                Platform.runLater(() -> akkordion.setExpandedPane(null));
+            }
+        });
+
         openContentToggle.setOnAction(e -> {
-            if (titledPane.isExpanded()) {
-                titledPane.setExpanded(false);
-            } else {
+            if (openContentToggle.isSelected()) {
                 Platform.runLater(() -> akkordion.setExpandedPane(titledPane));
+            } else {
+                Platform.runLater(() -> akkordion.setExpandedPane(null));
             }
         });
     }
-
 }
