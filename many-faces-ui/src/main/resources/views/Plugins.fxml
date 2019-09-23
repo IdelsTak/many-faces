@@ -16,7 +16,7 @@
          <children>
             <HBox maxHeight="-Infinity" minHeight="-Infinity" prefHeight="60.0" prefWidth="200.0" style="-fx-background-color: transparent;">
                <children>
-                  <JFXTextField fx:id="searchField" labelFloat="true" promptText="Search plugins...">
+                  <JFXTextField fx:id="searchField" labelFloat="true" promptText="Search plugins..." styleClass="search-field">
                      <HBox.margin>
                         <Insets top="7.5" />
                      </HBox.margin>

@@ -28,6 +28,14 @@
       <HBox fx:id="titleHbox" spacing="2.0" styleClass="title-box">
          <children>
             <Label fx:id="pluginNameLabel" maxHeight="-Infinity" minHeight="-Infinity" styleClass="plugin-name-label" text="IP Teleport" />
+            <Label fx:id="recommendedLabel" styleClass="recommended-label" text="RECOMMENDED" visible="false">
+               <padding>
+                  <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+               </padding>
+               <HBox.margin>
+                  <Insets left="6.0" top="14.0" />
+               </HBox.margin>
+            </Label>
             <HBox HBox.hgrow="ALWAYS" />
             <JFXToggleNode fx:id="openContentToggle" styleClass="expand-pane-toggle">
                <graphic>
