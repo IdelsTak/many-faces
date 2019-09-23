@@ -45,10 +45,10 @@
                               <Label styleClass="preference-subtitle" text="This option enables saving bookmarks in a browser interface." />
                            </children>
                         </VBox>
-                        <VBox prefHeight="100.0" VBox.vgrow="ALWAYS">
+                        <VBox prefHeight="80.0" VBox.vgrow="ALWAYS">
                            <children>
                               <JFXToggleButton styleClass="preference-toggle" text="Enable browser history saving" />
-                              <Label minHeight="-Infinity" prefHeight="45.0" styleClass="preference-subtitle" text="Warning! Enabling this option may increase the amount of data required to open/save a browser profile significantly. Since this option is not essential for your privacy, we recommend keeping it disabled." wrapText="true" />
+                              <Label minHeight="-Infinity" styleClass="preference-subtitle" text="Warning! Enabling this option may increase the amount of data required to open/save a browser profile significantly. Since this option is not essential for your privacy, we recommend keeping it disabled." wrapText="true" />
                            </children>
                         </VBox>
                         <VBox VBox.vgrow="NEVER">
@@ -56,8 +56,11 @@
                               <Label styleClass="preference-title" text="My native screen resolution:" wrapText="true" />
                               <StackPane>
                                  <children>
-                                    <JFXComboBox StackPane.alignment="CENTER_LEFT" />
+                                    <JFXComboBox fx:id="nativeResolutionComboBox" styleClass="resolution-preferences-combo" StackPane.alignment="CENTER_LEFT" />
                                  </children>
+                                 <VBox.margin>
+                                    <Insets bottom="15.0" />
+                                 </VBox.margin>
                               </StackPane>
                               <Hyperlink styleClass="preference-hyperlink" text="Set custom native screen resolution" />
                            </children>
@@ -65,14 +68,22 @@
                         <VBox>
                            <children>
                               <Label styleClass="preference-title" text="Minimal screen resolution:" wrapText="true" />
-                              <JFXComboBox />
+                              <JFXComboBox fx:id="minResolutionComboBox" styleClass="resolution-preferences-combo">
+                                 <VBox.margin>
+                                    <Insets bottom="15.0" />
+                                 </VBox.margin>
+                              </JFXComboBox>
                               <Label layoutX="10.0" layoutY="10.0" styleClass="preference-subtitle" text="Screen resolutions that are smaller than the one you selected won't be offered in the browser fingerprint builder." wrapText="true" />
                            </children>
                         </VBox>
                         <VBox>
                            <children>
                               <Label styleClass="preference-title" text="Maximal screen resolution:" wrapText="true" />
-                              <JFXComboBox />
+                              <JFXComboBox fx:id="maxResolutionComboBox" styleClass="resolution-preferences-combo">
+                                 <VBox.margin>
+                                    <Insets bottom="15.0" />
+                                 </VBox.margin>
+                              </JFXComboBox>
                               <Label layoutX="10.0" layoutY="10.0" styleClass="preference-subtitle" text="Screen resolutions that are bigger than the one you selected won't be offered in the browser fingerprint builder." wrapText="true" />
                            </children>
                         </VBox>
