@@ -39,6 +39,12 @@ public class AccountPreferencesTabController {
         Node accountPane = loader.load();
         
         accountTab.setContent(accountPane);
+        
+        location = getClass().getResource("/views/Preferences.fxml");
+        loader = new FXMLLoader(location);
+        Node preferencesPane = loader.load();
+        
+        preferencesTab.setContent(preferencesPane);
     }
 
     public void setPageHeaderController(PageHeaderController phc) {
