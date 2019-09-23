@@ -11,7 +11,7 @@
 
 <TitledPane fx:id="titledPane" animated="false" maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="645.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.manyfaces.ui.controllers.PluginsListRowController">
     <content>
-        <AnchorPane fx:id="pluginContentPane" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="180.0" prefWidth="200.0" styleClass="content-area">
+        <AnchorPane fx:id="pluginContentPane" styleClass="content-area">
          <children>
             <Label fx:id="sampleContentLabel" alignment="CENTER" text="Hello plugin content" wrapText="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <padding>
@@ -29,9 +29,9 @@
          <children>
             <Label fx:id="pluginNameLabel" maxHeight="-Infinity" minHeight="-Infinity" styleClass="plugin-name-label" text="IP Teleport" />
             <HBox HBox.hgrow="ALWAYS" />
-            <JFXToggleNode fx:id="openContentToggle">
+            <JFXToggleNode fx:id="openContentToggle" styleClass="expand-pane-toggle">
                <graphic>
-                  <FontIcon />
+                  <FontIcon styleClass="expand-pane-icon" />
                </graphic>
                <HBox.margin>
                   <Insets right="2.0" top="10.0" />
