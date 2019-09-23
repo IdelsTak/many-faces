@@ -2,8 +2,6 @@
 .preferences-pane-root {
     -fx-font-family: "Roboto";
     -fx-background-color: white;
-    /*-fx-pref-width: 700px;*/
-    /*-fx-min-width: -fx-pref-width;*/
 }
 
 .preferences-header {
@@ -12,33 +10,75 @@
 }
 
 .preference-textfield {
-    -fx-border-color: #949494;
-    -fx-border-width: 1 1 1 1;
     -fx-pref-width: 180px;
     -fx-pref-height: 25px;
     -fx-max-width: -fx-pref-width;
     -fx-max-height: -fx-pref-height;
-    -fx-padding: 0 0 0 0.5;
 }
 
-.preference-textfield:focused {
-    -fx-border-color: #174bc9;
+.resolution-preferences-combo {
+    -fx-pref-width: 280px;
+    -fx-pref-height: 27px;
+    -fx-min-width: -fx-pref-width;
+    -fx-min-height: -fx-pref-height;
+    -fx-max-width: -fx-pref-width;
+    -fx-max-height: -fx-pref-height;
 }
 
+.resolution-preferences-combo > .input-line,
 .preference-textfield > .input-line {
     -fx-pref-height: 0px;
     -fx-max-height: 0px;
 }
 
+.resolution-preferences-combo > .input-focused-line,
 .preference-textfield > .input-focused-line {
     -fx-pref-height: 0px;
     -fx-max-height: 0px;
 }
 
+.resolution-preferences-combo,
+.preference-textfield:focused {
+    -fx-border-color: #174bc9;
+}
+
+.resolution-preferences-combo,
+.preference-textfield {
+    -fx-border-color: #949494;
+    -fx-border-width: 1 1 1 1;
+    -fx-padding: 0 0 0 0.5;
+}
+
 .option-tile,
+.resolution-preferences-combo,
 .preference-textfield,
 .preference-toggle {
     -fx-font-size: 15px;
+}
+
+.combo-box-popup .list-view .jfx-list-cell:odd:selected,
+.combo-box-popup .list-view .jfx-list-cell:even:selected {
+    -fx-background-color: #e0e0e0;
+    -fx-text-fill: #1c4fca;
+}
+
+.combo-box-popup .list-view .jfx-list-cell {
+    -fx-background-insets: 0.0;
+    -fx-text-fill: BLACK;
+}
+
+.combo-box-popup .list-view .jfx-list-cell:odd,
+.combo-box-popup .list-view .jfx-list-cell:even {
+    -fx-background-color: WHITE;
+}
+
+.combo-box-popup .list-view .jfx-list-cell:filled:hover {
+    -fx-text-fill: black;
+    -fx-background-color: #f5f5f5;
+}
+
+.combo-box-popup .list-view .jfx-list-cell .jfx-rippler {
+    -jfx-rippler-fill: #dcdcdc;
 }
 
 .preference-toggle {
@@ -141,3 +181,4 @@
     -fx-background-color: #d7e4ff;
     -fx-border-color: #b9c9ef;
 }
+
