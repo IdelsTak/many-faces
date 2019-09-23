@@ -5,7 +5,7 @@
     -fx-border-color: #e0e2e7 transparent transparent transparent;
 }
 
-.jfx-text-field {
+.search-field {
     -fx-font-family: "Roboto";
     -fx-font-size: 14px;
     -fx-prompt-text-fill: #7b7b7b;
@@ -16,16 +16,16 @@
     -fx-padding: 0 0 0 1;
 }
 
-.jfx-text-field:focused {
+.search-field:focused {
     -fx-border-color: #174bc9;
 }
 
-.jfx-text-field > .input-line {
+.search-field > .input-line {
     -fx-pref-height: 0px;
     -fx-max-height: 0px;
 }
 
-.jfx-text-field > .input-focused-line {
+.search-field > .input-focused-line {
     -fx-pref-height: 0px;
     -fx-max-height: 0px;
 }
