@@ -36,6 +36,7 @@ public class PluginsListRowController {
     @FXML
     private JFXToggleNode openContentToggle;
     @FXML
+    private Label recommendedLabel;
     private Label sampleContentLabel;
     private double height;
 
@@ -105,5 +106,9 @@ public class PluginsListRowController {
                 openContentToggle.setSelected(false);
             }
         });
+    }
+    
+    void setRecommended(boolean recommended){
+        recommendedLabel.setVisible(recommended);
     }
 }
