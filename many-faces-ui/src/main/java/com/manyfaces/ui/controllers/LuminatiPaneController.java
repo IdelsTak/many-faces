@@ -4,15 +4,9 @@
 package com.manyfaces.ui.controllers;
 
 import com.jfoenix.controls.JFXButton;
-import com.manyfaces.spi.RootComponent;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.fxml.FXML;
-import javafx.geometry.Pos;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.StackPane;
-import org.controlsfx.control.Notifications;
-import org.openide.util.Lookup;
 
 /**
  FXML Controller class
@@ -36,22 +30,6 @@ public class LuminatiPaneController {
      */
     @FXML
     public void initialize() {
-        StackPane root = Lookup.getDefault()
-                .lookup(RootComponent.class)
-                .getRoot();
-
-        Notifications notifications = Notifications.create()
-                .owner(root)
-                .text("Hello notification")
-                .position(Pos.TOP_CENTER);
-
-        activateButton.setOnAction(e -> {
-            LOG.log(Level.INFO,
-                    "\n++++++++++++++++++++++++++++"
-                    + "\nActivate button clicked"
-                    + "\n++++++++++++++++++++++++++++");
-            notifications.show();
-        });
     }
 
 }
