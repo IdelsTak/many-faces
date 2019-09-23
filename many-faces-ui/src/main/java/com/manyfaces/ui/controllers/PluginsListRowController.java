@@ -6,6 +6,7 @@ package com.manyfaces.ui.controllers;
 import com.jfoenix.controls.JFXToggleNode;
 import java.util.Objects;
 import java.util.logging.Logger;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Accordion;
@@ -44,16 +45,6 @@ public class PluginsListRowController {
      */
     @FXML
     public void initialize() {
-//        titledPane.addEventFilter(InputEvent.ANY, e -> {
-//            //If the target of the event is the title, ignore it
-//            //we want to be able to expand the titled pane using 
-//            //our custom button only
-//            if (((Styleable) e.getTarget())
-//                    .getStyleClass()
-//                    .contains("title")) {
-//                e.consume();
-//            }
-//        });
         titleHbox.prefWidthProperty().bind(titledPane.widthProperty());
     }
 
@@ -69,15 +60,17 @@ public class PluginsListRowController {
         String message = "Content pane should not be null";
         Node kontent = Objects.requireNonNull(content, message);
 
-        pluginContentPane.getChildren().setAll(kontent);
+        Platform.runLater(() -> {
+            pluginContentPane.getChildren().setAll(kontent);
 
-        AnchorPane.setTopAnchor(kontent, 0.0);
-        AnchorPane.setRightAnchor(kontent, 0.0);
-        AnchorPane.setBottomAnchor(kontent, 0.0);
-        AnchorPane.setLeftAnchor(kontent, 0.0);
+            AnchorPane.setTopAnchor(kontent, 0.0);
+            AnchorPane.setRightAnchor(kontent, 0.0);
+            AnchorPane.setLeftAnchor(kontent, 0.0);
+        });
+
     }
-    
-    void setTestContent(String testContent){
+
+    void setTestContent(String testContent) {
         sampleContentLabel.setText(testContent);
     }
 
@@ -85,29 +78,13 @@ public class PluginsListRowController {
         String message = "Plugins accordion should not be null";
         Accordion akkordion = Objects.requireNonNull(accordion, message);
 
-//        akkordion.getPanes()
-//                .stream()
-//                .filter(tp -> tp.getId().equals(titledPane.getId()))
-//                .findFirst()
-//                .ifPresent(tp -> {
         openContentToggle.setOnAction(e -> {
             if (titledPane.isExpanded()) {
                 titledPane.setExpanded(false);
             } else {
-                akkordion.setExpandedPane(titledPane);
+                Platform.runLater(() -> akkordion.setExpandedPane(titledPane));
             }
         });
-//                });
-//
-//        accordion.getPanes()
-//                .stream()
-//                .filter(tp -> tp.isExpanded())
-//                .findFirst()
-//                .ifPresent(tp -> {
-//                    if (!tp.getId().equals(titledPane.getId())) {
-//                        tp.setExpanded(false);
-//                    }
-//                });
     }
 
 }
