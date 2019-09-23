@@ -10,7 +10,6 @@
     -fx-pref-height: 38px;
     -fx-min-height: -fx-pref-height;
     -fx-max-height: -fx-pref-height;
-    /*-fx-border-width: 0.5px;*/
 }
 
 .titled-pane {
@@ -24,8 +23,6 @@
     -fx-background-radius: 0;
     -fx-padding: 0;
     -fx-background-color: white;
-    /*-fx-cursor: hand;*/
-    /*    -fx-font-size: 14px;*/
 }
 
 .titled-pane > .title > .arrow-button {
@@ -48,7 +45,7 @@
     -fx-pref-height: 38px;
 }
 
-.jfx-toggle-node {
+.expand-pane-toggle {
     -fx-pref-width: 18px;
     -fx-pref-height: -fx-pref-width;
     -fx-min-width: -fx-pref-width;
@@ -58,19 +55,19 @@
     -fx-background-radius: 9px;
     -fx-cursor: hand;
 }
-.ikonli-font-icon {
+.expand-pane-icon {
     -fx-icon-code: mdi-settings;
     -fx-icon-size: 18px;
 }
 
-.jfx-toggle-node > .ikonli-font-icon {
+.expand-pane-toggle > .expand-pane-icon {
     -fx-icon-color: #cdd2d6;
 }
 
-.jfx-toggle-node:selected > .ikonli-font-icon {
+.expand-pane-toggle:selected > .expand-pane-icon {
     -fx-icon-color: #0d42c2;
 }
 
 .content-area {
-    -fx-background-color: #f9f9f9;
+    /*-fx-background-color: #f9f9f9;*/
 }
