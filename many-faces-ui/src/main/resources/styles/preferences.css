@@ -136,6 +136,8 @@
     -fx-pref-width: 142px;
     -fx-pref-height: 38px;
     -fx-text-fill: #0e46cc;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
     -fx-background-color: #d7e4ff;
     -fx-border-color: #b9c9ef;
 }
