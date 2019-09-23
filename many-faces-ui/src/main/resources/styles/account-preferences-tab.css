@@ -34,8 +34,6 @@
 }
 
 .jfx-tab-pane .tab .tab-label {
-    /*-fx-font-family: "Roboto";*/
-    /*-fx-font-size: 14.0;*/
     -fx-text-fill: #868686;
 }
 
@@ -45,4 +43,30 @@
 
 .jfx-tab-pane .tab:selected:hover {
     -fx-background-color: #eaeffa;
+}
+
+.scroll-pane .scroll-bar:vertical .track {
+    -fx-background-color: white;
+    -fx-border-color: transparent;
+    -fx-background-radius: 0em;
+    -fx-border-radius: 2em;
+}
+
+.scroll-pane .scroll-bar:vertical .increment-button,
+.scroll-pane .scroll-bar:vertical .decrement-button {
+    -fx-background-color: transparent;
+    -fx-background-radius: 0em;
+    -fx-padding: 0 10 0 0;
+}
+
+.scroll-pane .scroll-bar .increment-arrow,
+.scroll-pane .scroll-bar .decrement-arrow {
+    -fx-shape: " ";
+    -fx-padding: 0;
+}
+
+.scroll-pane .scroll-bar:vertical .thumb {
+    -fx-background-color: #e5e5e5;
+    -fx-background-insets: 2, 0, 0;
+    -fx-background-radius: 2em;
 }
