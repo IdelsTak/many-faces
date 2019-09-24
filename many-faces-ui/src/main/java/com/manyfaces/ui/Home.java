@@ -3,27 +3,34 @@
  */
 package com.manyfaces.ui;
 
+import com.manyfaces.spi.RootComponent;
 import com.manyfaces.ui.controllers.NavigationBarController;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import org.openide.util.lookup.ServiceProvider;
 
 /**
 
  @author Hiram K <hiram.kamau@outlook.com>
  */
-public final class Home extends StackPane {
+@ServiceProvider(service = RootComponent.class)
+public final class Home extends StackPane implements RootComponent {
 
     private static final Logger LOG = Logger.getLogger(Home.class.getName());
     private VBox contentPane;
     private Pane navigationPane;
+    private final HBox homeContent;
 
     /**
      Default constructor.
@@ -31,10 +38,32 @@ public final class Home extends StackPane {
     public Home() {
         super();
 
-        HBox hBox = new HBox(getNavigationPane(), getContentPane());
+        homeContent = new HBox(getNavigationPane(), getContentPane());
         HBox.setHgrow(getContentPane(), Priority.ALWAYS);
 
-        getChildren().setAll(hBox);
+        getChildren().setAll(homeContent);
+    }
+
+    @Override
+    public StackPane getRoot() {
+        return this;
+    }
+
+    @Override
+    public void resetContent() {
+        LOG.log(Level.INFO, "Resetting content...");
+        
+        Platform.runLater(() -> getChildren().setAll(homeContent));
+    }
+    
+    @Override
+    public void setContent(Node content){
+        String message = "Content should not be null";
+        Node kontent = Objects.requireNonNull(content, message);
+        
+        LOG.log(Level.INFO, "Setting new content to: {0}", kontent);
+        
+        Platform.runLater(() -> getChildren().setAll(kontent));
     }
 
     private VBox getContentPane() {
@@ -70,4 +99,5 @@ public final class Home extends StackPane {
 
         return navigationPane;
     }
+
 }
