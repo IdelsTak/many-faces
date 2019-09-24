@@ -142,6 +142,7 @@
     -fx-background-radius: 0px;
     -fx-padding: 0.0em; 
 }
+
 .browser-preference-toggle:selected > .radio > .dot {
     -fx-background-color: transparent;
 }
