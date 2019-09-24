@@ -3,6 +3,7 @@
  */
 package com.manyfaces.spi;
 
+import javafx.scene.Node;
 import javafx.scene.layout.StackPane;
 
 /**
@@ -12,4 +13,8 @@ import javafx.scene.layout.StackPane;
 public interface RootComponent {
 
     StackPane getRoot();
+
+    void resetContent();
+
+    void setContent(Node content);
 }
