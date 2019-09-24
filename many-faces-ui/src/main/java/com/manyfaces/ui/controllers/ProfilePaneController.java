@@ -8,14 +8,19 @@ import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXListView;
 import com.jfoenix.controls.JFXPopup;
 import com.jfoenix.controls.JFXToggleNode;
+import com.manyfaces.spi.RootComponent;
+import com.manyfaces.ui.ProfileEditHome;
 import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TitledPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
+import org.openide.util.Lookup;
 
 /**
  FXML Controller class
@@ -39,9 +44,16 @@ public class ProfilePaneController {
     private JFXToggleNode expandPaneToggle;
     @FXML
     private JFXButton menuButton;
+    private JFXPopup popup;
+    private JFXListView<Label> actionsList;
+    private final ProfileActions profileActions;
 
     static {
         LOG = Logger.getLogger(ProfilePaneController.class.getName());
+    }
+
+    {
+        profileActions = new ProfileActions();
     }
 
     /**
@@ -63,41 +75,44 @@ public class ProfilePaneController {
 
         URL styleUrl = getClass().getResource("/styles/profile-pane.css");
         String style = styleUrl.toExternalForm();
-        JFXListView<Label> list = new JFXListView<>();
-        list.getStylesheets().add(style);
 
-        list.getItems().add(new Label("Edit"));
-        list.getItems().add(new Label("Move to a group"));
-        list.getItems().add(new Label("Delete"));
+        actionsList = new JFXListView<>();
+        actionsList.getStylesheets().add(style);
 
-        list.selectionModelProperty()
+        actionsList.getItems().add(new Label("Edit"));
+        actionsList.getItems().add(new Label("Move to a group"));
+        actionsList.getItems().add(new Label("Delete"));
+
+        actionsList.selectionModelProperty()
                 .getValue()
                 .selectedItemProperty()
-                .addListener((ob, ov, nv) -> {
-                    switch (nv.getText()) {
-                        case "Edit":
-                            LOG.log(Level.INFO, "Edit");
-                            return;
-                        case "Move to a group":
-                            LOG.log(Level.INFO, "Move to a group");
-                            return;
-                        case "Delete":
-                            LOG.log(Level.INFO, "Delete");
-                            return;
-                        default:
-                            throw new IllegalArgumentException("Action not known");
+                .addListener(profileActions);
 
-                    }
-                });
+        popup = new JFXPopup(actionsList);
 
-        JFXPopup popup = new JFXPopup(list);
-        
+//        popup.showingProperty().addListener((o, ov, nv) -> {
+//            LOG.log(Level.INFO,
+//                    "\n++++++++++++++++++++++++++++"
+//                    + "\nActions popup event occured"
+//                    + "\n- old val: {0}"
+//                    + "\n- new val: {1}",
+//                    new Object[]{ov,
+//                                 nv});
+//
+//            if (nv != null && nv == true) {
+//                actionsList.getSelectionModel().clearSelection();
+//            }
+//        });
+
+        popup.setOnShowing(e -> {
+            actionsList.getSelectionModel().clearSelection();
+        });
+
         menuButton.setOnAction(e -> {
             popup.show(menuButton,
                     JFXPopup.PopupVPosition.TOP,
                     JFXPopup.PopupHPosition.RIGHT);
         });
-
     }
 
     void setTitledPaneTitle(String profileName) {
@@ -113,6 +128,58 @@ public class ProfilePaneController {
             titleHbox.getChildren().set(0, titlePaneCheckBox);
         } else {
             titleHbox.getChildren().remove(titlePaneCheckBox);
+        }
+    }
+
+    private class ProfileActions implements ChangeListener<Label> {
+
+        private ProfileActions() {
+        }
+
+        @Override
+        public void changed(
+                ObservableValue<? extends Label> observable,
+                Label oldValue,
+                Label newValue) {
+
+            LOG.log(Level.INFO,
+                    "\n++++++++++++++++++++++++++++"
+                    + "\nActions list event occured"
+                    + "\n- old val: {0}"
+                    + "\n- new val: {1}",
+                    new Object[]{oldValue,
+                                 newValue});
+
+            if (newValue == null) {
+                return;
+            }
+
+            switch (newValue.getText()) {
+                case "Edit":
+                    LOG.log(Level.INFO, "Show profile edit home");
+                    Lookup lkp = Lookup.getDefault();
+                    RootComponent rc = lkp.lookup(RootComponent.class);
+
+                    rc.setContent(new ProfileEditHome().getPane());
+
+                    LOG.log(Level.INFO, "Hiding popup...");
+
+                    if (popup.isShowing()) {
+//                        actionsList.getSelectionModel().clearSelection();
+//                        actionsList.getSelectionModel().select(-1);
+                        popup.hide();
+                    }
+                    return;
+                case "Move to a group":
+                    LOG.log(Level.INFO, "Move to a group");
+                    return;
+                case "Delete":
+                    LOG.log(Level.INFO, "Delete");
+                    return;
+                default:
+                    throw new IllegalArgumentException("Action not known");
+
+            }
         }
     }
 
