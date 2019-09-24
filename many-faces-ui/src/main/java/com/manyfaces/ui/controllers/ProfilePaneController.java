@@ -10,15 +10,18 @@ import com.jfoenix.controls.JFXPopup;
 import com.jfoenix.controls.JFXToggleNode;
 import com.manyfaces.spi.RootComponent;
 import com.manyfaces.ui.ProfileEditHome;
+import java.io.IOException;
 import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.control.TitledPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import org.openide.util.Lookup;
 
@@ -60,7 +63,7 @@ public class ProfilePaneController {
      Initializes the controller class.
      */
     @FXML
-    public void initialize() {
+    public void initialize() throws IOException {
         titledPane.widthProperty().addListener((obs, ov, nv) -> {
             titleHbox.setPrefWidth(nv.doubleValue());
         });
@@ -87,8 +90,14 @@ public class ProfilePaneController {
                 .getValue()
                 .selectedItemProperty()
                 .addListener(profileActions);
-
-        popup = new JFXPopup(actionsList);
+        
+        URL location = getClass().getResource("/views/ProfileActionsPopup.fxml");
+        FXMLLoader loader = new FXMLLoader(location);
+        Pane actionsPane = loader.load();
+        popup = new JFXPopup(actionsPane);
+        ProfileActionsPopupController controller = loader.getController();
+        
+        controller.setPopup(popup);
 
 //        popup.showingProperty().addListener((o, ov, nv) -> {
 //            LOG.log(Level.INFO,
