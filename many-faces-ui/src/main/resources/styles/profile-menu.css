@@ -27,9 +27,9 @@
     -fx-cursor: hand;
 }
 
-/*.title-area > .home-button .jfx-rippler {
-    -jfx-rippler-fill: transparent;
-}*/
+.title-area > .home-button .jfx-rippler {
+    -jfx-rippler-fill: #0d3fb9;
+}
 
 .title-area > .home-button > .home-icon {
     -fx-icon-color: white;
@@ -47,38 +47,69 @@
     -fx-min-height: -fx-pref-height;
     -fx-max-height: -fx-pref-height;
     -fx-padding: 0 0 38 27;
-    -fx-font-size: 16px;
-    -fx-spacing: 16px;
-    /*-fx-text-fill: #a7d0ff;*/
 }
 
-.main-menu-area > .main-menu-toggle {
+.advanced-menu-area,
+.main-menu-area {
+    -fx-font-size: 16px;
+    -fx-spacing: 16px;
+}
+
+.advanced-menu-toggle,
+.menu-toggle {
     -fx-text-fill: #a7d0ff;
     -fx-label-padding: 0;
     -fx-cursor: hand;
 }
 
-.main-menu-area > .main-menu-toggle:selected {
+.menu-toggle:selected {
     -fx-text-fill: white;
 }
 
 /*Remove radio-button's styling*/
-.main-menu-area > .main-menu-toggle > .radio {
+.advanced-menu-toggle > .radio,
+.menu-toggle > .radio {
     -fx-background-color: transparent;
     -fx-background-insets: 0;
     -fx-background-radius: 0px;
     -fx-padding: 0.0em;
 }
 
-.main-menu-area > .main-menu-toggle > .radio > .dot {
+.advanced-menu-toggle > .radio > .dot,
+.menu-toggle > .radio > .dot {
     -fx-background-color: transparent;
     /*This is important!*/
     -fx-background-radius: 0;
     -fx-padding: 0;
 }
 
-.main-menu-area > .main-menu-toggle:selected > .radio > .dot {
+.advanced-menu-toggle:selected > .radio > .dot,
+.menu-toggle:selected > .radio > .dot {
     -fx-background-color: transparent;
 }
 
+.advanced-menu-pane > .title {
+    -fx-font-size: 16px;
+    -fx-pref-height: 20px;
+    -fx-min-height: 20px;
+    -fx-background-insets: 0;
+    -fx-background-radius: 0;
+    -fx-background-color: transparent;
+    -fx-padding: 0 0 0 27;
+}
 
+.advanced-menu-pane > .title > .arrow-button {
+    -fx-padding: 0;
+}
+
+.advanced-menu-pane > .title > .arrow-button > .arrow {
+    -fx-background-color: null;
+    -fx-padding: 0;
+}
+
+.advanced-menu-pane > *.content {
+    -fx-border-color: null;
+    -fx-border-insets: 0;
+    -fx-background-color: transparent;
+    -fx-padding: 0 0 0 33;
+}
