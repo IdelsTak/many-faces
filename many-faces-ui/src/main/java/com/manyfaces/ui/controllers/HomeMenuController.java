@@ -13,6 +13,7 @@ import com.manyfaces.ui.BrowserProfileList;
 import com.manyfaces.ui.Help;
 import com.manyfaces.ui.MyAccountPreferences;
 import com.manyfaces.ui.Plugins;
+import com.manyfaces.ui.ProfileEditHome;
 import java.io.IOException;
 import java.net.URL;
 import java.util.logging.Level;
@@ -21,12 +22,14 @@ import javafx.application.Platform;
 import javafx.collections.ListChangeListener.Change;
 import javafx.collections.ObservableList;
 import javafx.css.Styleable;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import org.openide.util.Lookup;
 
 /**
@@ -38,6 +41,8 @@ public class HomeMenuController {
 
     private static final Logger LOG;
     private static final Lookup LOOKUP = Lookup.getDefault();
+    @FXML
+    private VBox homeMenuBox;
     @FXML
     private ToggleGroup menuGroup;
     @FXML
@@ -76,6 +81,16 @@ public class HomeMenuController {
         accountToggle.setOnAction(e -> {
             contentPane.getChildren().setAll(new MyAccountPreferences().getPane());
         });
+        newProfileToggle.setOnAction(e -> {
+            homeToggle.setSelected(true);
+            homeToggle.fireEvent(new ActionEvent(null, null));
+            RootComponent component = LOOKUP.lookup(RootComponent.class);
+            ProfileEditHome edit = new ProfileEditHome("New browser profile");
+            component.setContent(edit.getPane());
+        });
+        homeToggle.setOnAction(e -> {
+            contentPane.getChildren().setAll(new BrowserProfileList().getPane());
+        });
         groupSettingsButton.setOnAction(e -> {
 
             URL location = getClass().getResource("/views/EditGroupsDialog.fxml");
@@ -111,28 +126,17 @@ public class HomeMenuController {
 
     public void setContentPane(Pane contentPane) {
         this.contentPane = contentPane;
-        
+
         URL styleUrl = getClass().getResource("/styles/content-area.css");
         this.contentPane.getStylesheets().add(styleUrl.toExternalForm());
-        
+
         this.contentPane.getStyleClass().add("content-area");
 
-        homeToggle.selectedProperty().addListener((o, ov, nv) -> {
-            if (nv) {
-                openBrowserProfileList();
-            }
-        });
-
-        openBrowserProfileList();
         homeToggle.setSelected(true);
-    }
-
-    private void openBrowserProfileList() {
-        contentPane.getChildren().setAll(new BrowserProfileList().loadPane());
+        homeToggle.fireEvent(new ActionEvent(null, null));
     }
 
     private void removeRadioButtonStyling(Toggle toggle) {
         ((Styleable) toggle).getStyleClass().remove("radio-button");
     }
-
 }
