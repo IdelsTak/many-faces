@@ -3,6 +3,7 @@
  */
 package com.manyfaces.ui;
 
+import com.manyfaces.ui.controllers.ProfileMenuController;
 import java.io.IOException;
 import java.net.URL;
 import java.util.logging.Level;
@@ -21,13 +22,15 @@ public class ProfileEditHome extends HBox {
     private static final Logger LOG;
     private Pane profileNavigationPane;
     private Pane profileContentPane;
+    private final String menuTitle;
 
     static {
         LOG = Logger.getLogger(ProfileEditHome.class.getName());
     }
 
-    public ProfileEditHome() {
+    public ProfileEditHome(String menuTitle) {
         super();
+        this.menuTitle = menuTitle;
     }
 
     public Pane getPane() {
@@ -44,6 +47,8 @@ public class ProfileEditHome extends HBox {
             URL location = getClass().getResource("/views/ProfileMenu.fxml");
             FXMLLoader loader = new FXMLLoader(location);
             profileNavigationPane = loader.load();
+            ProfileMenuController controller = loader.getController();
+            controller.setMenuTitle(menuTitle);
         }
         return profileNavigationPane;
     }
