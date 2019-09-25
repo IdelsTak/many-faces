@@ -40,9 +40,10 @@ public class ProfileActionsPopupController {
 
     void setPopup(JFXPopup popup) {
         editButton.setOnAction(e -> {
-            RootComponent component = LOOKUP.lookup(RootComponent.class);
-            component.setContent(new ProfileEditHome().getPane());
             popup.hide();
+            RootComponent component = LOOKUP.lookup(RootComponent.class);
+            ProfileEditHome edit = new ProfileEditHome("Edit browser profile");
+            component.setContent(edit.getPane());
         });
     }
 
