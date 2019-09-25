@@ -11,8 +11,11 @@ import javafx.beans.property.BooleanProperty;
 import javafx.css.Styleable;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.Labeled;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TitledPane;
+import javafx.scene.control.Toggle;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.InputEvent;
 import org.openide.util.Lookup;
 
@@ -32,6 +35,8 @@ public class ProfileMenuController {
     private TitledPane advancedMenuTitledPane;
     @FXML
     private RadioButton advancedMenuToggle;
+    @FXML
+    private ToggleGroup profileMenuGroup;
 
     static {
         LOG = Logger.getLogger(ProfileMenuController.class.getName());
@@ -57,7 +62,7 @@ public class ProfileMenuController {
         BooleanProperty menuToggleSelected = advancedMenuToggle.selectedProperty();
 
         menuExpand.bind(menuToggleSelected);
-        
+
         goHomeButton.setOnAction(e -> {
             Lookup lkp = Lookup.getDefault();
             RootComponent rootComponent = lkp.lookup(RootComponent.class);
@@ -69,7 +74,24 @@ public class ProfileMenuController {
     public void setMenuTitle(String menuTitle) {
         String message = "Profile menu title should not be null";
         String title = Objects.requireNonNull(menuTitle, message);
-        
+
         menuTitleLabel.setText(title);
+    }
+
+    public void setProfileAttributeController(ProfileAttributeController controller) {
+        String message = "Profile attribute controller should not be null";
+        ProfileAttributeController kontroller = Objects.requireNonNull(
+                controller,
+                message);
+
+        profileMenuGroup.selectedToggleProperty()
+                .addListener((o, ov, nv) -> {
+                    if (nv != null) {
+                        kontroller.setHeaderText(((Labeled) nv).getText());
+                    }
+                });
+
+        Toggle selectedToggle = profileMenuGroup.getSelectedToggle();
+        kontroller.setHeaderText(((Labeled) selectedToggle).getText());
     }
 }
