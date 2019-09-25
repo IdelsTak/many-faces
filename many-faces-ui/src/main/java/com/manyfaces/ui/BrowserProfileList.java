@@ -34,7 +34,7 @@ public class BrowserProfileList extends VBox {
         super();
     }
 
-    public Pane loadPane() {
+    public Pane getPane() {
         Pane headerPane = null;
         Pane tabPane = null;
 
