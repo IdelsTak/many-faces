@@ -7,7 +7,6 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPopup;
 import com.manyfaces.spi.RootComponent;
 import com.manyfaces.ui.ProfileEditHome;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.fxml.FXML;
 import org.openide.util.Lookup;
@@ -40,10 +39,9 @@ public class ProfileActionsPopupController {
     }
 
     void setPopup(JFXPopup popup) {
-        LOG.log(Level.INFO, "Show profile edit home");
         editButton.setOnAction(e -> {
-            LOOKUP.lookup(RootComponent.class)
-                    .setContent(new ProfileEditHome().getPane());
+            RootComponent component = LOOKUP.lookup(RootComponent.class);
+            component.setContent(new ProfileEditHome().getPane());
             popup.hide();
         });
     }
