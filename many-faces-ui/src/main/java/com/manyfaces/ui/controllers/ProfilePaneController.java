@@ -48,6 +48,8 @@ public class ProfilePaneController {
 
     /**
      Initializes the controller class.
+
+     @throws java.io.IOException
      */
     @FXML
     public void initialize() throws IOException {
