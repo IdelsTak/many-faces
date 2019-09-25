@@ -3,6 +3,7 @@
  */
 package com.manyfaces.ui;
 
+import com.manyfaces.ui.controllers.ProfileAttributeController;
 import com.manyfaces.ui.controllers.ProfileMenuController;
 import java.io.IOException;
 import java.net.URL;
@@ -11,7 +12,7 @@ import java.util.logging.Logger;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.Priority;
 
 /**
 
@@ -23,6 +24,7 @@ public class ProfileEditHome extends HBox {
     private Pane profileNavigationPane;
     private Pane profileContentPane;
     private final String menuTitle;
+    private ProfileAttributeController attributeController;
 
     static {
         LOG = Logger.getLogger(ProfileEditHome.class.getName());
@@ -36,6 +38,7 @@ public class ProfileEditHome extends HBox {
     public Pane getPane() {
         try {
             getChildren().setAll(getProfileNavigationPane(), getProfileContentPane());
+            HBox.setHgrow(getProfileContentPane(), Priority.ALWAYS);
         } catch (IOException ex) {
             LOG.log(Level.SEVERE, null, ex);
         }
@@ -47,19 +50,23 @@ public class ProfileEditHome extends HBox {
             URL location = getClass().getResource("/views/ProfileMenu.fxml");
             FXMLLoader loader = new FXMLLoader(location);
             profileNavigationPane = loader.load();
-            ProfileMenuController controller = loader.getController();
-            controller.setMenuTitle(menuTitle);
+            ProfileMenuController menuController = loader.getController();
+            menuController.setMenuTitle(menuTitle);
+            
+            //Ensure the controller is initialized
+            getProfileContentPane();
+            menuController.setProfileAttributeController(attributeController);
+            
         }
         return profileNavigationPane;
     }
 
-    private Pane getProfileContentPane() {
+    private Pane getProfileContentPane() throws IOException {
         if (profileContentPane == null) {
-            profileContentPane = new VBox();
-            URL styleUrl = getClass().getResource("/styles/content-area.css");
-            
-            profileContentPane.getStylesheets().add(styleUrl.toExternalForm());
-            profileContentPane.getStyleClass().add("content-area");
+            URL location = getClass().getResource("/views/ProfileAttribute.fxml");
+            FXMLLoader loader = new FXMLLoader(location);
+            profileContentPane = loader.load();
+            attributeController = loader.getController();
         }
         return profileContentPane;
     }
