@@ -5,11 +5,16 @@ package com.manyfaces.ui.controllers;
 
 import com.jfoenix.controls.JFXButton;
 import com.manyfaces.spi.RootComponent;
+import java.io.IOException;
+import java.net.URL;
 import java.util.Objects;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.beans.property.BooleanProperty;
 import javafx.css.Styleable;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.control.Labeled;
 import javafx.scene.control.RadioButton;
@@ -17,6 +22,7 @@ import javafx.scene.control.TitledPane;
 import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.InputEvent;
+import javafx.scene.layout.Pane;
 import org.openide.util.Lookup;
 
 /**
@@ -37,6 +43,32 @@ public class ProfileMenuController {
     private RadioButton advancedMenuToggle;
     @FXML
     private ToggleGroup profileMenuGroup;
+    @FXML
+    private RadioButton overviewToggle;
+    @FXML
+    private RadioButton proxyToggle;
+    @FXML
+    private RadioButton timezoneToggle;
+    @FXML
+    private RadioButton webRtcToggle;
+    @FXML
+    private RadioButton geoLocationToggle;
+    @FXML
+    private RadioButton navigatorToggle;
+    @FXML
+    private RadioButton fontsToggle;
+    @FXML
+    private RadioButton devicesToggle;
+    @FXML
+    private RadioButton hardwareToggle;
+    @FXML
+    private RadioButton extensionsToggle;
+    @FXML
+    private RadioButton storageToggle;
+    @FXML
+    private RadioButton browserPluginsToggle;
+    @FXML
+    private RadioButton otherToggle;
 
     static {
         LOG = Logger.getLogger(ProfileMenuController.class.getName());
@@ -93,5 +125,21 @@ public class ProfileMenuController {
 
         Toggle selectedToggle = profileMenuGroup.getSelectedToggle();
         kontroller.setHeaderText(((Labeled) selectedToggle).getText());
+
+        overviewToggle.setOnAction(e -> {
+            URL location = getClass().getResource("/views/ProfileOverview.fxml");
+            FXMLLoader loader = new FXMLLoader(location);
+            Pane pane = null;
+
+            try {
+                pane = loader.load();
+            } catch (IOException ex) {
+                LOG.log(Level.SEVERE, null, ex);
+            }
+
+            kontroller.setContent(pane);
+        });
+        
+        overviewToggle.fireEvent(new ActionEvent(null, null));
     }
 }
