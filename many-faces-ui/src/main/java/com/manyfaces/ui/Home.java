@@ -51,8 +51,6 @@ public final class Home extends StackPane implements RootComponent {
 
     @Override
     public void resetContent() {
-        LOG.log(Level.INFO, "Resetting content...");
-        
         Platform.runLater(() -> getChildren().setAll(homeContent));
     }
     
@@ -60,8 +58,6 @@ public final class Home extends StackPane implements RootComponent {
     public void setContent(Node content){
         String message = "Content should not be null";
         Node kontent = Objects.requireNonNull(content, message);
-        
-        LOG.log(Level.INFO, "Setting new content to: {0}", kontent);
         
         Platform.runLater(() -> getChildren().setAll(kontent));
     }
