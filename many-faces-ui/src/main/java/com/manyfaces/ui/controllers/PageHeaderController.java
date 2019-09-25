@@ -36,8 +36,11 @@ public class PageHeaderController {
         // TODO
     }
     
-    public void setHeaderText(String text){
+    void setHeaderText(String text){
         headerText.setText(text);
     }
-
+    
+    void setNotificationToggleVisible(boolean visible){
+        notificationToggle.setVisible(visible);
+    }
 }
