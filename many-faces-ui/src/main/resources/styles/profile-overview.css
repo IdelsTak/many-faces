@@ -40,6 +40,7 @@
     -fx-background-color: #d1deff;
     -fx-text-fill: #1048cc;
     -fx-font-weight: bold;
+    -fx-cursor: hand;
 }
 
 .os-label {
