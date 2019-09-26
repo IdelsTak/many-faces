@@ -38,7 +38,7 @@
                 <VBox fx:id="connectionTypeBox" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" prefHeight="150.0" VBox.vgrow="NEVER">
                     <children>
                         <Label alignment="TOP_LEFT" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" prefHeight="34.0" styleClass="field-header-label" text="Connection type:" />
-                        <JFXComboBox maxWidth="1.7976931348623157E308">
+                        <JFXComboBox fx:id="connectionTypeComboBox" maxWidth="1.7976931348623157E308">
                             <VBox.margin>
                                 <Insets bottom="32.0" />
                             </VBox.margin>
@@ -74,15 +74,16 @@
                                 <Insets bottom="29.0" />
                             </VBox.margin>
                             <children>
-                                <JFXPasswordField promptText="Proxy password" StackPane.alignment="CENTER" />
-                        <JFXToggleNode styleClass="show-password-toggle" StackPane.alignment="CENTER_RIGHT">
-                           <StackPane.margin>
-                              <Insets right="6.0" />
-                           </StackPane.margin>
-                           <graphic>
+                                <JFXPasswordField fx:id="passwordField" promptText="Proxy password" StackPane.alignment="CENTER" />
+                                <JFXTextField fx:id="passwordTextField" />
+                                <JFXToggleNode fx:id="showPasswordToggle" styleClass="show-password-toggle" StackPane.alignment="CENTER_RIGHT">
+                                    <StackPane.margin>
+                                        <Insets right="6.0" />
+                                    </StackPane.margin>
+                                    <graphic>
                                         <FontIcon iconSize="22" />
-                           </graphic>
-                        </JFXToggleNode>
+                                    </graphic>
+                                </JFXToggleNode>
                             </children>
                         </StackPane>
                     </children>
@@ -90,16 +91,17 @@
                 <VBox fx:id="buttonBox" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" prefHeight="31.0" VBox.vgrow="NEVER">
                     <children>
                         <JFXButton styleClass="check-proxy-button" text="Check proxy">
-                     <VBox.margin>
-                        <Insets top="6.0" />
-                     </VBox.margin></JFXButton>
+                            <VBox.margin>
+                                <Insets top="6.0" />
+                            </VBox.margin>
+                        </JFXButton>
                     </children>
                 </VBox>
             </children>
         </VBox>
     </children>
-   <stylesheets>
-      <URL value="@../styles/roboto-regular.css" />
-      <URL value="@../styles/profile-proxy.css" />
-   </stylesheets>
+    <stylesheets>
+        <URL value="@../styles/roboto-regular.css" />
+        <URL value="@../styles/profile-proxy.css" />
+    </stylesheets>
 </AnchorPane>
