@@ -69,6 +69,7 @@ public class ProfileMenuController {
     private RadioButton browserPluginsToggle;
     @FXML
     private RadioButton otherToggle;
+    private ProfileAttributeController attributeController;
 
     static {
         LOG = Logger.getLogger(ProfileMenuController.class.getName());
@@ -112,19 +113,17 @@ public class ProfileMenuController {
 
     public void setProfileAttributeController(ProfileAttributeController controller) {
         String message = "Profile attribute controller should not be null";
-        ProfileAttributeController kontroller = Objects.requireNonNull(
-                controller,
-                message);
+        attributeController = Objects.requireNonNull(controller, message);
 
         profileMenuGroup.selectedToggleProperty()
                 .addListener((o, ov, nv) -> {
                     if (nv != null) {
-                        kontroller.setHeaderText(((Labeled) nv).getText());
+                        attributeController.setHeaderText(((Labeled) nv).getText());
                     }
                 });
 
         Toggle selectedToggle = profileMenuGroup.getSelectedToggle();
-        kontroller.setHeaderText(((Labeled) selectedToggle).getText());
+        attributeController.setHeaderText(((Labeled) selectedToggle).getText());
 
         overviewToggle.setOnAction(e -> {
             URL location = getClass().getResource("/views/ProfileOverview.fxml");
@@ -137,9 +136,9 @@ public class ProfileMenuController {
                 LOG.log(Level.SEVERE, null, ex);
             }
 
-            kontroller.setContent(pane);
+            attributeController.setContent(pane);
         });
-        
+
         proxyToggle.setOnAction(e -> {
             URL location = getClass().getResource("/views/ProfileProxy.fxml");
             FXMLLoader loader = new FXMLLoader(location);
@@ -151,9 +150,23 @@ public class ProfileMenuController {
                 LOG.log(Level.SEVERE, null, ex);
             }
 
-            kontroller.setContent(pane);
+            attributeController.setContent(pane);
         });
-        
+
+        timezoneToggle.setOnAction(e -> {
+            URL location = getClass().getResource("/views/ProfileTimezone.fxml");
+            FXMLLoader loader = new FXMLLoader(location);
+            Pane pane = null;
+
+            try {
+                pane = loader.load();
+            } catch (IOException ex) {
+                LOG.log(Level.SEVERE, null, ex);
+            }
+
+            attributeController.setContent(pane);
+        });
+
         overviewToggle.fireEvent(new ActionEvent(null, null));
     }
 }
