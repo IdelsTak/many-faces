@@ -140,6 +140,20 @@ public class ProfileMenuController {
             kontroller.setContent(pane);
         });
         
+        proxyToggle.setOnAction(e -> {
+            URL location = getClass().getResource("/views/ProfileProxy.fxml");
+            FXMLLoader loader = new FXMLLoader(location);
+            Pane pane = null;
+
+            try {
+                pane = loader.load();
+            } catch (IOException ex) {
+                LOG.log(Level.SEVERE, null, ex);
+            }
+
+            kontroller.setContent(pane);
+        });
+        
         overviewToggle.fireEvent(new ActionEvent(null, null));
     }
 }
