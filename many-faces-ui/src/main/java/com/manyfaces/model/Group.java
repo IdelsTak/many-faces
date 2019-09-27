@@ -3,9 +3,13 @@
  */
 package com.manyfaces.model;
 
+import com.manyfaces.spi.ProfilesRepository;
 import java.util.Objects;
 import javafx.beans.property.ReadOnlyIntegerWrapper;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableSet;
+import org.openide.util.Lookup;
 
 /**
 
@@ -15,33 +19,39 @@ public class Group {
 
     private final SimpleStringProperty groupNameProperty;
     private final ReadOnlyIntegerWrapper idProperty;
-//    private int id;
-//    private String groupName;
+    private final ObservableSet<Profile> profiles;
 
-//    public Group(String groupName) {
-//        this.idProperty = new ReadOnlyIntegerWrapper();
-//        this.groupNameProperty = new SimpleStringProperty(groupName);
-//    }
     public Group(int id, String groupName) {
         this.idProperty = new ReadOnlyIntegerWrapper(id);
         this.groupNameProperty = new SimpleStringProperty(groupName);
+        this.profiles = FXCollections.emptyObservableSet();
     }
 
-    public ReadOnlyIntegerWrapper getIdProperty() {
+    public ReadOnlyIntegerWrapper idProperty() {
         return idProperty;
     }
 
-    public SimpleStringProperty getGroupNameProperty() {
+    public SimpleStringProperty groupNameProperty() {
         return groupNameProperty;
+    }
+
+    public int getId() {
+        return idProperty.get();
+    }
+
+    public String getName() {
+        return groupNameProperty.get();
+    }
+
+    public void setGroupName(String groupName) {
+        groupNameProperty.set(groupName);
     }
 
     @Override
     public int hashCode() {
-        int id = getIdProperty().get();
-        String groupName = getGroupNameProperty().get();
         int hash = 3;
-        hash = 97 * hash + id;
-        hash = 97 * hash + Objects.hashCode(groupName);
+        hash = 97 * hash + getId();
+        hash = 97 * hash + Objects.hashCode(getName());
         return hash;
     }
 
@@ -56,21 +66,25 @@ public class Group {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        int id = getIdProperty().get();
-        String groupName = getGroupNameProperty().get();
         final Group other = (Group) obj;
-        if (id != other.getIdProperty().get()) {
+        if (getId() != other.getId()) {
             return false;
         }
-        return Objects.equals(groupName, other.getGroupNameProperty().get());
+        return Objects.equals(getName(), other.getName());
     }
 
     @Override
     public String toString() {
-        int id = getIdProperty().get();
-        String name = getGroupNameProperty().get();
-//        return "[" + id + ", " + name + "]";
-        return name;
+        return getName() + " (" + getNumberOfRelatedProfiles() + ")";
+    }
+
+    private int getNumberOfRelatedProfiles() {
+        long count = Lookup.getDefault().lookup(ProfilesRepository.class).findAll()
+                .stream()
+                .filter(profile -> profile.getGroup().equals(this))
+                .count();
+
+        return Integer.valueOf(Long.toString(count)).intValue();
     }
 
 }
