@@ -43,7 +43,7 @@ public class Group {
         return groupNameProperty.get();
     }
 
-    public void setGroupName(String groupName) {
+    public void setName(String groupName) {
         groupNameProperty.set(groupName);
     }
 
