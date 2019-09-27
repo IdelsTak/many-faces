@@ -88,10 +88,7 @@ public class GroupListController {
 
     private void refreshRows() {
         accordion.getPanes().clear();
-        groups.forEach(group -> {
-            accordion.getPanes()
-                    .add(getGroupRow(group));
-        });
+        groups.forEach(group -> accordion.getPanes().add(getGroupRow(group)));
     }
 
     private TitledPane getGroupRow(Group group) {
