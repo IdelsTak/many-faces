@@ -8,13 +8,14 @@ import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.controls.JFXToggleNode;
 import com.manyfaces.model.Profile;
+import com.manyfaces.spi.ProfilesRepository;
 import java.io.IOException;
 import java.net.URL;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.application.Platform;
+import javafx.collections.ObservableSet;
+import javafx.collections.SetChangeListener;
 import javafx.css.Styleable;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -22,6 +23,7 @@ import javafx.scene.control.Accordion;
 import javafx.scene.control.TitledPane;
 import javafx.scene.input.InputEvent;
 import org.kordamp.ikonli.javafx.FontIcon;
+import org.openide.util.Lookup;
 
 /**
  FXML Controller class
@@ -31,6 +33,7 @@ import org.kordamp.ikonli.javafx.FontIcon;
 public class ProfileListController {
 
     private static final Logger LOG;
+    private static final Lookup LOOKUP = Lookup.getDefault();
     @FXML
     private TitledPane titledPane;
     @FXML
@@ -55,10 +58,14 @@ public class ProfileListController {
     private FontIcon refreshIcon;
     @FXML
     private Accordion accordion;
-    private final Collection<Profile> profiles = new ArrayList<>();
+    private ObservableSet<Profile> profiles;
 
     static {
         LOG = Logger.getLogger(ProfileListController.class.getName());
+    }
+
+    {
+        profiles = LOOKUP.lookup(ProfilesRepository.class).findAll();
     }
 
     /**
@@ -83,10 +90,8 @@ public class ProfileListController {
             accordion.getPanes().clear();
 
             profiles.forEach(profile -> {
-                ProfileTitledPane ptp = getProfileTitledPane(
-                        profile.getProfileNameProperty().get());
-                ptp.showSelectCheckboxes(expanded);
-                accordion.getPanes().add(ptp.getTitledPane());
+                getProfilePane(profile).showSelectCheckboxes(expanded);
+                accordion.getPanes().add(getProfilePane(profile).getTitledPane());
             });
         });
 
@@ -116,10 +121,8 @@ public class ProfileListController {
             accordion.getPanes().clear();
 
             profiles.forEach(profile -> {
-                ProfileTitledPane ptp = getProfileTitledPane(
-                        profile.getProfileNameProperty().get());
-                ptp.setTitledPaneSelected(nv);
-                accordion.getPanes().add(ptp.getTitledPane());
+                getProfilePane(profile).setTitledPaneSelected(nv);
+                accordion.getPanes().add(getProfilePane(profile).getTitledPane());
             });
         });
 
@@ -132,26 +135,27 @@ public class ProfileListController {
                     .forEach(pane -> pane.setExpanded(false));
         });
 
-        initTable();
+        profiles.addListener((SetChangeListener.Change<? extends Profile> change) -> {
+            if (change.wasAdded()) {
+                refreshProfileRows();
+            }
+        });
+
+        refreshProfileRows();
     }
 
-    private void initTable() {
-        profiles.add(new Profile("Profile 1", "", "", LocalDateTime.now()));
-        profiles.add(new Profile("Profile 2", "", "", LocalDateTime.now()));
-        profiles.add(new Profile("Profile 3", "", "", LocalDateTime.now()));
-        profiles.add(new Profile("Profile 4", "", "", LocalDateTime.now()));
-        profiles.add(new Profile("Profile 5", "", "", LocalDateTime.now()));
-        profiles.add(new Profile("Profile 6", "", "", LocalDateTime.now()));
+    private void refreshProfileRows() {
+        accordion.getPanes().clear();
 
-        profiles.forEach(profile -> {
-            accordion.getPanes()
-                    .add(getProfileTitledPane(profile.getProfileNameProperty().get())
-                            .getTitledPane());
+        Platform.runLater(() -> {
+            profiles.forEach(profile -> {
+                accordion.getPanes().add(getProfilePane(profile).getTitledPane());
+            });
         });
 
     }
 
-    private ProfileTitledPane getProfileTitledPane(String profileName) {
+    private ProfilePane getProfilePane(Profile profile) {
         URL location = getClass().getResource("/views/ProfilePane.fxml");
         FXMLLoader loader = new FXMLLoader(location);
 
@@ -161,24 +165,24 @@ public class ProfileListController {
             tp = loader.load();
             controller = loader.getController();
 
-            controller.setTitledPaneTitle(profileName);
+            controller.setProfileInstance(profile);
             controller.setTitledPaneSelected(true);
         } catch (IOException ex) {
             LOG.log(Level.SEVERE, null, ex);
         }
-        ProfileTitledPane ptp = new ProfileTitledPane(tp, controller);
+        ProfilePane ptp = new ProfilePane(tp, controller);
         ptp.setTitledPaneSelected(selectCheckBox.isSelected());
         ptp.showSelectCheckboxes(titledPane.isExpanded());
 
         return ptp;
     }
 
-    private static class ProfileTitledPane {
+    private static class ProfilePane {
 
         private final TitledPane titledPane;
         private final ProfilePaneController controller;
 
-        private ProfileTitledPane(
+        private ProfilePane(
                 TitledPane titledPane,
                 ProfilePaneController controller) {
             this.titledPane = titledPane;
