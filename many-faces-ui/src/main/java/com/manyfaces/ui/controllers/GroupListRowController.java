@@ -3,12 +3,15 @@
  */
 package com.manyfaces.ui.controllers;
 
+import com.manyfaces.model.Group;
+import com.manyfaces.spi.ProfilesRepository;
 import javafx.css.Styleable;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TitledPane;
 import javafx.scene.input.InputEvent;
 import javafx.scene.layout.HBox;
+import org.openide.util.Lookup;
 
 /**
  FXML Controller class
@@ -17,6 +20,7 @@ import javafx.scene.layout.HBox;
  */
 public class GroupListRowController {
 
+    private static final Lookup LOOKUP = Lookup.getDefault();
     @FXML
     private TitledPane titledPane;
     @FXML
@@ -44,8 +48,17 @@ public class GroupListRowController {
         titleHbox.prefWidthProperty().bind(titledPane.widthProperty());
     }
 
-    void setGroupName(String groupName) {
-        groupNameLabel.setText(groupName);
+    void setGroup(Group group) {
+        groupNameLabel.setText(group.getName());
+
+        long count = LOOKUP.lookup(ProfilesRepository.class).findAll()
+                .stream()
+                .filter(profile -> profile.getGroup()
+                .getName()
+                .equals(group.getName()))
+                .count();
+
+        noOfProfilesLabel.setText(Long.toString(count));
     }
 
 }
