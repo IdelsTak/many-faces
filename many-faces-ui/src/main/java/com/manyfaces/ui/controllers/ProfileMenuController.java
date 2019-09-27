@@ -34,6 +34,7 @@ import org.openide.util.Lookup;
 public class ProfileMenuController {
 
     private static final Logger LOG;
+    private static final Lookup LOOKUP = Lookup.getDefault();
     @FXML
     private Label menuTitleLabel;
     @FXML
@@ -98,10 +99,7 @@ public class ProfileMenuController {
         menuExpand.bind(menuToggleSelected);
 
         goHomeButton.setOnAction(e -> {
-            Lookup lkp = Lookup.getDefault();
-            RootComponent rootComponent = lkp.lookup(RootComponent.class);
-
-            rootComponent.resetContent();
+            LOOKUP.lookup(RootComponent.class).resetContent();
         });
     }
 
@@ -135,17 +133,17 @@ public class ProfileMenuController {
         overviewToggle.fireEvent(new ActionEvent(null, null));
     }
 
-    void setProxyContent() {
+    void showProxyContent() {
         proxyToggle.setSelected(true);
         setContentFrom("/views/ProfileProxy.fxml");
     }
 
-    void setTimezoneContent() {
+    void showTimezoneContent() {
         timezoneToggle.setSelected(true);
         setContentFrom("/views/ProfileTimezone.fxml");
     }
-    
-    void setWebRtcContent(){
+
+    void showWebRtcContent() {
         webRtcToggle.setSelected(true);
         setContentFrom("/views/ProfileWebRtc.fxml");
     }
