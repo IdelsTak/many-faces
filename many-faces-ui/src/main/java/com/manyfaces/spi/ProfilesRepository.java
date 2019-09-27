@@ -17,7 +17,7 @@ public interface ProfilesRepository {
 
     void update(Profile profile);
 
-    Optional<Profile> findbyId(java.lang.String id);
+    Optional<Profile> findbyId(String id);
 
     ObservableSet<Profile> findAll();
 
