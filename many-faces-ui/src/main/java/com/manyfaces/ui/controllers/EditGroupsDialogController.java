@@ -85,8 +85,6 @@ public class EditGroupsDialogController {
         groups = LOOKUP.lookup(GroupsRepository.class).findAll();
 
         groups.addListener((Change<? extends Group> change) -> {
-//            LOG.log(Level.INFO, "Groups list change event occured: {0}", change);
-
             noGroupsFoundText.setVisible(change.getList().isEmpty());
             groupsListView.setVisible(!change.getList().isEmpty());
 
@@ -164,11 +162,10 @@ public class EditGroupsDialogController {
 
             Dragboard dragboard = startDragAndDrop(TransferMode.MOVE);
             ClipboardContent content = new ClipboardContent();
-            int groupId = getItem().getIdProperty().get();
             SnapshotParameters parameters = new SnapshotParameters();
             Image snapshot = getGraphic().snapshot(parameters, null);
 
-            content.putString(String.valueOf(groupId));
+            content.putString(String.valueOf(getItem().getId()));
             dragboard.setDragView(snapshot);
             dragboard.setContent(content);
 
@@ -190,10 +187,9 @@ public class EditGroupsDialogController {
 
                 groups.stream()
                         .filter(group -> {
-                            int thisId = group.getIdProperty().get();
                             String otherIdString = dragboard.getString();
                             int otherId = Integer.parseInt(otherIdString);
-                            return thisId == otherId;
+                            return group.getId() == otherId;
                         })
                         .findFirst()
                         .ifPresent(group -> {
