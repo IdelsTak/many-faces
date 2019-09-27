@@ -129,8 +129,8 @@
                   <HBox styleClass="profile-buttons-box">
                      <children>
                         <HBox HBox.hgrow="ALWAYS" />
-                        <JFXButton styleClass="cancel-update-profile-button" text="Cancel" />
-                              <JFXButton styleClass="update-profile-button" text="Update profile" />
+                        <JFXButton fx:id="cancelButton" styleClass="cancel-update-profile-button" text="Cancel" />
+                              <JFXButton fx:id="updateButton" styleClass="update-profile-button" text="Update profile" />
                         <HBox layoutX="10.0" layoutY="10.0" HBox.hgrow="ALWAYS" />
                      </children>
                      <padding>
