@@ -3,8 +3,6 @@
  */
 package com.manyfaces.spi.impl;
 
-import com.github.javafaker.Company;
-import com.github.javafaker.Faker;
 import com.manyfaces.model.Group;
 import com.manyfaces.spi.GroupsRepository;
 import java.util.Optional;
@@ -29,36 +27,36 @@ public class DefaultGroupsRepository implements GroupsRepository {
     public DefaultGroupsRepository() {
         this.groups = FXCollections.observableArrayList();
         //Bogus data
-        Company company = new Faker().company();
-
-        for (int i = 1; i < 11; i++) {
-            groups.add(new Group(i, company.buzzword()));
-        }
+//        Company company = new Faker().company();
+//
+//        for (int i = 1; i < 11; i++) {
+//            groups.add(new Group(i, company.buzzword()));
+//        }
 
         groups.addListener((ListChangeListener.Change<? extends Group> change) -> {
-            LOG.log(Level.INFO, "CHANGE OCCURED: {0}", change);
+            LOG.log(Level.INFO, "Groups list change occured: {0}", change);
         });
     }
 
     @Override
-    public void add(String groupName) {
+    public Group add(String groupName) {
+        LOG.log(Level.INFO, "Adding group with name: {0}", groupName);
+        
         id += 1;
-        groups.add(new Group(id, groupName));
+        Group newGroup = new Group(id, groupName);
+        groups.add(newGroup);
+        return newGroup;
     }
 
     @Override
     public void update(Group group) {
         groups.stream()
-                .filter(g -> {
-                    int thisId = g.getIdProperty().get();
-                    int otherId = group.getIdProperty().get();
-                    return thisId == otherId;
-                })
+                .filter(g -> g.getId() == group.getId())
                 .findFirst()
                 .ifPresent(g -> {
-                    int thisId = g.getIdProperty().get();
+                    int thisId = g.getId();
                     int thisIdx = groups.indexOf(g);
-                    String otherName = group.getGroupNameProperty().get();
+                    String otherName = group.getName();
 
                     if (groups.remove(g)) {
                         groups.add(thisIdx, new Group(thisId, otherName));
@@ -69,18 +67,11 @@ public class DefaultGroupsRepository implements GroupsRepository {
     @Override
     public void updateWithPosition(int index, Group group) {
         groups.stream()
-                .filter(g -> {
-                    int thisId = g.getIdProperty().get();
-                    int otherId = group.getIdProperty().get();
-                    return thisId == otherId;
-                })
+                .filter(g -> g.getId() == group.getId())
                 .findFirst()
                 .ifPresent(g -> {
-                    int thisId = g.getIdProperty().get();
-                    String otherName = group.getGroupNameProperty().get();
-
                     if (groups.remove(g)) {
-                        groups.add(index, new Group(thisId, otherName));
+                        groups.add(index, new Group(g.getId(), group.getName()));
                     }
                 });
     }
@@ -88,7 +79,16 @@ public class DefaultGroupsRepository implements GroupsRepository {
     @Override
     public Optional<Group> findbyId(int id) {
         return groups.stream()
-                .filter(group -> group.getIdProperty().get() == id)
+                .filter(g -> g.getId() == id)
+                .findFirst();
+    }
+
+    @Override
+    public Optional<Group> findByName(String name) {
+        return groups.stream()
+                .filter(group -> name == null 
+                                 ? group.getName() == null 
+                                 : group.getName().equals(name))
                 .findFirst();
     }
 
