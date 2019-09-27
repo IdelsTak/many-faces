@@ -13,13 +13,15 @@ import javafx.collections.ObservableList;
  */
 public interface GroupsRepository {
 
-    void add(String groupName);
+    Group add(String groupName);
 
     void update(Group group);
 
     void updateWithPosition(int index, Group group);
 
     Optional<Group> findbyId(int id);
+
+    Optional<Group> findByName(String name);
 
     ObservableList<Group> findAll();
 
