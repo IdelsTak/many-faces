@@ -90,22 +90,21 @@ public class GroupListController {
         accordion.getPanes().clear();
         groups.forEach(group -> {
             accordion.getPanes()
-                    .add(getGroupRow(group.getGroupNameProperty()
-                            .get()));
+                    .add(getGroupRow(group));
         });
     }
 
-    private TitledPane getGroupRow(String groupName) {
+    private TitledPane getGroupRow(Group group) {
         URL location = getClass().getResource("/views/GroupListRow.fxml");
         FXMLLoader loader = new FXMLLoader(location);
         TitledPane titledPane = null;
 
         try {
             titledPane = loader.load();
-            titledPane.setId(groupName);
+            titledPane.setId(group.getName());
             GroupListRowController controller = loader.getController();
 
-            controller.setGroupName(groupName);
+            controller.setGroup(group);
         } catch (IOException ex) {
             LOG.log(Level.SEVERE, null, ex);
         }
