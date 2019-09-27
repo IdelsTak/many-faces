@@ -8,12 +8,14 @@ import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXListView;
 import com.manyfaces.model.Group;
 import com.manyfaces.spi.GroupsRepository;
+import com.manyfaces.spi.Registry;
 import com.manyfaces.spi.RootComponent;
 import com.manyfaces.ui.BrowserProfileList;
 import com.manyfaces.ui.Help;
 import com.manyfaces.ui.MyAccountPreferences;
 import com.manyfaces.ui.Plugins;
 import com.manyfaces.ui.ProfileEditHome;
+import com.manyfaces.ui.ProfileEditHome.EditType;
 import java.io.IOException;
 import java.net.URL;
 import java.util.logging.Level;
@@ -82,10 +84,13 @@ public class HomeMenuController {
             contentPane.getChildren().setAll(new MyAccountPreferences().getPane());
         });
         newProfileToggle.setOnAction(e -> {
+            Registry registry = Lookup.getDefault().lookup(Registry.class);
+            registry.clear();
+            
             homeToggle.setSelected(true);
             homeToggle.fireEvent(new ActionEvent(null, null));
             RootComponent component = LOOKUP.lookup(RootComponent.class);
-            ProfileEditHome edit = new ProfileEditHome("New browser profile");
+            ProfileEditHome edit = new ProfileEditHome(EditType.CREATE);
             component.setContent(edit.getPane());
         });
         homeToggle.setOnAction(e -> {
