@@ -5,11 +5,14 @@ package com.manyfaces.ui.controllers;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPopup;
+import com.manyfaces.model.Profile;
 import com.manyfaces.spi.RootComponent;
 import com.manyfaces.ui.ProfileEditHome;
+import com.manyfaces.ui.ProfileEditHome.EditType;
 import java.util.logging.Logger;
 import javafx.fxml.FXML;
 import org.openide.util.Lookup;
+import com.manyfaces.spi.Registry;
 
 /**
  FXML Controller class
@@ -38,12 +41,17 @@ public class ProfileActionsPopupController {
     public void initialize() {
     }
 
-    void setPopup(JFXPopup popup) {
+    void setProfilePopup(Profile profile, JFXPopup popup) {
         editButton.setOnAction(e -> {
+            //Announce that the profile that was passed 
+            //to this method is the one that all clients
+            //should be keen on from now on
+            LOOKUP.lookup(Registry.class).setAll(profile);
+            
             popup.hide();
-            RootComponent component = LOOKUP.lookup(RootComponent.class);
-            ProfileEditHome edit = new ProfileEditHome("Edit browser profile");
-            component.setContent(edit.getPane());
+            
+            RootComponent rc = LOOKUP.lookup(RootComponent.class);
+            rc.setContent(new ProfileEditHome(EditType.EDIT).getPane());
         });
     }
 
