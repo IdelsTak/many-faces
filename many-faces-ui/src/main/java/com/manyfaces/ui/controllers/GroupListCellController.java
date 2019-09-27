@@ -71,9 +71,8 @@ public class GroupListCellController {
         noButton.setOnAction(e -> editGroupNamePane.setVisible(false));
         yesButton.setOnAction(e -> {
             Group group = groupProperty.getValue();
-            String newName = editGroupNameField.getText();
-            group.getGroupNameProperty().set(newName);
-            updateDisplayedNames(newName);
+            group.setName(editGroupNameField.getText());
+            updateDisplayedNames(editGroupNameField.getText());
             editGroupNamePane.setVisible(false);
 
             LOOKUP.lookup(GroupsRepository.class).update(groupProperty.get());
@@ -82,7 +81,7 @@ public class GroupListCellController {
         editGroupNamePane.visibleProperty().addListener((o, ov, nv) -> {
             if (nv) {
                 Group group = groupProperty.getValue();
-                editGroupNameField.setText(group.getGroupNameProperty().get());
+                editGroupNameField.setText(group.getName());
                 Platform.runLater(editGroupNameField::requestFocus);
             }
         });
@@ -96,7 +95,7 @@ public class GroupListCellController {
         dontDeleteButton.setOnAction(e -> confirmDeleteBox.setVisible(false));
 
         groupProperty.addListener((o, ov, nv) -> {
-            updateDisplayedNames(nv.getGroupNameProperty().get());
+            updateDisplayedNames(nv.getName());
         });
     }
 
