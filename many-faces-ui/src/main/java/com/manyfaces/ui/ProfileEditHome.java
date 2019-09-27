@@ -7,8 +7,10 @@ import com.manyfaces.ui.controllers.ProfileAttributeController;
 import com.manyfaces.ui.controllers.ProfileMenuController;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -25,14 +27,28 @@ public class ProfileEditHome extends HBox {
     private Pane profileContentPane;
     private final String menuTitle;
     private ProfileAttributeController attributeController;
+    private final EditType editType;
 
     static {
         LOG = Logger.getLogger(ProfileEditHome.class.getName());
     }
 
-    public ProfileEditHome(String menuTitle) {
+    public ProfileEditHome(EditType editType) {
         super();
-        this.menuTitle = menuTitle;
+
+        String message = "Edit type should not be null";
+        this.editType = Objects.requireNonNull(editType, message);
+
+        switch (this.editType) {
+            case CREATE:
+                this.menuTitle = "New browser profile";
+                break;
+            case EDIT:
+                this.menuTitle = "Edit browser profile";
+                break;
+            default:
+                throw new IllegalArgumentException("Edit type not known");
+        }
     }
 
     public Pane getPane() {
@@ -52,11 +68,10 @@ public class ProfileEditHome extends HBox {
             profileNavigationPane = loader.load();
             ProfileMenuController menuController = loader.getController();
             menuController.setMenuTitle(menuTitle);
-            
+
             //Ensure the controller is initialized
             getProfileContentPane();
             menuController.setProfileAttributeController(attributeController);
-            
         }
         return profileNavigationPane;
     }
@@ -67,8 +82,14 @@ public class ProfileEditHome extends HBox {
             FXMLLoader loader = new FXMLLoader(location);
             profileContentPane = loader.load();
             attributeController = loader.getController();
+
+            Platform.runLater(() -> attributeController.setEditType(editType));
         }
         return profileContentPane;
+    }
+
+    public enum EditType {
+        CREATE, EDIT
     }
 
 }
