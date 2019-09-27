@@ -7,8 +7,14 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXPopup;
 import com.jfoenix.controls.JFXToggleNode;
+import com.manyfaces.model.Profile;
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
+import java.util.Objects;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -37,6 +43,8 @@ public class ProfilePaneController {
     @FXML
     private Label profileNameLabel;
     @FXML
+    private Label lastEditedLabel;
+    @FXML
     private JFXToggleNode expandPaneToggle;
     @FXML
     private JFXButton menuButton;
@@ -64,24 +72,40 @@ public class ProfilePaneController {
         expandPaneToggle.selectedProperty().addListener((ob, ov, nv) -> {
             titledPane.setExpanded(nv);
         });
+    }
+
+    void setProfileInstance(Profile profile) {
+        String message = "Profile should not be null";
+        Profile profyl = Objects.requireNonNull(profile, message);
+        profileNameLabel.setText(profyl.getName());
+        profileIdText.setText(profyl.getId());
+        
+        LocalDateTime lastEdited = profyl.getLastEdited();
+        DateTimeFormatter formatter = DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT);
+        
+        lastEditedLabel.setText(formatter.format(lastEdited));
 
         URL location = getClass().getResource("/views/ProfileActionsPopup.fxml");
         FXMLLoader loader = new FXMLLoader(location);
-        Pane actionsPane = loader.load();
-        popup = new JFXPopup(actionsPane);
-        ProfileActionsPopupController controller = loader.getController();
+        Pane actionsPane = null;
+        
+        try {
+            actionsPane = loader.load();
+        } catch (IOException ex) {
+            LOG.log(Level.SEVERE, null, ex);
+        }
+        
+        if (actionsPane != null) {
+            popup = new JFXPopup(actionsPane);
+            ProfileActionsPopupController controller = loader.getController();
 
-        controller.setPopup(popup);
-
-        menuButton.setOnAction(e -> {
-            popup.show(menuButton,
-                    JFXPopup.PopupVPosition.TOP,
-                    JFXPopup.PopupHPosition.RIGHT);
-        });
-    }
-
-    void setTitledPaneTitle(String profileName) {
-        profileNameLabel.setText(profileName);
+            controller.setProfilePopup(profyl, popup);
+            menuButton.setOnAction(e -> {
+                popup.show(menuButton,
+                        JFXPopup.PopupVPosition.TOP,
+                        JFXPopup.PopupHPosition.RIGHT);
+            });
+        }
     }
 
     void setTitledPaneSelected(boolean selected) {
