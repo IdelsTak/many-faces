@@ -26,7 +26,7 @@
             </Label>
             <VBox fx:id="fontsBox" styleClass="fonts-list-area" />
             <Hyperlink fx:id="moreFontsHyperlink" maxWidth="1.7976931348623157E308" text="...and 151 more" />
-            <JFXButton text="Edit">
+            <JFXButton fx:id="editButton" text="Edit">
                <VBox.margin>
                   <Insets top="19.0" />
                </VBox.margin>
