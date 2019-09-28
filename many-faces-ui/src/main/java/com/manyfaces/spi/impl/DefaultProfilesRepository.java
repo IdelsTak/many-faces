@@ -37,7 +37,7 @@ public class DefaultProfilesRepository implements ProfilesRepository {
         this.profiles = FXCollections.observableSet(new HashSet<>());
 
         profiles.addListener((SetChangeListener.Change<? extends Profile> change) -> {
-            LOG.log(Level.INFO, "Profiles list change occured: {0}", change);
+            LOG.log(Level.FINE, "Profiles list change occured: {0}", change);
         });
         
         //Add bogus data
