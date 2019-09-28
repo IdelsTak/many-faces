@@ -128,6 +128,7 @@ public class ProfileMenuController {
         proxyToggle.setOnAction(e -> setContentFrom("/views/ProfileProxy.fxml"));
         timezoneToggle.setOnAction(e -> setContentFrom("/views/ProfileTimezone.fxml"));
         webRtcToggle.setOnAction(e -> setContentFrom("/views/ProfileWebRtc.fxml"));
+        browserPluginsToggle.setOnAction(e -> setContentFrom("/views/ProfileAdvancedPlugins.fxml"));
         otherToggle.setOnAction(e -> setContentFrom("/views/ProfileAdvancedOther.fxml"));
 
         overviewToggle.fireEvent(new ActionEvent(null, null));
