@@ -13,7 +13,6 @@
     -fx-pref-height: 38px;
     -fx-min-height: -fx-pref-height;
     -fx-max-height: -fx-pref-height;
-    /*-fx-border-color: #e0e2e7 transparent #e0e2e7 #e0e2e7;*/
 }
 
 .buttons-area > .altered-toggle {
