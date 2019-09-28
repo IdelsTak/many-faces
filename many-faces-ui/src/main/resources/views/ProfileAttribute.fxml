@@ -15,11 +15,11 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" styleClass="profile-attribute-root" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.manyfaces.ui.controllers.ProfileAttributeController">
+<AnchorPane id="AnchorPane" styleClass="profile-attribute-root" xmlns="http://javafx.com/javafx/8.0.202-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.manyfaces.ui.controllers.ProfileAttributeController">
     <children>
-        <VBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <children>
-            <BorderPane>
+            <BorderPane maxWidth="1.7976931348623157E308">
                 <left>
                     <Text fx:id="headerText" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="page-header-text" text="&lt;headerg text&gt;" BorderPane.alignment="CENTER" />
                 </left>
@@ -32,14 +32,17 @@
                   <String fx:value="page-header-border" />
                </styleClass>
             </BorderPane>
-                <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" pannable="true" style="-fx-border-width: 0; -fx-background-color: transparent;" vbarPolicy="ALWAYS" VBox.vgrow="ALWAYS">
+                <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" pannable="true" style="-fx-border-width: 0; -fx-background-color: transparent;" VBox.vgrow="ALWAYS">
                     <content>
                         <HBox>
                             <children>
-                                <AnchorPane fx:id="attributeContentPane" maxWidth="1.7976931348623157E308" style="-fx-background-color: white;" HBox.hgrow="ALWAYS" />
+                                <AnchorPane fx:id="attributeContentPane" style="-fx-background-color: white;" HBox.hgrow="ALWAYS" />
                                 <VBox fx:id="summaryBox" HBox.hgrow="NEVER">
                                     <children>
-                                        <Label fx:id="mainLabel" text="PROFILE SUMMARY" />
+                                        <Label fx:id="mainLabel" text="PROFILE SUMMARY">
+                                 <VBox.margin>
+                                    <Insets left="17.0" />
+                                 </VBox.margin></Label>
                                         <GridPane hgap="16.0">
                                             <columnConstraints>
                                                 <ColumnConstraints hgrow="NEVER" minWidth="10.0" />
@@ -112,7 +115,21 @@
                                                 <Label text="Flash:" GridPane.rowIndex="20" />
                                                 <Label fx:id="flashLabel" disable="true" text="&lt;flash&gt;" GridPane.columnIndex="1" GridPane.rowIndex="20" />
                                             </children>
+                                 <VBox.margin>
+                                    <Insets left="17.0" />
+                                 </VBox.margin>
                                         </GridPane>
+                              <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="profile-buttons-box" VBox.vgrow="ALWAYS">
+                                 <children>
+                                    <HBox HBox.hgrow="ALWAYS" />
+                                    <JFXButton fx:id="cancelButton" styleClass="cancel-update-profile-button" text="Cancel" />
+                                          <JFXButton fx:id="updateButton" styleClass="update-profile-button" text="Update profile" />
+                                    <HBox layoutX="10.0" layoutY="10.0" HBox.hgrow="ALWAYS" />
+                                 </children>
+                                 <padding>
+                                    <Insets bottom="22.0" top="20.0" />
+                                 </padding>
+                              </HBox>
                                     </children>
                            <styleClass>
                               <String fx:value="profile-summary-root" />
@@ -123,22 +140,6 @@
                         </HBox>
                     </content>
                 </ScrollPane>
-                <HBox style="-fx-background-color: white;">
-                    <children>
-                  <HBox prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: white;" HBox.hgrow="ALWAYS" />
-                  <HBox styleClass="profile-buttons-box">
-                     <children>
-                        <HBox HBox.hgrow="ALWAYS" />
-                        <JFXButton fx:id="cancelButton" styleClass="cancel-update-profile-button" text="Cancel" />
-                              <JFXButton fx:id="updateButton" styleClass="update-profile-button" text="Update profile" />
-                        <HBox layoutX="10.0" layoutY="10.0" HBox.hgrow="ALWAYS" />
-                     </children>
-                     <padding>
-                        <Insets top="30.0" />
-                     </padding>
-                  </HBox>
-                    </children>
-                </HBox>
             </children>
         </VBox>
     </children>
