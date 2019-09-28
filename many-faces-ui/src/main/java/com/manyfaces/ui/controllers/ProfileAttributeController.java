@@ -46,7 +46,6 @@ public class ProfileAttributeController {
      */
     @FXML
     public void initialize() {
-
     }
 
     public void setHeaderText(String text) {
@@ -57,26 +56,11 @@ public class ProfileAttributeController {
         switch (editType) {
             case CREATE:
                 updateButton.setText("Create profile");
-                updateButton.setOnAction(e -> {
-                    LOOKUP.lookup(Registry.class)
-                            .getLookup()
-                            .lookupAll(String.class)
-                            .stream()
-                            .findFirst()
-                            .ifPresent(name -> {
-                                LOOKUP.lookup(ProfilesRepository.class).add(name);
-                            });
-                });
+                updateButton.setOnAction(e -> createProfile());
                 break;
             case EDIT:
                 updateButton.setText("Update profile");
-                updateButton.setOnAction(e -> {
-                    Registry gl = LOOKUP.lookup(Registry.class);
-                    Collection<? extends Profile> profiles = gl.getLookup().lookupAll(Profile.class);
-
-                    LOG.log(Level.INFO, "Found {0} profiles. Value(s): {1}",
-                            new Object[]{profiles.size(), profiles});
-                });
+                updateButton.setOnAction(e -> updateProfile());
                 break;
             default:
                 throw new IllegalArgumentException("Edit type not known");
@@ -87,8 +71,34 @@ public class ProfileAttributeController {
         String message = "Content node should not be null";
         Node kontent = Objects.requireNonNull(content, message);
 
-        Platform.runLater(() -> attributeContentPane.getChildren()
-                .setAll(kontent));
+        Platform.runLater(() -> {
+            attributeContentPane.getChildren().setAll(kontent);
+            //Ensure the content resizes with the
+            //parent anchorpane
+            AnchorPane.setTopAnchor(kontent, 0.0);
+            AnchorPane.setRightAnchor(kontent, 0.0);
+            AnchorPane.setBottomAnchor(kontent, 0.0);
+            AnchorPane.setLeftAnchor(kontent, 0.0);
+        });
+    }
+
+    private void updateProfile() {
+        Registry gl = LOOKUP.lookup(Registry.class);
+        Collection<? extends Profile> profiles = gl.getLookup().lookupAll(Profile.class);
+
+        LOG.log(Level.INFO, "Found {0} profiles. Value(s): {1}",
+                new Object[]{profiles.size(), profiles});
+    }
+
+    private void createProfile() {
+        LOOKUP.lookup(Registry.class)
+                .getLookup()
+                .lookupAll(String.class)
+                .stream()
+                .findFirst()
+                .ifPresent(name -> {
+                    LOOKUP.lookup(ProfilesRepository.class).add(name);
+                });
     }
 
 }
