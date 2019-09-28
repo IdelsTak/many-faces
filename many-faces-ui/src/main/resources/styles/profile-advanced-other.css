@@ -13,7 +13,6 @@
     -fx-pref-height: 20px;
     -fx-min-height: -fx-pref-height;
     -fx-max-height: -fx-pref-height;
-    -fx-alignment: top-left;
 }
 
 .custom-dns-title,
@@ -22,11 +21,7 @@
 .google-services-subtitle {
     -fx-alignment: top-left;
     -fx-font-size: 12px;
-}
-
-.active-session-subtitle,
-.custom-dns-subtitle,
-.google-services-subtitle {
+    -fx-line-spacing: 2;
 }
 
 .active-session-subtitle {
