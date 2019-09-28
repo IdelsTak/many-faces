@@ -8,7 +8,7 @@
 }
 
 .summary-box {
-    -fx-padding: 26 0 0 17;
+    -fx-padding: 26 0 0 0;
     -fx-spacing: 16px;
     -fx-border-color: transparent transparent transparent #e0e2e7;
 }
