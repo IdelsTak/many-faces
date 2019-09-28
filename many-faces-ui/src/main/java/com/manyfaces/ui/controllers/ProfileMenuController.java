@@ -128,6 +128,7 @@ public class ProfileMenuController {
         proxyToggle.setOnAction(e -> setContentFrom("/views/ProfileProxy.fxml"));
         timezoneToggle.setOnAction(e -> setContentFrom("/views/ProfileTimezone.fxml"));
         webRtcToggle.setOnAction(e -> setContentFrom("/views/ProfileWebRtc.fxml"));
+        fontsToggle.setOnAction(e -> setContentFrom("/views/ProfileAdvancedFonts.fxml"));
         devicesToggle.setOnAction(e -> setContentFrom("/views/ProfileAdvancedDevices.fxml"));
         extensionsToggle.setOnAction(e -> setContentFrom("/views/ProfileAdvancedExtensions.fxml"));
         storageToggle.setOnAction(e -> setContentFrom("/views/ProfileAdvancedStorage.fxml"));
