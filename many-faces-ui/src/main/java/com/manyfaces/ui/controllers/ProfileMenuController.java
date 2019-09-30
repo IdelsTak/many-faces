@@ -131,6 +131,7 @@ public class ProfileMenuController {
         navigatorToggle.setOnAction(e -> setContentFrom("/views/ProfileAdvancedNavigator.fxml"));
         fontsToggle.setOnAction(e -> setContentFrom("/views/ProfileAdvancedFonts.fxml"));
         devicesToggle.setOnAction(e -> setContentFrom("/views/ProfileAdvancedDevices.fxml"));
+        hardwareToggle.setOnAction(e -> setContentFrom("/views/ProfileAdvancedHardware.fxml"));
         extensionsToggle.setOnAction(e -> setContentFrom("/views/ProfileAdvancedExtensions.fxml"));
         storageToggle.setOnAction(e -> setContentFrom("/views/ProfileAdvancedStorage.fxml"));
         browserPluginsToggle.setOnAction(e -> setContentFrom("/views/ProfileAdvancedPlugins.fxml"));
