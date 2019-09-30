@@ -20,7 +20,7 @@ import org.openide.util.Lookup;
 import org.openide.util.lookup.ServiceProvider;
 
 @ServiceProvider(service = ProfilesRepository.class)
-public class DefaultProfilesRepository implements ProfilesRepository {
+public final class DefaultProfilesRepository implements ProfilesRepository {
 
     private static final Logger LOG;
     private static final Lookup LOOKUP = Lookup.getDefault();
