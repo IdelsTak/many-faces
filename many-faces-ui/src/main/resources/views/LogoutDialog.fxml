@@ -10,7 +10,7 @@
 <?import javafx.scene.text.Text?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 
-<AnchorPane id="AnchorPane" styleClass="logout-dialog-root" xmlns="http://javafx.com/javafx/8.0.202-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.manyfaces.ui.controllers.LogoutDialogController">
+<AnchorPane id="AnchorPane" styleClass="logout-dialog-root" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.manyfaces.ui.controllers.LogoutDialogController">
    <stylesheets>
       <URL value="@../styles/roboto-regular.css" />
       <URL value="@../styles/roboto-bold.css" />
@@ -49,7 +49,7 @@
             <HBox fx:id="buttonsBox" spacing="10.0" styleClass="buttons-area">
                <children>
                   <HBox prefHeight="44.0" HBox.hgrow="ALWAYS" />
-                  <JFXButton fx:id="yesButton" defaultButton="true" text="Save" />
+                  <JFXButton fx:id="yesButton" defaultButton="true" text="Yes" />
                   <JFXButton fx:id="cancelButton" cancelButton="true" text="Cancel" />
                   <HBox layoutX="213.0" layoutY="26.0" prefHeight="44.0" HBox.hgrow="ALWAYS" />
                </children>

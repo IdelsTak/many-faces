@@ -1,24 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXTextField?>
+<?import com.jfoenix.controls.JFXToggleButton?>
+<?import java.lang.String?>
 <?import java.net.URL?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
-<?import org.kordamp.ikonli.javafx.FontIcon?>
 
-<AnchorPane id="AnchorPane" styleClass="profile-webrtc-root" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="com.manyfaces.ui.controllers.ProfileWebRtcController">
+<AnchorPane id="AnchorPane" styleClass="profile-webrtc-root" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.manyfaces.ui.controllers.ProfileWebRtcController">
    <stylesheets>
       <URL value="@../styles/roboto-regular.css" />
       <URL value="@../styles/roboto-bold.css" />
       <URL value="@../styles/profile-webrtc.css" />
    </stylesheets>
    <children>
-      <VBox styleClass="profile-webrtc-content" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="35.0" AnchorPane.rightAnchor="33.0" AnchorPane.topAnchor="21.0">
+      <VBox styleClass="profile-webrtc-content" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="35.0" AnchorPane.rightAnchor="36.0" AnchorPane.topAnchor="18.0">
          <children>
             <Label text="Behavior:" />
             <HBox fx:id="buttonsBox" styleClass="buttons-area">
@@ -32,42 +35,87 @@
                   <RadioButton fx:id="realToggle" layoutX="261.0" layoutY="10.0" maxHeight="1.7976931348623157E308" mnemonicParsing="false" styleClass="real-toggle" text="Real" toggleGroup="$behaviorGroup" />
                   <HBox maxHeight="1.7976931348623157E308" HBox.hgrow="ALWAYS" />
                </children>
+               <VBox.margin>
+                  <Insets top="7.0" />
+               </VBox.margin>
             </HBox>
-            <StackPane fx:id="alertAreaBox">
+            <BorderPane fx:id="behaviorAlertPane">
+               <VBox.margin>
+                  <Insets bottom="23.0" top="9.0" />
+               </VBox.margin>
+            </BorderPane>
+            <VBox fx:id="ipSettingsBox">
                <children>
-                  <HBox fx:id="realAlert" styleClass="real-alert-box" visible="false" StackPane.alignment="TOP_CENTER">
+                  <VBox fx:id="publicIPBox" styleClass="public-ip-box">
                      <children>
-                        <HBox styleClass="icon-box">
-                           <children>
-                              <FontIcon>
-                                 <HBox.margin>
-                                    <Insets bottom="24.0" left="12.0" right="11.0" top="32.0" />
-                                 </HBox.margin>
-                              </FontIcon>
-                           </children>
-                        </HBox>
-                        <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="WebRTC plugin will be turned on and will leak your real IP. This mode is only recommended if you don't use proxies in your connection." wrapText="true" />
+                        <Label styleClass="header-label" text="Public IP">
+                           <VBox.margin>
+                              <Insets top="33.0" />
+                           </VBox.margin>
+                        </Label>
+                        <JFXToggleButton fx:id="fillIPToggle" text="Fill WebRTC Public IP based on the IP.">
+                           <VBox.margin>
+                              <Insets top="9.0" />
+                           </VBox.margin>
+                        </JFXToggleButton>
+                        <Label maxWidth="1.7976931348623157E308" text="Fill WebRTC Public IP on browser profile start based on the external IP." wrapText="true">
+                           <styleClass>
+                              <String fx:value="field-header-label" />
+                              <String fx:value="public-ip-header-label" />
+                           </styleClass>
+                           <VBox.margin>
+                              <Insets top="9.0" />
+                           </VBox.margin>
+                        </Label>
+                        <JFXTextField fx:id="fillIPField">
+                           <VBox.margin>
+                              <Insets bottom="48.0" />
+                           </VBox.margin>
+                        </JFXTextField>
                      </children>
-                  </HBox>
-                  <HBox fx:id="disabledAlert" layoutX="10.0" layoutY="18.0" styleClass="disabled-alert-box" StackPane.alignment="TOP_CENTER">
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                  </VBox>
+                  <VBox fx:id="localIpsBox">
                      <children>
-                        <HBox maxHeight="1.7976931348623157E308" styleClass="icon-box">
-                           <children>
-                              <FontIcon>
-                                 <HBox.margin>
-                                    <Insets left="10.0" right="10.0" top="21.0" />
-                                 </HBox.margin>
-                              </FontIcon>
-                           </children>
-                        </HBox>
-                        <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="WebRTC plugin will be turned off completely. Websites will see that you are turned off." wrapText="true" />
+                        <Label fx:id="headerLabel" styleClass="header-label" text="Local IP(s)">
+                           <VBox.margin>
+                              <Insets bottom="9.0" top="33.0" />
+                           </VBox.margin>
+                        </Label>
+                        <JFXToggleButton fx:id="enableMaskingToggle" alignment="CENTER_LEFT" maxWidth="1.7976931348623157E308" text="Enable Local IP masking">
+                           <VBox.margin>
+                              <Insets bottom="9.0" />
+                           </VBox.margin>
+                        </JFXToggleButton>
                      </children>
-                  </HBox>
+                  </VBox>
+                  <VBox fx:id="otherIpsBox">
+                     <children>
+                        <VBox styleClass="ip-details-box">
+                           <children>
+                              <Label styleClass="field-header-label" text="Local IP 1">
+                                 <VBox.margin>
+                                    <Insets bottom="6.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <JFXTextField fx:id="ip1Field" />
+                           </children>
+                           <VBox.margin>
+                              <Insets bottom="39.0" />
+                           </VBox.margin>
+                        </VBox>
+                        <VBox fx:id="extraIpsBox" styleClass="ip-details-box" />
+                        <VBox fx:id="hyperlinkBox" maxWidth="1.7976931348623157E308">
+                           <children>
+                              <Hyperlink fx:id="addIpHyperlink" maxHeight="1.7976931348623157E308" text="Add new local IP" />
+                           </children>
+                        </VBox>
+                     </children>
+                  </VBox>
                </children>
-               <padding>
-                  <Insets top="8.0" />
-               </padding>
-            </StackPane>
+            </VBox>
          </children>
       </VBox>
    </children>
