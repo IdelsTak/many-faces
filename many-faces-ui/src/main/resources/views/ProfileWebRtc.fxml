@@ -106,7 +106,7 @@
                               <Insets bottom="39.0" />
                            </VBox.margin>
                         </VBox>
-                        <VBox fx:id="extraIpsBox" styleClass="ip-details-box" />
+                        <VBox fx:id="extraIpsBox" />
                         <VBox fx:id="hyperlinkBox" maxWidth="1.7976931348623157E308">
                            <children>
                               <Hyperlink fx:id="addIpHyperlink" maxHeight="1.7976931348623157E308" text="Add new local IP" />
