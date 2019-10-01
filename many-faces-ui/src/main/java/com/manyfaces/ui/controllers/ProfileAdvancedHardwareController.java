@@ -85,7 +85,7 @@ public class ProfileAdvancedHardwareController {
                         + "browser profile on different hardware the resulting "
                         + "canvas fingerprint may differ. This option is most "
                         + "popular for web scraping.", Style.INFO);
-                alertPane.setMinHeight(105.0);
+                alertPane.setMinHeight(115.0);
                 canvasAlertPane.setCenter(alertPane);
             }
         });
