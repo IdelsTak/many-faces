@@ -9,6 +9,7 @@ import com.manyfaces.model.Timezone;
 import com.manyfaces.model.Timezones;
 import java.util.Collection;
 import java.util.logging.Logger;
+import javafx.beans.binding.BooleanBinding;
 import javafx.beans.property.BooleanProperty;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -41,8 +42,8 @@ public class ProfileTimezoneController {
     @FXML
     public void initialize() {
         BooleanProperty displayTimezoneBox = timezonePickerBox.visibleProperty();
-        BooleanProperty timezoneToggleSelected = fillTimezoneToggle.selectedProperty();
-        displayTimezoneBox.bind(timezoneToggleSelected);
+        BooleanBinding timezoneToggleNotSelected = fillTimezoneToggle.selectedProperty().not();
+        displayTimezoneBox.bind(timezoneToggleNotSelected);
 
         Collection<Timezone> timezones = new Timezones().getTimezones(true);
         timezonesComboBox.getItems().setAll(timezones);
