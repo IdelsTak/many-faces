@@ -81,8 +81,7 @@ public class ProfileWebRtcController {
         fillIPField.setText(net.publicIpV4Address());
         
         alteredToggle.setOnAction(e -> {
-            boolean selected = alteredToggle.isSelected();
-            if (selected) {
+            if (alteredToggle.isSelected()) {
                 Pane alertPane = getAlertPane("WebRTC plugin will be turned on and "
                         + "will falsely leak your actual external IP as a Public IP "
                         + "address. A valid Local IP will also be falsely leaked "
