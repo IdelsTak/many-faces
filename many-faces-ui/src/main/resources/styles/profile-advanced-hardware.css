@@ -11,6 +11,9 @@
 
 .field-header-label {
     -fx-font-size: 12px;
+    -fx-pref-height: 21px;
+    -fx-min-height: -fx-pref-height;
+    -fx-alignment: top-left;
 }
 
 .buttons-area {
@@ -66,42 +69,34 @@
     -fx-background-color: transparent;
 }
 
-/*.alert-box {
-    -fx-background-color: #dff0d8;
-    -fx-padding: 15px;
+.audio-context-box {
+    -fx-border-color: #e0e0e0 transparent #e0e0e0 transparent;
 }
 
-.warning-box > .label,
-.alert-box > .label {
-    -fx-font-size: 12px;
-    -fx-line-spacing: 2px;
+.jfx-text-field {
+    -fx-border-color: #949494;
+    -fx-pref-width: 335px;
+    -fx-max-width: -fx-pref-width;
+    -fx-font-size: 14px;
+    -fx-padding: 1.7 0 4.7 0;
 }
 
-.alert-box > .label {
-    -fx-text-fill: #487f48;
+.jfx-text-field > .input-line {
+    -fx-pref-height: 0px;
+    -fx-max-height: 0px;
 }
 
-.warning-box > .icon-label,
-.alert-box > .icon-label {
-    -fx-padding: 0 15 0 0;
+.jfx-text-field > .input-focused-line {
+    -fx-pref-height: 0px;
+    -fx-max-height: 0px;
 }
 
-.warning-box > .icon-label > .ikonli-font-icon,
-.alert-box > .icon-label > .ikonli-font-icon {
-    -fx-icon-size: 18px;
+.jfx-text-field:focused {
+    -fx-border-color: #174bc9;
 }
 
-.alert-box > .icon-label > .ikonli-font-icon {
-    -fx-icon-color: #487f48;
-    -fx-icon-code: mdi-check;
+.hyperlink {
+    -fx-text-fill: #315fcf;
+    -fx-padding: 0;
+    -fx-focus-traversable: false;
 }
-
-.warning-box > .icon-label > .ikonli-font-icon {
-    -fx-icon-color: #ff9300;
-    -fx-icon-code: mdi-alert;
-}
-
-.warning-box {
-    -fx-background-color: #fff6ea;
-    -fx-padding: 15px;
-}*/
