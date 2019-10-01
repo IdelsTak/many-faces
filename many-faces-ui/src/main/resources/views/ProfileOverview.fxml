@@ -32,12 +32,12 @@
             <Label layoutX="10.0" layoutY="10.0" styleClass="attribute-title-label" text="Operating system:" />
             <HBox>
                <children>
-                  <Label maxHeight="1.7976931348623157E308" styleClass="os-label" text="Windows">
+                  <Label fx:id="osLabel" maxHeight="1.7976931348623157E308" styleClass="os-label" text="Windows">
                      <padding>
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                      </padding>
                   </Label>
-                  <Hyperlink maxHeight="1.7976931348623157E308" text="Edit" />
+                  <Hyperlink fx:id="editOsHyperlink" maxHeight="1.7976931348623157E308" text="Edit" />
                </children>
                <VBox.margin>
                   <Insets bottom="12.0" />
