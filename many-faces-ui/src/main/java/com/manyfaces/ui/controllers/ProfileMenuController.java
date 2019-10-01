@@ -155,6 +155,11 @@ public class ProfileMenuController {
         webRtcToggle.setSelected(true);
         setContentFrom("/views/ProfileWebRtc.fxml");
     }
+    
+    void showGeolocationContent() {
+        geoLocationToggle.setSelected(true);
+        setContentFrom("/views/ProfileGeolocation.fxml");
+    }
 
     private void setContentFrom(String path) {
         URL location = getClass().getResource(path);
