@@ -25,6 +25,7 @@ public class ProfileOverviewController
         implements ProfileMenuController.ProfileMenuChildController {
 
     private static final Logger LOG;
+    private static final Lookup LOOKUP = Lookup.getDefault();
     @FXML
     private AnchorPane overviewPane;
     @FXML
@@ -64,7 +65,6 @@ public class ProfileOverviewController
             }
         });
     }
-    private static final Lookup LOOKUP = Lookup.getDefault();
 
     @Override
     public void setProfileMenuController(ProfileMenuController controller) {
@@ -74,6 +74,7 @@ public class ProfileOverviewController
         editProxyButton.setOnAction(e -> pmc.showProxyContent());
         timezoneHyperlink.setOnAction(e -> pmc.showTimezoneContent());
         webRtcHyperlink.setOnAction(e -> pmc.showWebRtcContent());
+        geolocationHyperlink.setOnAction(e -> pmc.showGeolocationContent());
     }
 
 }
