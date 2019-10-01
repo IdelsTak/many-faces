@@ -16,7 +16,7 @@
       <URL value="@../styles/profile-advanced-navigator.css" />
    </stylesheets>
    <children>
-      <VBox styleClass="advanced-navigator-content" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="35.0" AnchorPane.rightAnchor="71.0" AnchorPane.topAnchor="18.0">
+      <VBox styleClass="advanced-navigator-content" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="35.0" AnchorPane.rightAnchor="36.0" AnchorPane.topAnchor="18.0">
          <children>
             <Label styleClass="field-header-label" text="User-Agent:" />
             <JFXTextField>
