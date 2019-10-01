@@ -4,16 +4,23 @@
 package com.manyfaces.ui.controllers;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXTextField;
 import com.manyfaces.model.Profile;
 import com.manyfaces.spi.Registry;
+import com.manyfaces.spi.RootComponent;
+import java.io.IOException;
+import java.net.URL;
 import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Hyperlink;
+import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import org.openide.util.Lookup;
 
 /**
@@ -38,6 +45,11 @@ public class ProfileOverviewController
     private Hyperlink geolocationHyperlink;
     @FXML
     private JFXTextField profileNameField;
+    @FXML
+    private Hyperlink editOsHyperlink;
+    @FXML
+    private Label osLabel;
+
 
     static {
         LOG = Logger.getLogger(ProfileOverviewController.class.getName());
@@ -64,6 +76,8 @@ public class ProfileOverviewController
                 LOOKUP.lookup(Registry.class).setAll(nv);
             }
         });
+
+        editOsHyperlink.setOnAction(e -> showChooseOSDialog());
     }
 
     @Override
@@ -75,6 +89,28 @@ public class ProfileOverviewController
         timezoneHyperlink.setOnAction(e -> pmc.showTimezoneContent());
         webRtcHyperlink.setOnAction(e -> pmc.showWebRtcContent());
         geolocationHyperlink.setOnAction(e -> pmc.showGeolocationContent());
+    }
+
+    private void showChooseOSDialog() {
+        URL location = getClass().getResource("/views/ChooseOSDialog.fxml");
+        FXMLLoader loader = new FXMLLoader(location);
+        Pane pane = null;
+        ChooseOSDialogController controller = null;
+
+        try {
+            pane = loader.load();
+            controller = loader.getController();
+        } catch (IOException ex) {
+            LOG.log(Level.SEVERE, null, ex);
+        }
+
+        if (pane != null && controller != null) {
+            JFXDialog dialog = new JFXDialog();
+            dialog.setContent(pane);
+            controller.setDialog(dialog);
+            controller.setOSLabel(osLabel);
+            dialog.show(LOOKUP.lookup(RootComponent.class).getRoot());
+        }
     }
 
 }
