@@ -19,7 +19,7 @@
 }
 
 .warning-box > .label {
-    -fx-text-fill: black;
+    -fx-text-fill: #303542;
 }
 
 .warning-box > .icon-label,

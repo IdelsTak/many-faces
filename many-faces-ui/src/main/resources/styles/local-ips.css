@@ -21,6 +21,11 @@
     -fx-max-height: -fx-pref-width;
     -fx-padding: 0 1 0 0;
     -fx-background-radius: 12px;
+    -fx-cursor: hand;
+}
+
+.delete-button .jfx-rippler {
+    -jfx-rippler-fill: white;
 }
 
 .delete-button .ikonli-font-icon {
