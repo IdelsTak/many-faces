@@ -63,7 +63,7 @@
                   <HBox fx:id="paidStatusBox" prefHeight="100.0" prefWidth="200.0" styleClass="paid-status-box">
                      <children>
                         <Label text="Free" />
-                        <Hyperlink text="Upgrade" />
+                        <Hyperlink focusTraversable="false" text="Upgrade" />
                      </children>
                   </HBox>
                   <HBox fx:id="profilesInUseNumberBox" prefHeight="100.0" prefWidth="200.0" styleClass="profiles-number-box">
