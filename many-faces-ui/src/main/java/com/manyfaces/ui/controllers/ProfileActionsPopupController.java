@@ -6,13 +6,13 @@ package com.manyfaces.ui.controllers;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPopup;
 import com.manyfaces.model.Profile;
+import com.manyfaces.spi.Registry;
 import com.manyfaces.spi.RootComponent;
 import com.manyfaces.ui.ProfileEditHome;
 import com.manyfaces.ui.ProfileEditHome.EditType;
 import java.util.logging.Logger;
 import javafx.fxml.FXML;
 import org.openide.util.Lookup;
-import com.manyfaces.spi.Registry;
 
 /**
  FXML Controller class
@@ -50,8 +50,8 @@ public class ProfileActionsPopupController {
             
             popup.hide();
             
-            RootComponent rc = LOOKUP.lookup(RootComponent.class);
-            rc.setContent(new ProfileEditHome(EditType.EDIT).getPane());
+            LOOKUP.lookup(RootComponent.class)
+                    .setContent(new ProfileEditHome(EditType.EDIT).getPane());
         });
     }
 
