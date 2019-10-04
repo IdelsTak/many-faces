@@ -17,8 +17,9 @@ import javafx.beans.property.SimpleStringProperty;
 public class Profile {
 
     private static final Internet FAKE_INTERNET = new Faker().internet();
-    private final SimpleStringProperty profileIdProperty;
-    private final SimpleStringProperty profileNameProperty;
+    private final SimpleStringProperty idProperty;
+    private final SimpleStringProperty nameProperty;
+    private final SimpleStringProperty osProperty;
     private final SimpleStringProperty notesProperty;
     private final SimpleObjectProperty<Group> groupProperty;
     private final SimpleObjectProperty<LocalDateTime> lastEditedProperty;
@@ -40,19 +41,24 @@ public class Profile {
             String notes,
             Group group,
             LocalDateTime lastEdited) {
-        this.profileIdProperty = new SimpleStringProperty(id);
-        this.profileNameProperty = new SimpleStringProperty(name);
+        this.idProperty = new SimpleStringProperty(id);
+        this.nameProperty = new SimpleStringProperty(name);
         this.notesProperty = new SimpleStringProperty(notes);
+        this.osProperty = new SimpleStringProperty("");
         this.groupProperty = new SimpleObjectProperty<>(group);
         this.lastEditedProperty = new SimpleObjectProperty<>(lastEdited);
     }
 
-    public SimpleStringProperty profileIdProperty() {
-        return profileIdProperty;
+    public SimpleStringProperty idProperty() {
+        return idProperty;
     }
 
-    public SimpleStringProperty profileNameProperty() {
-        return profileNameProperty;
+    public SimpleStringProperty nameProperty() {
+        return nameProperty;
+    }
+
+    public SimpleStringProperty osProperty() {
+        return osProperty;
     }
 
     public SimpleStringProperty notesProperty() {
@@ -68,11 +74,19 @@ public class Profile {
     }
 
     public String getId() {
-        return profileIdProperty.get();
+        return idProperty.get();
     }
 
     public String getName() {
-        return profileNameProperty.get();
+        return nameProperty.get();
+    }
+
+    public String getOs() {
+        return osProperty.get();
+    }
+
+    public void setOs(String os) {
+        osProperty.set(os);
     }
 
     public String getNotes() {
@@ -88,11 +102,11 @@ public class Profile {
     }
 
     public void setProfileId(String profileId) {
-        profileIdProperty.set(profileId);
+        idProperty.set(profileId);
     }
 
     public void setProfileName(String profileName) {
-        profileNameProperty.set(profileName);
+        nameProperty.set(profileName);
     }
 
     public void setNotes(String notes) {
