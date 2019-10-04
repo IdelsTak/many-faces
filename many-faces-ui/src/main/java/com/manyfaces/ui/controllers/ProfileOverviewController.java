@@ -14,7 +14,6 @@ import java.net.URL;
 import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Hyperlink;
@@ -50,7 +49,6 @@ public class ProfileOverviewController
     @FXML
     private Label osLabel;
 
-
     static {
         LOG = Logger.getLogger(ProfileOverviewController.class.getName());
     }
@@ -65,17 +63,12 @@ public class ProfileOverviewController
                 .lookupAll(Profile.class)
                 .stream()
                 .findFirst()
-                .ifPresent(p -> {
-                    Platform.runLater(() -> profileNameField.setText(p.getName()));
+                .ifPresent(profile -> {
+                    profileNameField.setText(profile.getName());
+                    
+                    profile.nameProperty().bind(profileNameField.textProperty());
+                    profile.osProperty().bind(osLabel.textProperty());
                 });
-
-        profileNameField.textProperty().addListener((o, ov, nv) -> {
-            LOG.log(Level.INFO, "Text entered: {0}", nv);
-
-            if (nv != null) {
-                LOOKUP.lookup(Registry.class).setAll(nv);
-            }
-        });
 
         editOsHyperlink.setOnAction(e -> showChooseOSDialog());
     }

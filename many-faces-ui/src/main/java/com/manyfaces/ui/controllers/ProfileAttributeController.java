@@ -20,6 +20,7 @@ import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
@@ -34,6 +35,10 @@ public class ProfileAttributeController {
 
     private static final Logger LOG;
     private static final Lookup LOOKUP = Lookup.getDefault();
+    @FXML
+    private Label profileNameLabel;
+    @FXML
+    private Label osLabel;
     @FXML
     private Text headerText;
     @FXML
@@ -72,6 +77,18 @@ public class ProfileAttributeController {
             default:
                 throw new IllegalArgumentException("Edit type not known");
         }
+
+        LOOKUP.lookup(Registry.class)
+                .getLookup()
+                .lookupAll(Profile.class)
+                .stream()
+                .findFirst()
+                .ifPresent(p -> {
+                    LOG.log(Level.INFO, "Profile with id to create: {0}", p.getId());
+
+                    profileNameLabel.textProperty().bind(p.nameProperty());
+                    osLabel.textProperty().bind(p.osProperty());
+                });
     }
 
     public void setContent(Node content) {
@@ -90,8 +107,9 @@ public class ProfileAttributeController {
     }
 
     private void updateProfile() {
-        Registry gl = LOOKUP.lookup(Registry.class);
-        Collection<? extends Profile> profiles = gl.getLookup().lookupAll(Profile.class);
+        Collection<? extends Profile> profiles = LOOKUP.lookup(Registry.class)
+                .getLookup()
+                .lookupAll(Profile.class);
 
         LOG.log(Level.INFO, "Found {0} profiles. Value(s): {1}",
                 new Object[]{profiles.size(), profiles});
