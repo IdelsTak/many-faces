@@ -7,6 +7,7 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXListView;
 import com.manyfaces.model.Group;
+import com.manyfaces.model.Profile;
 import com.manyfaces.spi.GroupsRepository;
 import com.manyfaces.spi.Registry;
 import com.manyfaces.spi.RootComponent;
@@ -84,14 +85,16 @@ public class HomeMenuController {
             contentPane.getChildren().setAll(new MyAccountPreferences().getPane());
         });
         newProfileToggle.setOnAction(e -> {
-            Registry registry = Lookup.getDefault().lookup(Registry.class);
-            registry.clear();
+            //Announce that the profile that was passed 
+            //to this method is the one that all clients
+            //should be keen on from now on
+            LOOKUP.lookup(Registry.class).setAll(new Profile(""));
             
             homeToggle.setSelected(true);
             homeToggle.fireEvent(new ActionEvent(null, null));
-            RootComponent component = LOOKUP.lookup(RootComponent.class);
-            ProfileEditHome edit = new ProfileEditHome(EditType.CREATE);
-            component.setContent(edit.getPane());
+            
+            LOOKUP.lookup(RootComponent.class)
+                    .setContent(new ProfileEditHome(EditType.CREATE).getPane());
         });
         homeToggle.setOnAction(e -> {
             contentPane.getChildren().setAll(new BrowserProfileList().getPane());
